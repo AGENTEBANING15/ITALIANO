@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Italiano en 30 días</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf7f0;--card:#fff;--ink:#1f2421;--mut:#6b6f6a;--line:#e8e1d4;--verde:#0f7b4f;--rojo:#c8372d;--oro:#d99a1e;--b:#0f7b4f;--i:#d99a1e;--a:#c8372d}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(90deg,var(--verde) 0 33.3%,#fff 33.3% 66.6%,var(--rojo) 66.6%);height:6px}
+.wrap{max-width:960px;margin:0 auto;padding:20px 16px 60px}
+h1{font-family:Fraunces,serif;font-size:2rem;margin:10px 0 4px}
+h2{font-family:Fraunces,serif;margin:0 0 6px}
+.sub{color:var(--mut);margin:0 0 16px}
+.bar{height:10px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--verde);transition:.4s}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--card);padding:9px 14px;border-radius:10px;cursor:pointer;font:inherit;font-weight:500}
+.btn:hover{border-color:var(--ink)}
+.btn.p{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn.g{background:var(--verde);color:#fff;border-color:var(--verde)}
+.btn.sm{padding:5px 9px;font-size:.85rem}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
+.tab{padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);cursor:pointer;font:inherit}
+.tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.lvl{margin:22px 0 8px;display:flex;align-items:center;gap:8px;font-weight:600}
+.dot{width:12px;height:12px;border-radius:50%}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.day{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;cursor:pointer;position:relative;border-top:4px solid var(--c)}
+.day:hover{transform:translateY(-2px);box-shadow:0 4px 14px #0001}
+.day b{font-family:Fraunces,serif;font-size:1.3rem}
+.day small{display:block;color:var(--mut);margin-top:3px}
+.day .ok{position:absolute;top:8px;right:10px;color:var(--verde);font-weight:700}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:12px 0}
+.vocab{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.w{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+.w .it{font-weight:600}.w .es{color:var(--mut);font-size:.88rem}
+.spk{border:none;background:#f1ece2;border-radius:8px;cursor:pointer;padding:6px 8px;font-size:1rem}
+.spk:hover{background:#e6dfd0}
+.note{background:#fff8e6;border-left:4px solid var(--oro);padding:10px 12px;border-radius:8px;font-size:.95rem}
+table{width:100%;border-collapse:collapse}
+td{padding:8px;border-bottom:1px solid var(--line)}
+td:first-child{color:var(--mut);width:110px}
+.big{font-family:Fraunces,serif;font-size:2.2rem;text-align:center;margin:14px 0}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;font:inherit;text-align:left}
+.opt.ok{background:#e3f4ea;border-color:var(--verde)}.opt.bad{background:#fbe5e2;border-color:var(--rojo)}
+input[type=text]{width:100%;padding:12px;font:inherit;font-size:1.1rem;border:1px solid var(--line);border-radius:10px}
+.fb{margin-top:10px;font-weight:500;min-height:1.4em}
+.fb.ok{color:var(--verde)}.fb.bad{color:var(--rojo)}
+.mut{color:var(--mut)}
+.score{font-weight:600}
+.acc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.acc button{width:36px}
+input[type=password]{width:100%;padding:12px;font:inherit;font-size:1.1rem;border:1px solid var(--line);border-radius:10px}
+.pr{font-family:ui-monospace,Menlo,monospace;font-size:.78rem;color:var(--verde);font-weight:400}
+details.w summary::-webkit-details-marker{color:var(--mut)}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--verde);font-weight:600;margin:16px 0 0}
+.jump{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0;margin:10px 0 0}
+.blk{margin-top:30px;scroll-margin-top:60px}
+.blk>div,.blk{scroll-margin-top:60px}
+.sec{font-family:Fraunces,serif;font-weight:600;font-size:1.4rem;margin:0 0 8px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.sec i{color:var(--verde)}
+.sec small{font-family:Inter,sans-serif;font-style:normal;font-size:.7rem;text-transform:uppercase;letter-spacing:.09em;color:var(--mut);margin-left:6px}
+.prose{line-height:1.65;max-width:70ch}.prose p{margin:0 0 10px}
+.tblgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 14px}
+.cap{text-align:left;padding:10px 12px 4px;font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);font-weight:600}
+.th{text-align:left;padding:8px;color:var(--mut);font-size:.8rem;font-weight:600}
+.notes{line-height:1.6;max-width:70ch;padding-left:20px}.notes li{margin:4px 0}
+.fab{position:fixed;right:16px;bottom:calc(18px + env(safe-area-inset-bottom,0px));width:50px;height:50px;border-radius:50%;border:none;background:var(--ink);color:#fff;font-size:1.3rem;cursor:pointer;z-index:20;box-shadow:0 3px 10px #0003}
+.idx{position:fixed;right:16px;bottom:calc(78px + env(safe-area-inset-bottom,0px));width:200px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:6px;z-index:20;box-shadow:0 6px 20px #0002;display:flex;flex-direction:column}
+.idx[hidden]{display:none}
+.idx button{border:none;background:none;text-align:left;padding:9px 12px;border-radius:9px;font:inherit;font-size:.92rem;cursor:pointer;color:var(--ink)}
+.idx button.on{background:#e3f4ea;color:var(--verde);font-weight:600}
+.idx .up{border-top:1px solid var(--line);border-radius:0;color:var(--mut)}
+.rule{border-radius:10px;padding:10px 12px;margin:8px 0}
+.rule.v{background:#e3f4ea;color:#0f5c3b}.rule.a{background:#fff3d6;color:#7a5200}
+.rule small{display:block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.rule div{font-size:1rem;margin-top:3px}
+.lbl{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);font-weight:600;margin:16px 0 6px}
+.sndt{border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.sr{display:grid;grid-template-columns:92px 1fr 44px;gap:6px;align-items:center;padding:8px 10px;border-top:1px solid var(--line)}
+.sr.hd{background:#f1ece2;color:var(--mut);font-size:.8rem;border-top:none}
+.clave{border-radius:10px;padding:10px 12px;margin:8px 0}
+.clave small{display:block;font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;font-weight:600}
+.clave div{margin-top:3px;line-height:1.5}.clave .cx{display:flex;align-items:center;gap:8px;font-style:italic;font-size:.92rem}
+.clave.v{background:#e3f4ea;color:#0f5c3b}.clave.b{background:#e6eef9;color:#1d4a80}.clave.a{background:#fff3d6;color:#7a5200}
+.hint{font-size:.85rem;color:var(--mut);margin:2px 0 10px}
+.ej{display:inline-block;border:1px dashed #9a958a;border-radius:6px;padding:1px 9px;color:var(--ink);background:#faf8f3;font-style:normal}
+body.typing .fab,body.typing .idx{display:none!important}
+.tbar{height:8px;border-radius:4px;background:#fff;margin:10px 0 8px;overflow:hidden}.tbar i{display:block;height:100%;width:0;background:var(--verde)}
+.ev{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.ev button{padding:10px 6px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer}
+.ev .ok{background:#e3f4ea;color:#0f5c3b;border:1px solid #9fd3b6}.ev .mid{background:#fff3d6;color:#7a5200;border:1px solid #f0cf86}.ev .bad{background:#fbe5e2;color:#9b2a22;border:1px solid #f0b3ac}
+.hard{display:inline-block;background:#fff3d6;color:#7a5200;border-radius:999px;padding:3px 12px;font-size:.8rem;font-weight:600;margin:6px 0 0}
+.micb{width:100%;height:52px;border:none;border-radius:26px;background:var(--rojo);color:#fff;font:inherit;font-size:1.05rem;font-weight:600;cursor:pointer}
+.micb.on{background:#7a1d16;animation:pul 1s infinite}@keyframes pul{50%{opacity:.7}}
+.er{display:grid;grid-template-columns:28px 1fr 44px;gap:6px;align-items:center;padding:8px 10px;border-top:1px solid var(--line)}.er:first-child{border-top:none}
+.er small.bad{color:var(--rojo)}
+.chat{display:flex;flex-direction:column;gap:8px;margin:6px 0}
+.bb{max-width:82%;padding:8px 12px;border-radius:14px;line-height:1.4}.bb small{display:block;font-size:.72rem;color:var(--mut);font-weight:600}
+.bb.other{align-self:flex-start;background:#f1ece2;border-bottom-left-radius:4px}
+.bb.me{align-self:flex-end;border-bottom-right-radius:4px}.bb.me.ok{background:#e3f4ea;color:#0f5c3b}.bb.me.bad{background:#fbe5e2;color:#9b2a22}
+.bb.turn{margin:6px 0 10px auto;border:1.5px dashed var(--verde);color:#0f5c3b;max-width:90%}
+.modal{position:fixed;inset:0;background:#0006;display:flex;align-items:center;justify-content:center;z-index:9}
+.modal .card{max-width:400px;text-align:center}
+@media(max-width:560px){.opts{grid-template-columns:1fr}h1{font-size:1.6rem}}
+</style>
+</head>
+<body>
+<header></header>
+<div class="wrap" id="app"></div>
+<script>
+const P=["io","tu","lui/lei","noi","voi","loro"];
+const D=[
+// ---------- BÁSICO ----------
+{t:"Saludos",w:[["ciao","hola / chau"],["buongiorno","buenos días"],["buonasera","buenas tardes/noches"],["arrivederci","adiós"],["grazie","gracias"],["prego","de nada"],["per favore","por favor"],["scusi","disculpe"]],v:["essere","ser / estar","Presente",["sono","sei","è","siamo","siete","sono"]],f:[["Ciao, come stai?","Hola, ¿cómo estás?"],["Sto bene, grazie.","Estoy bien, gracias."]],n:"En italiano la 'c' antes de i/e suena 'ch': ciao = 'chao'."},
+{t:"Presentarse",w:[["nome","nombre"],["cognome","apellido"],["piacere","mucho gusto"],["signore","señor"],["signora","señora"],["amico","amigo"],["amica","amiga"],["ragazzo","chico"]],v:["avere","tener / haber","Presente",["ho","hai","ha","abbiamo","avete","hanno"]],f:[["Mi chiamo Marco.","Me llamo Marco."],["Piacere di conoscerti.","Encantado de conocerte."]],n:"La 'h' es muda: ho = 'o', hanno = 'anno'."},
+{t:"Números 0-2000",w:[["uno","uno"],["due","dos"],["tre","tres"],["quattro","cuatro"],["cinque","cinco"],["sei","seis"],["sette","siete"],["otto","ocho"],["nove","nueve"],["dieci","diez"]],v:["chiamarsi","llamarse","Presente",["mi chiamo","ti chiami","si chiama","ci chiamiamo","vi chiamate","si chiamano"]],f:[["Quanti anni hai?","¿Cuántos años tienes?"],["Ho trent'anni.","Tengo treinta años."]],n:"Para la edad se usa AVERE (tener), igual que en español."},
+{t:"La familia",w:[["padre","padre"],["madre","madre"],["fratello","hermano"],["sorella","hermana"],["figlio","hijo"],["figlia","hija"],["nonno","abuelo"],["nonna","abuela"]],v:["parlare","hablar","Presente (-ARE)",["parlo","parli","parla","parliamo","parlate","parlano"]],f:[["Parlo un po' d'italiano.","Hablo un poco de italiano."],["Mia sorella si chiama Anna.","Mi hermana se llama Anna."]],n:"Con familiares en singular no se usa artículo: mia madre (no 'la mia madre')."},
+{t:"Colores",w:[["rosso","rojo"],["blu","azul"],["verde","verde"],["giallo","amarillo"],["nero","negro"],["bianco","blanco"],["arancione","naranja"],["grigio","gris"]],v:["vedere","ver","Presente (-ERE)",["vedo","vedi","vede","vediamo","vedete","vedono"]],f:[["La macchina è rossa.","El carro es rojo."],["Vedo il mare blu.","Veo el mar azul."]],n:"Los adjetivos en -o cambian: rosso/rossa/rossi/rosse. 'Blu' no cambia."},
+{t:"Comida",w:[["pane","pan"],["acqua","agua"],["vino","vino"],["formaggio","queso"],["pasta","pasta"],["carne","carne"],["pesce","pescado"],["frutta","fruta"]],v:["mangiare","comer","Presente",["mangio","mangi","mangia","mangiamo","mangiate","mangiano"]],f:[["Mangio la pasta ogni giorno.","Como pasta todos los días."],["Un bicchiere d'acqua, per favore.","Un vaso de agua, por favor."]],n:"'sc' antes de e/i suena 'sh': pesce = 'pe-she'."},
+{t:"La casa",w:[["casa","casa"],["cucina","cocina"],["camera","habitación"],["bagno","baño"],["porta","puerta"],["finestra","ventana"],["tavolo","mesa"],["sedia","silla"]],v:["abitare","vivir (residir)","Presente",["abito","abiti","abita","abitiamo","abitate","abitano"]],f:[["Abito a Chimbote.","Vivo en Chimbote."],["La cucina è grande.","La cocina es grande."]],n:"'gn' suena como la 'ñ': bagno = 'baño'."},
+{t:"Días y tiempo",w:[["lunedì","lunes"],["martedì","martes"],["mercoledì","miércoles"],["giovedì","jueves"],["venerdì","viernes"],["sabato","sábado"],["domenica","domingo"],["oggi","hoy"]],v:["fare","hacer","Presente (irregular)",["faccio","fai","fa","facciamo","fate","fanno"]],f:[["Che cosa fai oggi?","¿Qué haces hoy?"],["Il sabato faccio sport.","Los sábados hago deporte."]],n:"Los días se escriben con minúscula. 'Il lunedì' = todos los lunes."},
+{t:"La ciudad",w:[["strada","calle"],["piazza","plaza"],["negozio","tienda"],["banca","banco"],["ospedale","hospital"],["stazione","estación"],["chiesa","iglesia"],["mercato","mercado"]],v:["andare","ir","Presente (irregular)",["vado","vai","va","andiamo","andate","vanno"]],f:[["Dov'è la stazione?","¿Dónde está la estación?"],["Vado al mercato.","Voy al mercado."]],n:"'ch' suena 'k': chiesa = 'kiesa'. 'gh' suena 'g' fuerte."},
+{t:"Preguntas (repaso)",w:[["chi","quién"],["che cosa","qué"],["dove","dónde"],["quando","cuándo"],["perché","por qué / porque"],["come","cómo"],["quanto","cuánto"],["quale","cuál"]],v:["volere","querer","Presente (irregular)",["voglio","vuoi","vuole","vogliamo","volete","vogliono"]],f:[["Quanto costa?","¿Cuánto cuesta?"],["Voglio un caffè.","Quiero un café."]],n:"'gli' suena parecido a 'll' suave: voglio = 'vo-llo'."},
+// ---------- INTERMEDIO ----------
+{t:"Rutina diaria",w:[["svegliarsi","despertarse"],["colazione","desayuno"],["lavoro","trabajo"],["pranzo","almuerzo"],["cena","cena"],["dormire","dormir"],["presto","temprano"],["tardi","tarde"]],v:["alzarsi","levantarse","Presente (reflexivo)",["mi alzo","ti alzi","si alza","ci alziamo","vi alzate","si alzano"]],f:[["Mi alzo alle sette.","Me levanto a las siete."],["Faccio colazione al bar.","Desayuno en el bar."]],n:"Reflexivos: el pronombre va antes del verbo (mi, ti, si, ci, vi, si)."},
+{t:"La ropa",w:[["camicia","camisa"],["pantaloni","pantalón"],["scarpe","zapatos"],["gonna","falda"],["vestito","vestido / traje"],["giacca","chaqueta"],["cappello","sombrero"],["borsa","bolso"]],v:["potere","poder","Presente",["posso","puoi","può","possiamo","potete","possono"]],f:[["Posso provare questa giacca?","¿Puedo probarme esta chaqueta?"],["Le scarpe sono nere.","Los zapatos son negros."]],n:"Las consonantes dobles se pronuncian más largas: giacca, cappello."},
+{t:"De compras",w:[["prezzo","precio"],["caro","caro"],["economico","barato"],["sconto","descuento"],["scontrino","boleta"],["contanti","efectivo"],["carta","tarjeta"],["taglia","talla"]],v:["dovere","deber / tener que","Presente",["devo","devi","deve","dobbiamo","dovete","devono"]],f:[["Devo pagare in contanti?","¿Tengo que pagar en efectivo?"],["È troppo caro.","Es demasiado caro."]],n:"Potere, dovere y volere van seguidos de infinitivo: devo andare."},
+{t:"En el restaurante",w:[["menù","carta / menú"],["conto","cuenta"],["cameriere","mesero"],["antipasto","entrada"],["primo","primer plato"],["secondo","segundo plato"],["dolce","postre"],["bicchiere","vaso"]],v:["prendere","tomar / pedir","Presente",["prendo","prendi","prende","prendiamo","prendete","prendono"]],f:[["Il conto, per favore.","La cuenta, por favor."],["Prendo un primo e un dolce.","Pido un primer plato y un postre."]],n:"En el restaurante se usa 'prendere' para pedir comida."},
+{t:"Pasado con AVERE",w:[["ieri","ayer"],["la settimana scorsa","la semana pasada"],["già","ya"],["ancora","todavía"],["mai","nunca"],["sempre","siempre"],["appena","recién"],["fa","hace (tiempo)"]],v:["mangiare","comer","Passato prossimo",["ho mangiato","hai mangiato","ha mangiato","abbiamo mangiato","avete mangiato","hanno mangiato"]],f:[["Ieri ho mangiato la pizza.","Ayer comí pizza."],["Due giorni fa ho lavorato molto.","Hace dos días trabajé mucho."]],n:"Passato prossimo = avere/essere + participio (-ato, -uto, -ito)."},
+{t:"Pasado con ESSERE · Viajes",w:[["viaggio","viaje"],["treno","tren"],["aereo","avión"],["biglietto","boleto"],["valigia","maleta"],["albergo","hotel"],["vacanza","vacaciones"],["mare","mar"]],v:["andare","ir","Passato prossimo",["sono andato/a","sei andato/a","è andato/a","siamo andati/e","siete andati/e","sono andati/e"]],f:[["Sono andato a Roma in treno.","Fui a Roma en tren."],["Siamo arrivati ieri.","Llegamos ayer."]],n:"Verbos de movimiento usan ESSERE y el participio concuerda: andato/andata."},
+{t:"El clima",w:[["sole","sol"],["pioggia","lluvia"],["neve","nieve"],["vento","viento"],["caldo","calor"],["freddo","frío"],["nuvoloso","nublado"],["estate","verano"]],v:["venire","venir","Presente (irregular)",["vengo","vieni","viene","veniamo","venite","vengono"]],f:[["Oggi fa caldo.","Hoy hace calor."],["Vieni con me?","¿Vienes conmigo?"]],n:"Para el clima: fa caldo / fa freddo; piove (llueve); nevica (nieva)."},
+{t:"Cuerpo y salud",w:[["testa","cabeza"],["mano","mano"],["piede","pie"],["occhio","ojo"],["bocca","boca"],["braccio","brazo"],["gamba","pierna"],["medico","médico"]],v:["sentirsi","sentirse","Presente (reflexivo)",["mi sento","ti senti","si sente","ci sentiamo","vi sentite","si sentono"]],f:[["Mi fa male la testa.","Me duele la cabeza."],["Non mi sento bene.","No me siento bien."]],n:"Plurales irregulares: la mano → le mani, il braccio → le braccia."},
+{t:"Imperfecto · Recuerdos",w:[["bambino","niño"],["scuola","escuela"],["spesso","a menudo"],["di solito","normalmente"],["una volta","una vez / antes"],["giocare","jugar"],["ricordo","recuerdo"],["quartiere","barrio"]],v:["essere","ser / estar","Imperfetto",["ero","eri","era","eravamo","eravate","erano"]],f:[["Quando ero bambino, giocavo a calcio.","Cuando era niño, jugaba fútbol."],["Di solito andavo a scuola a piedi.","Normalmente iba a la escuela a pie."]],n:"Imperfetto = costumbres y descripciones del pasado (como '-aba/-ía')."},
+{t:"El trabajo",w:[["ufficio","oficina"],["collega","colega"],["capo","jefe"],["riunione","reunión"],["stipendio","sueldo"],["progetto","proyecto"],["orario","horario"],["contratto","contrato"]],v:["fare","hacer","Imperfetto",["facevo","facevi","faceva","facevamo","facevate","facevano"]],f:[["Ho una riunione alle dieci.","Tengo una reunión a las diez."],["Prima facevo un altro lavoro.","Antes hacía otro trabajo."]],n:"Imperfetto regular: -avo (are), -evo (ere), -ivo (ire)."},
+// ---------- AVANZADO ----------
+{t:"Futuro · Planes",w:[["domani","mañana"],["prossimo","próximo"],["futuro","futuro"],["sogno","sueño"],["fra poco","dentro de poco"],["forse","quizás"],["obiettivo","objetivo"],["anno","año"]],v:["essere","ser / estar","Futuro semplice",["sarò","sarai","sarà","saremo","sarete","saranno"]],f:[["L'anno prossimo sarò in Italia.","El próximo año estaré en Italia."],["Domani sarà una bella giornata.","Mañana será un lindo día."]],n:"Futuro regular: parlerò, parlerai, parlerà… (el acento va al final)."},
+{t:"Aeropuerto",w:[["passaporto","pasaporte"],["prenotazione","reserva"],["volo","vuelo"],["partenza","salida"],["arrivo","llegada"],["ritardo","retraso"],["dogana","aduana"],["bagaglio","equipaje"]],v:["avere","tener / haber","Futuro semplice",["avrò","avrai","avrà","avremo","avrete","avranno"]],f:[["Il volo è in ritardo.","El vuelo está retrasado."],["Avrò bisogno di un taxi.","Necesitaré un taxi."]],n:"'Avere bisogno di' = necesitar."},
+{t:"Condicional · Cortesía",w:[["vorrei","quisiera"],["potrei","podría"],["sarebbe","sería"],["gentile","amable"],["consiglio","consejo"],["preferire","preferir"],["magari","ojalá / quizás"],["volentieri","con gusto"]],v:["volere","querer","Condizionale",["vorrei","vorresti","vorrebbe","vorremmo","vorreste","vorrebbero"]],f:[["Vorrei un tavolo per due.","Quisiera una mesa para dos."],["Potrebbe aiutarmi?","¿Podría ayudarme?"]],n:"El condicional suaviza pedidos: 'vorrei' es más cortés que 'voglio'."},
+{t:"Opiniones · Subjuntivo",w:[["secondo me","según yo"],["penso che","pienso que"],["credo che","creo que"],["d'accordo","de acuerdo"],["opinione","opinión"],["invece","en cambio"],["però","pero"],["quindi","entonces / por lo tanto"]],v:["essere","ser / estar","Congiuntivo presente (che…)",["che io sia","che tu sia","che lui sia","che noi siamo","che voi siate","che loro siano"]],f:[["Penso che sia una buona idea.","Pienso que es una buena idea."],["Non sono d'accordo.","No estoy de acuerdo."]],n:"Ojo: 'penso che' + congiuntivo (en español va indicativo)."},
+{t:"Emociones",w:[["felice","feliz"],["triste","triste"],["arrabbiato","enojado"],["stanco","cansado"],["preoccupato","preocupado"],["contento","contento"],["paura","miedo"],["speranza","esperanza"]],v:["avere","tener / haber","Congiuntivo presente (che…)",["che io abbia","che tu abbia","che lui abbia","che noi abbiamo","che voi abbiate","che loro abbiano"]],f:[["Spero che tu abbia ragione.","Espero que tengas razón."],["Ho paura di sbagliare.","Tengo miedo de equivocarme."]],n:"Sperare, temere, volere che… → congiuntivo."},
+{t:"Economía y precios",w:[["prezzi","precios"],["inflazione","inflación"],["aumento","aumento"],["calo","caída / baja"],["mensile","mensual"],["indice","índice"],["consumatore","consumidor"],["ingrosso","al por mayor"]],v:["fare","hacer","Congiuntivo presente (che…)",["che io faccia","che tu faccia","che lui faccia","che noi facciamo","che voi facciate","che loro facciano"]],f:[["I prezzi sono aumentati questo mese.","Los precios subieron este mes."],["L'indice dei prezzi al consumo è calato.","El índice de precios al consumidor bajó."]],n:"IPC en italiano: 'indice dei prezzi al consumo'; IPM: 'prezzi all'ingrosso'."},
+{t:"Pronombres combinados",w:[["me lo","me lo"],["te lo","te lo"],["glielo","se lo (a él/ella)"],["ce lo","nos lo"],["ne","de eso / algunos"],["ci","ahí / allí"],["ne ho due","tengo dos (de eso)"],["ci vado","voy allí"]],v:["dare","dar","Presente (irregular)",["do","dai","dà","diamo","date","danno"]],f:[["Me lo dai?","¿Me lo das?"],["Glielo dico domani.","Se lo digo mañana."]],n:"'Ne' reemplaza cantidades: Quanti libri hai? – Ne ho tre."},
+{t:"Expresiones idiomáticas",w:[["in bocca al lupo","¡buena suerte!"],["non vedo l'ora","no veo la hora"],["essere al verde","estar sin dinero"],["costare un occhio","costar un ojo de la cara"],["acqua in bocca","no digas nada"],["prendere un granchio","equivocarse"],["fare due chiacchiere","charlar un rato"],["avere la testa fra le nuvole","estar en las nubes"]],v:["dire","decir","Presente (irregular)",["dico","dici","dice","diciamo","dite","dicono"]],f:[["In bocca al lupo! – Crepi!","¡Buena suerte! – ¡Gracias!"],["Non vedo l'ora di partire.","No veo la hora de viajar."]],n:"A 'in bocca al lupo' se responde 'crepi (il lupo)!'."},
+{t:"Hipótesis (se…)",w:[["se","si"],["fossi","fuera / estuviera"],["avessi","tuviera"],["potessi","pudiera"],["farei","haría"],["andrei","iría"],["vivrei","viviría"],["comprerei","compraría"]],v:["essere","ser / estar","Congiuntivo imperfetto (se…)",["se io fossi","se tu fossi","se lui fosse","se noi fossimo","se voi foste","se loro fossero"]],f:[["Se avessi tempo, viaggerei di più.","Si tuviera tiempo, viajaría más."],["Se fossi in te, studierei ogni giorno.","Si fuera tú, estudiaría todos los días."]],n:"Se + congiuntivo imperfetto → condizionale. ¡Igual que en español!"},
+{t:"Conectores · Repaso final",w:[["tuttavia","sin embargo"],["inoltre","además"],["infatti","de hecho"],["comunque","de todos modos"],["dunque","así que"],["mentre","mientras"],["sebbene","aunque"],["affinché","para que"]],v:["sapere","saber","Presente (irregular)",["so","sai","sa","sappiamo","sapete","sanno"]],f:[["Sebbene sia difficile, continuo a studiare.","Aunque es difícil, sigo estudiando."],["Adesso so parlare italiano!","¡Ahora sé hablar italiano!"]],n:"Sebbene y affinché siempre van con congiuntivo."}
+];
+const X=[
+{f:[["Buongiorno, signora!","¡Buenos días, señora!"],["Come va?","¿Qué tal?"],["Molto bene, e tu?","Muy bien, ¿y tú?"],["A domani!","¡Hasta mañana!"]],c:[["Ciao! Come stai?","¡Hola! ¿Cómo estás?"],["Bene, grazie. E tu?","Bien, gracias. ¿Y tú?"],["Molto bene! Sei di qui?","¡Muy bien! ¿Eres de aquí?"],["No, sono del Perù.","No, soy de Perú."],["Che bello! Arrivederci!","¡Qué bonito! ¡Adiós!"],["Ciao, a domani!","¡Chau, hasta mañana!"]]},
+{f:[["Come ti chiami?","¿Cómo te llamas?"],["Di dove sei?","¿De dónde eres?"],["Sono peruviano.","Soy peruano."],["Lui è il mio amico.","Él es mi amigo."]],c:[["Buongiorno, come si chiama?","Buenos días, ¿cómo se llama?"],["Mi chiamo Daniel. E lei?","Me llamo Daniel. ¿Y usted?"],["Sono Giulia. Piacere!","Soy Giulia. ¡Mucho gusto!"],["Piacere mio. Di dov'è?","El gusto es mío. ¿De dónde es?"],["Sono di Milano. E lei?","Soy de Milán. ¿Y usted?"],["Sono di Chimbote, in Perù.","Soy de Chimbote, en Perú."]]},
+{f:[["Il mio numero è...","Mi número es..."],["Quanti siete?","¿Cuántos son ustedes?"],["Siamo in tre.","Somos tres."],["Ho due fratelli.","Tengo dos hermanos."]],c:[["Quanti anni hai?","¿Cuántos años tienes?"],["Ho trentacinque anni. E tu?","Tengo treinta y cinco. ¿Y tú?"],["Io ho ventotto anni.","Yo tengo veintiocho."],["Hai fratelli?","¿Tienes hermanos?"],["Sì, ho due sorelle.","Sí, tengo dos hermanas."],["Io ho un fratello.","Yo tengo un hermano."]]},
+{f:[["Hai figli?","¿Tienes hijos?"],["Sono sposato.","Estoy casado."],["Mio padre parla spagnolo.","Mi padre habla español."],["La mia famiglia è grande.","Mi familia es grande."]],c:[["Com'è la tua famiglia?","¿Cómo es tu familia?"],["È grande: ho tre fratelli.","Es grande: tengo tres hermanos."],["E i tuoi genitori?","¿Y tus padres?"],["Abitano a Lima con mia nonna.","Viven en Lima con mi abuela."],["Parlate italiano in famiglia?","¿Hablan italiano en familia?"],["No, parliamo spagnolo.","No, hablamos español."]]},
+{f:[["Di che colore è?","¿De qué color es?"],["Il mio colore preferito è il verde.","Mi color favorito es el verde."],["Vedi quella casa bianca?","¿Ves esa casa blanca?"],["Il cielo è azzurro.","El cielo es celeste."]],c:[["Qual è il tuo colore preferito?","¿Cuál es tu color favorito?"],["Il blu. E il tuo?","El azul. ¿Y el tuyo?"],["Il rosso, come la mia macchina.","El rojo, como mi carro."],["Vedi quella macchina gialla?","¿Ves ese carro amarillo?"],["Sì, è molto bella!","¡Sí, es muy bonito!"],["È di mio fratello.","Es de mi hermano."]]},
+{f:[["Ho fame.","Tengo hambre."],["Ho sete.","Tengo sed."],["Mi piace il formaggio.","Me gusta el queso."],["Buon appetito!","¡Buen provecho!"]],c:[["Hai fame?","¿Tienes hambre?"],["Sì, molta! Mangiamo?","¡Sí, mucha! ¿Comemos?"],["Che cosa mangi di solito?","¿Qué comes normalmente?"],["Mangio pesce e riso.","Como pescado y arroz."],["Ti piace la pasta?","¿Te gusta la pasta?"],["Sì, moltissimo! Buon appetito!","¡Sí, muchísimo! ¡Buen provecho!"]]},
+{f:[["Dove abiti?","¿Dónde vives?"],["La casa ha tre camere.","La casa tiene tres habitaciones."],["Il bagno è a destra.","El baño está a la derecha."],["Benvenuto a casa mia!","¡Bienvenido a mi casa!"]],c:[["Benvenuta a casa mia!","¡Bienvenida a mi casa!"],["Grazie! È molto bella.","¡Gracias! Es muy bonita."],["Questa è la cucina.","Esta es la cocina."],["Dov'è il bagno, per favore?","¿Dónde está el baño, por favor?"],["È a sinistra, vicino alla porta.","Está a la izquierda, cerca de la puerta."],["Grazie mille!","¡Muchas gracias!"]]},
+{f:[["Che giorno è oggi?","¿Qué día es hoy?"],["Oggi è venerdì.","Hoy es viernes."],["Che ore sono?","¿Qué hora es?"],["Sono le otto.","Son las ocho."]],c:[["Che cosa fai sabato?","¿Qué haces el sábado?"],["Faccio la spesa al mercato.","Hago las compras en el mercado."],["E domenica?","¿Y el domingo?"],["Domenica non faccio niente!","¡El domingo no hago nada!"],["Facciamo una passeggiata?","¿Damos un paseo?"],["Va bene, alle cinque.","Está bien, a las cinco."]]},
+{f:[["Scusi, dov'è la piazza?","Disculpe, ¿dónde está la plaza?"],["Sempre dritto.","Siempre recto."],["Giri a destra.","Gire a la derecha."],["È lontano?","¿Está lejos?"]],c:[["Scusi, dov'è la stazione?","Disculpe, ¿dónde está la estación?"],["Vada sempre dritto.","Siga siempre recto."],["È lontano?","¿Está lejos?"],["No, cinque minuti a piedi.","No, cinco minutos a pie."],["E c'è una banca vicino?","¿Y hay un banco cerca?"],["Sì, in piazza, accanto alla chiesa.","Sí, en la plaza, al lado de la iglesia."]]},
+{f:[["Perché studi italiano?","¿Por qué estudias italiano?"],["Quando parti?","¿Cuándo viajas?"],["Chi è lei?","¿Quién es ella?"],["Non capisco.","No entiendo."]],c:[["Che cosa vuoi fare oggi?","¿Qué quieres hacer hoy?"],["Voglio andare al mare.","Quiero ir al mar."],["Quando?","¿Cuándo?"],["Dopo pranzo. Vuoi venire?","Después del almuerzo. ¿Quieres venir?"],["Sì! Come andiamo?","¡Sí! ¿Cómo vamos?"],["In autobus. Costa poco.","En bus. Cuesta poco."]]},
+{f:[["A che ora ti alzi?","¿A qué hora te levantas?"],["Mi faccio la doccia.","Me ducho."],["Vado a letto alle undici.","Me acuesto a las once."],["Sono sempre in ritardo.","Siempre llego tarde."]],c:[["A che ora ti alzi?","¿A qué hora te levantas?"],["Mi alzo alle sei e mezza.","Me levanto a las seis y media."],["Così presto?","¿Tan temprano?"],["Sì, il lavoro comincia alle otto.","Sí, el trabajo empieza a las ocho."],["E la sera cosa fai?","¿Y en la noche qué haces?"],["Ceno e vado a letto presto.","Ceno y me acuesto temprano."]]},
+{f:[["Che taglia porta?","¿Qué talla usa?"],["Mi sta bene?","¿Me queda bien?"],["È troppo stretto.","Está muy ajustado."],["Avete un'altra taglia?","¿Tienen otra talla?"]],c:[["Buongiorno, posso aiutarla?","Buenos días, ¿puedo ayudarle?"],["Sì, cerco una camicia bianca.","Sí, busco una camisa blanca."],["Che taglia porta?","¿Qué talla usa?"],["La media. Posso provarla?","La mediana. ¿Puedo probármela?"],["Certo, il camerino è lì.","Claro, el probador está allí."],["Mi sta bene. La prendo!","Me queda bien. ¡Me la llevo!"]]},
+{f:[["Quanto costa questo?","¿Cuánto cuesta esto?"],["Posso pagare con la carta?","¿Puedo pagar con tarjeta?"],["C'è uno sconto?","¿Hay descuento?"],["Mi dà lo scontrino?","¿Me da la boleta?"]],c:[["Quanto costano queste scarpe?","¿Cuánto cuestan estos zapatos?"],["Ottanta euro.","Ochenta euros."],["Sono un po' care. C'è uno sconto?","Son un poco caros. ¿Hay descuento?"],["Sì, oggi il venti per cento.","Sí, hoy el veinte por ciento."],["Perfetto. Posso pagare con la carta?","Perfecto. ¿Puedo pagar con tarjeta?"],["Certo. Ecco lo scontrino.","Claro. Aquí está la boleta."]]},
+{f:[["Un tavolo per due, per favore.","Una mesa para dos, por favor."],["Che cosa mi consiglia?","¿Qué me recomienda?"],["Sono vegetariano.","Soy vegetariano."],["Era tutto buonissimo.","Todo estaba buenísimo."]],c:[["Buonasera, siete pronti per ordinare?","Buenas noches, ¿están listos para pedir?"],["Sì. Che cosa ci consiglia?","Sí. ¿Qué nos recomienda?"],["Gli spaghetti alle vongole sono ottimi.","Los espaguetis con almejas son excelentes."],["Allora prendo quelli e un'acqua.","Entonces pido esos y un agua."],["Perfetto. E da bere?","Perfecto. ¿Y para tomar?"],["Un bicchiere di vino rosso, grazie.","Una copa de vino tinto, gracias."]]},
+{f:[["Che cosa hai fatto ieri?","¿Qué hiciste ayer?"],["Ho già mangiato.","Ya comí."],["Non ho mai visto Roma.","Nunca he visto Roma."],["Ho dormito poco.","Dormí poco."]],c:[["Che cosa hai fatto ieri?","¿Qué hiciste ayer?"],["Ho lavorato tutto il giorno.","Trabajé todo el día."],["E la sera?","¿Y en la noche?"],["Ho guardato un film con mia moglie.","Vi una película con mi esposa."],["Hai già mangiato oggi?","¿Ya comiste hoy?"],["No, non ancora. Ho fame!","No, todavía no. ¡Tengo hambre!"]]},
+{f:[["Sei mai stato in Italia?","¿Alguna vez has estado en Italia?"],["Siamo partiti alle sei.","Salimos a las seis."],["È arrivata tardi.","Llegó tarde."],["Il viaggio è stato bellissimo.","El viaje fue hermosísimo."]],c:[["Dove sei andato in vacanza?","¿Adónde fuiste de vacaciones?"],["Sono andato a Napoli.","Fui a Nápoles."],["In aereo?","¿En avión?"],["No, sono partito da Roma in treno.","No, salí de Roma en tren."],["Ti è piaciuto?","¿Te gustó?"],["Moltissimo! Sono stato al mare ogni giorno.","¡Muchísimo! Fui al mar todos los días."]]},
+{f:[["Che tempo fa?","¿Qué tiempo hace?"],["Piove da ieri.","Llueve desde ayer."],["Prendi l'ombrello!","¡Lleva el paraguas!"],["Domani c'è il sole.","Mañana hay sol."]],c:[["Che tempo fa lì?","¿Qué tiempo hace allí?"],["Fa molto caldo, trenta gradi.","Hace mucho calor, treinta grados."],["Qui piove e fa freddo.","Aquí llueve y hace frío."],["Vieni qui al sole, allora!","¡Entonces ven aquí al sol!"],["Magari! Vengo a luglio.","¡Ojalá! Voy en julio."],["Perfetto, ti aspetto!","¡Perfecto, te espero!"]]},
+{f:[["Ho il raffreddore.","Tengo resfriado."],["Ho la febbre.","Tengo fiebre."],["Dov'è la farmacia?","¿Dónde está la farmacia?"],["Devo andare dal medico.","Tengo que ir al médico."]],c:[["Che cosa si sente?","¿Qué siente?"],["Mi fa male la gola e ho la febbre.","Me duele la garganta y tengo fiebre."],["Da quando?","¿Desde cuándo?"],["Da due giorni.","Desde hace dos días."],["Prenda questo sciroppo e riposi.","Tome este jarabe y descanse."],["Grazie, dottore.","Gracias, doctor."]]},
+{f:[["Da piccolo abitavo in campagna.","De pequeño vivía en el campo."],["Mia nonna cucinava benissimo.","Mi abuela cocinaba muy bien."],["Ero molto timido.","Era muy tímido."],["Ogni estate andavamo al mare.","Cada verano íbamos al mar."]],c:[["Com'eri da bambino?","¿Cómo eras de niño?"],["Ero molto vivace e giocavo sempre.","Era muy inquieto y jugaba siempre."],["Dove abitavi?","¿Dónde vivías?"],["In un quartiere vicino al porto.","En un barrio cerca del puerto."],["E che cosa facevi d'estate?","¿Y qué hacías en verano?"],["Andavo in spiaggia con i miei cugini.","Iba a la playa con mis primos."]]},
+{f:[["Che lavoro fai?","¿En qué trabajas?"],["Lavoro in un ufficio pubblico.","Trabajo en una oficina pública."],["Ho molto da fare.","Tengo mucho que hacer."],["Sono in ferie.","Estoy de vacaciones."]],c:[["Che lavoro fai?","¿En qué trabajas?"],["Sono economista, lavoro con le statistiche.","Soy economista, trabajo con estadísticas."],["Interessante! Ti piace?","¡Interesante! ¿Te gusta?"],["Sì, anche se ho molte riunioni.","Sí, aunque tengo muchas reuniones."],["Prima che lavoro facevi?","¿Antes en qué trabajabas?"],["Facevo l'insegnante.","Era profesor."]]},
+{f:[["Che cosa farai domani?","¿Qué harás mañana?"],["Ti chiamerò stasera.","Te llamaré esta noche."],["Fra un anno parlerò italiano.","En un año hablaré italiano."],["Vedremo!","¡Ya veremos!"]],c:[["Che progetti hai per l'anno prossimo?","¿Qué planes tienes para el próximo año?"],["Studierò italiano ogni giorno.","Estudiaré italiano todos los días."],["E poi?","¿Y después?"],["Andrò in Italia a settembre.","Iré a Italia en setiembre."],["Sarà un viaggio bellissimo!","¡Será un viaje hermosísimo!"],["Lo spero. Ti manderò le foto!","Eso espero. ¡Te mandaré las fotos!"]]},
+{f:[["Dov'è il check-in?","¿Dónde está el check-in?"],["Il mio volo è cancellato.","Mi vuelo está cancelado."],["Ho perso la valigia.","Perdí la maleta."],["A che ora parte il volo?","¿A qué hora sale el vuelo?"]],c:[["Passaporto, per favore.","Pasaporte, por favor."],["Ecco a lei.","Aquí tiene."],["Quanto tempo resterà in Italia?","¿Cuánto tiempo se quedará en Italia?"],["Due settimane, per turismo.","Dos semanas, por turismo."],["Ha qualcosa da dichiarare?","¿Tiene algo que declarar?"],["No, niente. Grazie.","No, nada. Gracias."]]},
+{f:[["Mi potrebbe aiutare?","¿Me podría ayudar?"],["Vorrei prenotare una camera.","Quisiera reservar una habitación."],["Sarebbe possibile pagare dopo?","¿Sería posible pagar después?"],["Ti dispiacerebbe aspettare?","¿Te molestaría esperar?"]],c:[["Buongiorno, vorrei prenotare una camera.","Buenos días, quisiera reservar una habitación."],["Per quante notti?","¿Para cuántas noches?"],["Tre notti. Sarebbe possibile con vista mare?","Tres noches. ¿Sería posible con vista al mar?"],["Sì, costerebbe dieci euro in più.","Sí, costaría diez euros más."],["Va bene. Potrebbe includere la colazione?","Está bien. ¿Podría incluir el desayuno?"],["Certo, è già inclusa.","Claro, ya está incluido."]]},
+{f:[["Che ne pensi?","¿Qué opinas?"],["Hai ragione.","Tienes razón."],["Dipende.","Depende."],["Mi sembra che sia vero.","Me parece que es verdad."]],c:[["Che ne pensi di questo film?","¿Qué opinas de esta película?"],["Secondo me è un po' lungo.","Para mí es un poco larga."],["Io invece penso che sia fantastico.","Yo en cambio pienso que es fantástica."],["Credo che la fine sia troppo triste.","Creo que el final es demasiado triste."],["Forse hai ragione.","Quizás tienes razón."],["Però gli attori sono bravissimi!","¡Pero los actores son buenísimos!"]]},
+{f:[["Che bello!","¡Qué bonito!"],["Sono felice per te.","Me alegro por ti."],["Non ti preoccupare.","No te preocupes."],["Mi dispiace molto.","Lo siento mucho."]],c:[["Ti vedo stanco. Tutto bene?","Te veo cansado. ¿Todo bien?"],["Sono un po' preoccupato per l'esame.","Estoy un poco preocupado por el examen."],["Non ti preoccupare, sei preparato.","No te preocupes, estás preparado."],["Spero che tu abbia ragione.","Espero que tengas razón."],["Certo! E dopo festeggiamo.","¡Claro! Y después celebramos."],["Grazie, sei un vero amico.","Gracias, eres un verdadero amigo."]]},
+{f:[["Il costo della vita è aumentato.","El costo de vida ha aumentado."],["I prezzi del pesce sono scesi.","Los precios del pescado bajaron."],["La variazione mensile è positiva.","La variación mensual es positiva."],["Bisogna che si faccia un'analisi.","Es necesario que se haga un análisis."]],c:[["Com'è andata l'inflazione questo mese?","¿Cómo estuvo la inflación este mes?"],["È aumentata dello zero virgola tre per cento.","Aumentó en cero coma tres por ciento."],["Quali prezzi sono saliti di più?","¿Qué precios subieron más?"],["Gli alimenti, soprattutto la frutta.","Los alimentos, sobre todo la fruta."],["E il pesce?","¿Y el pescado?"],["È calato, grazie alla buona pesca.","Bajó, gracias a la buena pesca."]]},
+{f:[["Te lo prometto.","Te lo prometo."],["Ne vuoi un po'?","¿Quieres un poco?"],["Ci penso io.","Yo me encargo."],["Non me ne importa.","No me importa."]],c:[["Hai il libro di Marco?","¿Tienes el libro de Marco?"],["Sì, ma devo darglielo domani.","Sí, pero tengo que dárselo mañana."],["Me lo presti stasera?","¿Me lo prestas esta noche?"],["Va bene, te lo do dopo cena.","Está bien, te lo doy después de la cena."],["Quante pagine ha?","¿Cuántas páginas tiene?"],["Ne ha trecento. Ci vuole tempo!","Tiene trescientas. ¡Toma tiempo!"]]},
+{f:[["Che figata!","¡Qué genial!"],["Meno male!","¡Menos mal!"],["Boh, non lo so.","Ni idea, no sé."],["Dai, andiamo!","¡Vamos, anda!"]],c:[["Domani ho il colloquio di lavoro.","Mañana tengo la entrevista de trabajo."],["In bocca al lupo!","¡Buena suerte!"],["Crepi! Non vedo l'ora che finisca.","¡Gracias! No veo la hora de que termine."],["Andrà bene. Poi facciamo due chiacchiere?","Irá bien. ¿Luego charlamos un rato?"],["Sì, ma offri tu: sono al verde!","Sí, pero invitas tú: ¡estoy sin plata!"],["Ahah, va bene!","¡Jaja, está bien!"]]},
+{f:[["Se potessi, lo farei.","Si pudiera, lo haría."],["Se fossi ricco, viaggerei.","Si fuera rico, viajaría."],["Magari fosse vero!","¡Ojalá fuera verdad!"],["Se avessi saputo, sarei venuto.","Si hubiera sabido, habría venido."]],c:[["Se vincessi la lotteria, che cosa faresti?","Si ganaras la lotería, ¿qué harías?"],["Comprerei una casa al mare.","Compraría una casa en la playa."],["In Italia o in Perù?","¿En Italia o en Perú?"],["Se potessi, in tutti e due!","¡Si pudiera, en los dos!"],["E lavoreresti ancora?","¿Y seguirías trabajando?"],["Forse sì, ma solo un po'.","Quizás sí, pero solo un poco."]]},
+{f:[["Prima di tutto...","Antes que nada..."],["In conclusione...","En conclusión..."],["Da una parte... dall'altra...","Por un lado... por otro..."],["Ce l'ho fatta!","¡Lo logré!"]],c:[["Allora, com'è andato il corso?","Entonces, ¿cómo te fue en el curso?"],["Benissimo! Infatti adesso capisco quasi tutto.","¡Muy bien! De hecho ahora entiendo casi todo."],["Sebbene fosse difficile?","¿Aunque fuera difícil?"],["Sì, comunque ho studiato ogni giorno.","Sí, de todos modos estudié todos los días."],["Complimenti! Ce l'hai fatta!","¡Felicitaciones! ¡Lo lograste!"],["Grazie! Inoltre continuerò a studiare.","¡Gracias! Además seguiré estudiando."]]}
+];
+D.forEach((d,i)=>{d.f=d.f.concat(X[i].f);d.c=X[i].c});
+const W2=[
+[["salve","hola (formal neutro)"],["buon pomeriggio","buenas tardes"],["buonanotte","buenas noches (al dormir)"],["a presto","hasta pronto"],["sì","sí"],["no","no"],["benvenuto","bienvenido"],["scusa","perdón (informal)"]],
+[["età","edad"],["indirizzo","dirección"],["telefono","teléfono"],["professione","profesión"],["nazionalità","nacionalidad"],["città","ciudad"],["sposato","casado"],["studente","estudiante"]],
+[["undici","11"],["dodici","12"],["tredici","13"],["quattordici","14"],["quindici","15"],["sedici","16"],["diciassette","17"],["diciotto","18"],["diciannove","19"],["venti","20"],["ventuno","21"],["ventidue","22"],["ventitré","23"],["ventotto","28"],["trenta","30"],["quaranta","40"],["cinquanta","50"],["sessanta","60"],["settanta","70"],["ottanta","80"],["novanta","90"],["cento","100"],["duecento","200"],["mille","1000"],["duemila","2000"]],
+[["marito","esposo"],["moglie","esposa"],["zio","tío"],["zia","tía"],["cugino","primo"],["nipote","sobrino / nieto"],["genitori","padres"],["fidanzato","novio"]],
+[["rosa","rosado"],["marrone","marrón"],["viola","morado"],["azzurro","celeste"],["chiaro","claro"],["scuro","oscuro"],["oro","dorado"],["argento","plateado"]],
+[["riso","arroz"],["uova","huevos"],["pollo","pollo"],["verdura","verduras"],["latte","leche"],["zucchero","azúcar"],["sale","sal"],["olio","aceite"]],
+[["soggiorno","sala"],["giardino","jardín"],["letto","cama"],["armadio","ropero"],["scale","escaleras"],["divano","sofá"],["specchio","espejo"],["tetto","techo"]],
+[["ieri","ayer"],["domani","mañana"],["settimana","semana"],["mese","mes"],["gennaio","enero"],["febbraio","febrero"],["marzo","marzo"],["aprile","abril"],["maggio","mayo"],["giugno","junio"],["luglio","julio"],["agosto","agosto"],["settembre","setiembre"],["ottobre","octubre"],["novembre","noviembre"],["dicembre","diciembre"]],
+[["farmacia","farmacia"],["scuola","escuela"],["ufficio postale","correo"],["parco","parque"],["ristorante","restaurante"],["museo","museo"],["ponte","puente"],["semaforo","semáforo"]],
+[["quanti","cuántos"],["da dove","de dónde"],["a che ora","a qué hora"],["che cos'è","qué es"],["di chi","de quién"],["come mai","cómo es que"],["quanto tempo","cuánto tiempo"],["con chi","con quién"]],
+[["doccia","ducha"],["denti","dientes"],["uscire","salir"],["tornare","volver"],["mezzogiorno","mediodía"],["sveglia","despertador"],["autobus","bus"],["stanco","cansado"]],
+[["maglione","chompa"],["cravatta","corbata"],["calze","medias"],["cintura","correa"],["cappotto","abrigo"],["occhiali","lentes"],["guanti","guantes"],["costume","ropa de baño"]],
+[["cassa","caja"],["commesso","vendedor"],["saldi","rebajas"],["resto","vuelto"],["pagare","pagar"],["spendere","gastar"],["aperto","abierto"],["chiuso","cerrado"]],
+[["forchetta","tenedor"],["coltello","cuchillo"],["cucchiaio","cuchara"],["piatto","plato"],["tovagliolo","servilleta"],["mancia","propina"],["prenotare","reservar"],["contorno","guarnición"]],
+[["ieri sera","anoche"],["stamattina","esta mañana"],["l'altro ieri","anteayer"],["finalmente","por fin"],["dopo","después"],["prima","antes"],["poco fa","hace poco"],["scorso","pasado"]],
+[["zaino","mochila"],["porto","puerto"],["nave","barco"],["noleggiare","alquilar"],["spiaggia","playa"],["montagna","montaña"],["lago","lago"],["autostrada","autopista"]],
+[["temporale","tormenta"],["nebbia","neblina"],["gradi","grados"],["primavera","primavera"],["autunno","otoño"],["inverno","invierno"],["umido","húmedo"],["sereno","despejado"]],
+[["gola","garganta"],["stomaco","estómago"],["schiena","espalda"],["dente","diente"],["febbre","fiebre"],["tosse","tos"],["ricetta","receta médica"],["pillola","pastilla"]],
+[["giocattolo","juguete"],["compagno di classe","compañero de clase"],["maestra","maestra"],["vicino di casa","vecino"],["cortile","patio"],["merenda","lonchera"],["nascondino","escondidas"],["bicicletta","bicicleta"]],
+[["dipendente","empleado"],["azienda","empresa"],["ferie","vacaciones (trabajo)"],["colloquio","entrevista"],["straordinari","horas extra"],["scrivania","escritorio"],["pensione","jubilación"],["turno","turno"]],
+[["dopodomani","pasado mañana"],["la prossima settimana","la próxima semana"],["piano","plan"],["promettere","prometer"],["cambiare","cambiar"],["raggiungere","alcanzar"],["un giorno","algún día"],["fra un mese","dentro de un mes"]],
+[["carta d'imbarco","tarjeta de embarque"],["uscita","puerta de embarque"],["decollare","despegar"],["atterrare","aterrizar"],["posto finestrino","asiento ventana"],["scalo","escala"],["noleggio auto","alquiler de auto"],["cintura di sicurezza","cinturón de seguridad"]],
+[["dovrei","debería"],["mi piacerebbe","me gustaría"],["sarebbe meglio","sería mejor"],["potresti","podrías"],["gentilmente","amablemente"],["ringraziare","agradecer"],["disturbare","molestar"],["volentieri","con gusto"]],
+[["secondo te","según tú"],["sono d'accordo","estoy de acuerdo"],["non sono d'accordo","no estoy de acuerdo"],["dubitare","dudar"],["sembra che","parece que"],["è vero","es verdad"],["è falso","es falso"],["a mio parere","en mi opinión"]],
+[["emozionato","emocionado"],["deluso","decepcionado"],["geloso","celoso"],["sorpreso","sorprendido"],["nervoso","nervioso"],["orgoglioso","orgulloso"],["annoiato","aburrido"],["tranquillo","tranquilo"]],
+[["offerta","oferta"],["domanda","demanda / pregunta"],["produzione","producción"],["esportazione","exportación"],["tasso","tasa"],["crescita","crecimiento"],["dati","datos"],["variazione","variación"]],
+[["glielo do","se lo doy"],["ce n'è","hay (de eso)"],["me ne vado","me voy"],["ci penso","lo pienso / me encargo"],["ne parliamo","lo hablamos"],["te la presto","te la presto"],["ce l'ho","lo tengo"],["non ne ho","no tengo (de eso)"]],
+[["essere in gamba","ser muy capaz"],["avere le mani bucate","ser gastador"],["fare una figuraccia","quedar mal"],["tirare tardi","trasnochar"],["piove a catinelle","llueve a cántaros"],["non avere peli sulla lingua","no tener pelos en la lengua"],["costare un occhio della testa","costar un ojo de la cara"],["essere una buona forchetta","ser de buen comer"]],
+[["se fossi in te","si yo fuera tú"],["se avessi saputo","si hubiera sabido"],["sarei venuto","habría venido"],["avrei fatto","habría hecho"],["nel caso","en caso de"],["purché","con tal de que"],["a condizione che","a condición de que"],["supponiamo che","supongamos que"]],
+[["perciò","por eso"],["anzi","es más"],["oppure","o bien"],["nonostante","a pesar de"],["invece di","en vez de"],["infine","finalmente"],["dato che","dado que"],["innanzitutto","ante todo"]]
+];
+D.forEach((d,i)=>{d.w=d.w.concat(W2[i])});
+D[2].n="11-19 son palabras únicas (undici… diciannove). Desde 21: venti+uno = ventuno y venti+otto = ventotto (se pierde la vocal); con 3 lleva tilde: ventitré. 100 = cento, 1000 = mille, pero 2000 = duemila.";
+D[7].n="Los días y los meses se escriben con minúscula: lunedì, gennaio. 'Il lunedì' = todos los lunes.";
+
+const G=[
+{t:"Pronombres personales y ESSERE",e:"Los pronombres sujeto casi siempre se omiten porque el verbo ya indica la persona (igual que en español). <b>Lei</b> (con mayúscula) es el 'usted' formal y se conjuga como 'lei' (3ª persona).",tb:[["io","yo"],["tu","tú"],["lui / lei","él / ella"],["Lei","usted"],["noi","nosotros"],["voi","ustedes / vosotros"],["loro","ellos / ellas"]],ej:[["Sono peruviano.","Soy peruano."],["Lei è italiana?","¿Usted es italiana?"],["Siamo amici.","Somos amigos."]]},
+{t:"Artículos determinados (el, la, los, las)",e:"El artículo depende de cómo empieza la palabra. Masculino: <b>il</b> (consonante), <b>lo</b> (s+consonante, z, gn, ps), <b>l'</b> (vocal). Plural: <b>i</b> / <b>gli</b>. Femenino: <b>la</b>, <b>l'</b> → plural <b>le</b>.",tb:[["il libro → i libri","consonante"],["lo studente → gli studenti","s+consonante / z"],["l'amico → gli amici","vocal (masc.)"],["la casa → le case","femenino"],["l'amica → le amiche","vocal (fem.)"]],ej:[["Il ragazzo ha un amico.","El chico tiene un amigo."],["Gli studenti sono qui.","Los estudiantes están aquí."],["L'acqua è fresca.","El agua está fresca."]]},
+{t:"Artículos indeterminados y plural",e:"<b>un</b> (masc.), <b>uno</b> (masc. ante s+consonante o z), <b>una</b> (fem.), <b>un'</b> (fem. ante vocal). Plural de sustantivos: <b>-o → -i</b>, <b>-a → -e</b>, <b>-e → -i</b>.",tb:[["un libro","un libro"],["uno zaino","una mochila"],["una casa","una casa"],["un'amica","una amiga"],["libro → libri / casa → case","plural -o/-a"],["padre → padri / notte → notti","plural -e"]],ej:[["Ho un fratello e una sorella.","Tengo un hermano y una hermana."],["Ho due libri.","Tengo dos libros."],["È un'amica di Marco.","Es una amiga de Marco."]]},
+{t:"Posesivos",e:"Normalmente llevan artículo: <b>il mio libro</b>, <b>la mia casa</b>. Excepción: con familiares en singular NO se usa artículo (<b>mia madre</b>), pero en plural sí (<b>i miei fratelli</b>). 'Loro' nunca cambia y siempre lleva artículo.",tb:[["mio / mia — miei / mie","mi(s)"],["tuo / tua — tuoi / tue","tu(s)"],["suo / sua — suoi / sue","su(s) (de él/ella/usted)"],["nostro / nostra — nostri / nostre","nuestro(s)"],["vostro / vostra — vostri / vostre","vuestro(s)"],["il loro / la loro","su(s) (de ellos)"]],ej:[["Mia madre si chiama Rosa.","Mi madre se llama Rosa."],["I miei fratelli abitano a Lima.","Mis hermanos viven en Lima."],["La nostra casa è piccola.","Nuestra casa es pequeña."]]},
+{t:"Concordancia de adjetivos",e:"El adjetivo va después del sustantivo y concuerda en género y número. Tipo <b>-o</b>: rosso/rossa/rossi/rosse. Tipo <b>-e</b>: verde/verdi (igual en masc. y fem.). Invariables: <b>blu, rosa, viola</b>.",tb:[["il libro rosso → i libri rossi","masc. -o"],["la casa rossa → le case rosse","fem. -a"],["il prato verde → i prati verdi","-e (masc./fem.)"],["la maglia blu → le maglie blu","invariable"]],ej:[["La macchina è nuova.","El carro es nuevo."],["Ho due gatti neri.","Tengo dos gatos negros."],["Le porte sono verdi.","Las puertas son verdes."]]},
+{t:"Presente -ARE y el verbo PIACERE",e:"Verbos en -are: raíz + <b>-o, -i, -a, -iamo, -ate, -ano</b>. <b>Piacere</b> funciona como 'gustar': <b>mi piace</b> + singular o infinitivo, <b>mi piacciono</b> + plural.",tb:[["mi piace","me gusta"],["ti piace","te gusta"],["gli / le piace","le gusta (a él / a ella)"],["ci piace","nos gusta"],["mi piacciono","me gustan"]],ej:[["Mi piace il pane.","Me gusta el pan."],["Mi piacciono le olive.","Me gustan las aceitunas."],["Mangiamo alle due.","Comemos a las dos."]]},
+{t:"Preposiciones articuladas",e:"Las preposiciones <b>a, di, da, in, su</b> se unen con el artículo, igual que 'a + el = al' en español, pero con todas las formas.",tb:[["a + il","al"],["di + il","del"],["da + il","dal"],["in + il","nel"],["su + il","sul"],["in + la","nella"],["di + la","della"]],ej:[["Il libro è sul tavolo.","El libro está sobre la mesa."],["Le chiavi sono nella borsa.","Las llaves están en el bolso."],["Vado al mercato.","Voy al mercado."]]},
+{t:"La hora y expresiones con FARE",e:"<b>Che ore sono?</b> → <b>Sono le</b> + número (plural), excepto <b>È l'una</b>, <b>è mezzogiorno</b>, <b>è mezzanotte</b>. FARE aparece en muchas expresiones: fare colazione, fare la spesa, fare una passeggiata.",tb:[["È l'una","Es la una"],["Sono le tre","Son las tres"],["Sono le tre e mezza","Son las tres y media"],["Sono le cinque meno un quarto","Son las cinco menos cuarto"],["fare la spesa","hacer las compras"]],ej:[["Che ore sono? Sono le otto.","¿Qué hora es? Son las ocho."],["Faccio colazione alle sette.","Desayuno a las siete."],["Facciamo una passeggiata.","Damos un paseo."]]},
+{t:"C'è / ci sono · Presente -ERE / -IRE",e:"<b>C'è</b> + singular, <b>ci sono</b> + plural (= hay). Presente -ere: <b>-o, -i, -e, -iamo, -ete, -ono</b>. -ire: <b>-o, -i, -e, -iamo, -ite, -ono</b>. Algunos -ire agregan <b>-isc-</b>: capisco, finisco.",tb:[["c'è una banca","hay un banco"],["ci sono due negozi","hay dos tiendas"],["vedo, vedi, vede…","-ERE (vedere)"],["dormo, dormi, dorme…","-IRE (dormire)"],["capisco, capisci, capisce…","-IRE con -isc-"]],ej:[["C'è un mercato vicino?","¿Hay un mercado cerca?"],["Ci sono molti negozi.","Hay muchas tiendas."],["Non capisco, scusi.","No entiendo, disculpe."]]},
+{t:"Negación y preguntas",e:"Para negar se pone <b>non</b> antes del verbo. La doble negación es correcta: <b>non… mai</b>, <b>non… niente</b>. Para preguntar no cambia el orden: solo sube la entonación.",tb:[["non… mai","nunca"],["non… niente","nada"],["non… nessuno","nadie"],["non… più","ya no"],["non… ancora","todavía no"]],ej:[["Non mangio mai carne.","Nunca como carne."],["Non c'è nessuno.","No hay nadie."],["Non abito più qui.","Ya no vivo aquí."]]},
+{t:"Verbos reflexivos",e:"El pronombre (<b>mi, ti, si, ci, vi, si</b>) va antes del verbo conjugado. Con infinitivo se pega al final: <b>devo alzarmi</b>.",tb:[["svegliarsi","mi sveglio (me despierto)"],["lavarsi","mi lavo (me lavo)"],["vestirsi","mi vesto (me visto)"],["divertirsi","mi diverto (me divierto)"],["riposarsi","mi riposo (descanso)"]],ej:[["Mi sveglio alle sei.","Me despierto a las seis."],["Ci vestiamo in fretta.","Nos vestimos rápido."],["Domani devo alzarmi presto.","Mañana tengo que levantarme temprano."]]},
+{t:"Demostrativos: QUESTO y QUELLO",e:"<b>Questo</b> = este (cerca). <b>Quello</b> = ese/aquel (lejos) y cambia como el artículo: quel, quello, quell', quei, quegli, quella, quelle.",tb:[["questo vestito / questa gonna","este vestido / esta falda"],["quel cappello","ese sombrero (il)"],["quello zaino","esa mochila (lo)"],["quell'albero","ese árbol (l')"],["quei pantaloni / quegli occhiali","esos (i / gli)"]],ej:[["Quanto costa questa giacca?","¿Cuánto cuesta esta chaqueta?"],["Mi piace quel cappello.","Me gusta ese sombrero."],["Quelle scarpe sono belle.","Esos zapatos son bonitos."]]},
+{t:"Modales + números grandes",e:"<b>Dovere, potere, volere</b> + infinitivo. Números: venti, trenta, quaranta, cinquanta, cento, mille (plural: <b>-mila</b>).",tb:[["20 / 30 / 40","venti / trenta / quaranta"],["50 / 60","cinquanta / sessanta"],["100 / 200","cento / duecento"],["1000 / 2000","mille / duemila"]],ej:[["Devo pagare cento euro.","Tengo que pagar cien euros."],["Posso usare la carta?","¿Puedo usar la tarjeta?"],["Vogliamo comprare due camicie.","Queremos comprar dos camisas."]]},
+{t:"Pronombres de objeto directo",e:"<b>lo, la, li, le</b> reemplazan al objeto y van antes del verbo conjugado. Con infinitivo se pegan al final: <b>voglio prenderlo</b>.",tb:[["lo","lo (masc. sing.)"],["la","la (fem. sing.)"],["li","los"],["le","las"],["mi / ti / ci / vi","me / te / nos / os"]],ej:[["Il conto? Lo pago io.","¿La cuenta? La pago yo."],["La pizza? La prendo.","¿La pizza? La pido."],["Gli spaghetti? Li mangio sempre.","¿Los espaguetis? Los como siempre."]]},
+{t:"Passato prossimo con AVERE",e:"<b>Avere + participio</b>. Participio regular: <b>-are → -ato</b>, <b>-ere → -uto</b>, <b>-ire → -ito</b>. Hay irregulares muy usados.",tb:[["parlare","parlato"],["vendere","venduto"],["dormire","dormito"],["fare","fatto (irreg.)"],["prendere","preso (irreg.)"],["vedere","visto (irreg.)"],["scrivere","scritto (irreg.)"]],ej:[["Ho visto un bel film.","Vi una buena película."],["Abbiamo preso il treno.","Tomamos el tren."],["Che cosa hai fatto?","¿Qué hiciste?"]]},
+{t:"Passato prossimo con ESSERE",e:"Usan <b>essere</b> los verbos de movimiento o cambio (andare, venire, partire, arrivare, nascere…) y todos los reflexivos. El participio concuerda con el sujeto: andat<b>o</b>/<b>a</b>/<b>i</b>/<b>e</b>.",tb:[["lui è andato","él fue"],["lei è andata","ella fue"],["loro sono partiti","ellos partieron"],["loro sono partite","ellas partieron"],["mi sono alzato/a","me levanté"]],ej:[["Maria è arrivata ieri.","María llegó ayer."],["Siamo andati al mare.","Fuimos al mar."],["Mi sono svegliato tardi.","Me desperté tarde."]]},
+{t:"Clima y comparativos",e:"Clima: <b>fa caldo/freddo</b>, <b>c'è il sole/vento</b>, <b>piove</b>, <b>nevica</b>. Comparar: <b>più… di</b> (más que), <b>meno… di</b> (menos que), <b>… come</b> (tan… como).",tb:[["più caldo di","más caluroso que"],["meno freddo di","menos frío que"],["bello come","tan bonito como"],["il più alto","el más alto"],["migliore / peggiore","mejor / peor"]],ej:[["Oggi fa più freddo di ieri.","Hoy hace más frío que ayer."],["Luglio è più caldo di aprile.","Julio es más caluroso que abril."],["Roma è bella come Firenze.","Roma es tan bonita como Florencia."]]},
+{t:"Imperativo y 'mi fa male'",e:"Imperativo informal (tu): <b>prendi, riposa, bevi</b>. Formal (Lei): <b>prenda, riposi, beva</b> (terminación cambiada). Para dolor: <b>mi fa male</b> + singular, <b>mi fanno male</b> + plural.",tb:[["prendere","prendi! / prenda!"],["riposare","riposa! / riposi!"],["bere","bevi! / beva!"],["mi fa male la testa","me duele la cabeza"],["mi fanno male i piedi","me duelen los pies"]],ej:[["Beva molta acqua.","Beba mucha agua."],["Riposa un po'!","¡Descansa un poco!"],["Mi fanno male le gambe.","Me duelen las piernas."]]},
+{t:"Imperfetto vs passato prossimo",e:"<b>Imperfetto</b>: costumbres, descripciones y acciones en curso (como '-aba/-ía'). <b>Passato prossimo</b>: acciones puntuales y terminadas. A menudo se combinan: una acción en curso interrumpida por otra.",tb:[["Imperfetto","ogni giorno, di solito, mentre, sempre"],["Passato prossimo","ieri, una volta, all'improvviso"],["giocavo","jugaba (costumbre)"],["ho giocato","jugué (una vez)"]],ej:[["Mentre leggevo, è arrivato Marco.","Mientras leía, llegó Marco."],["Da bambino giocavo sempre.","De niño jugaba siempre."],["Ieri ho giocato a calcio.","Ayer jugué fútbol."]]},
+{t:"Imperfetto regular · DA (desde hace)",e:"Imperfetto: <b>-avo</b> (-are), <b>-evo</b> (-ere), <b>-ivo</b> (-ire) + -vi, -va, -vamo, -vate, -vano. Presente + <b>da</b> = acción que sigue: <b>Lavoro qui da tre anni</b>.",tb:[["lavorare","lavoravo"],["avere","avevo"],["dormire","dormivo"],["fare","facevo (irreg.)"],["essere","ero (irreg.)"]],ej:[["Lavoro qui da tre anni.","Trabajo aquí desde hace tres años."],["Prima avevo un altro capo.","Antes tenía otro jefe."],["Studio italiano da un mese.","Estudio italiano desde hace un mes."]]},
+{t:"Futuro semplice",e:"Infinitivo sin -e final + <b>-ò, -ai, -à, -emo, -ete, -anno</b>. En -are la <b>a</b> cambia a <b>e</b>: parlare → parl<b>e</b>rò. Irregulares frecuentes: sarò, avrò, andrò, farò, verrò, potrò.",tb:[["parlare","parlerò"],["prendere","prenderò"],["partire","partirò"],["andare","andrò (irreg.)"],["venire","verrò (irreg.)"],["fare","farò (irreg.)"]],ej:[["Domani partirò per Roma.","Mañana partiré a Roma."],["Faremo una festa.","Haremos una fiesta."],["Verrai con noi?","¿Vendrás con nosotros?"]]},
+{t:"Futuro de probabilidad · FRA / TRA",e:"El futuro también expresa suposición sobre el presente: <b>Saranno le tre</b> (serán las tres). <b>Fra / tra</b> + tiempo = 'dentro de'.",tb:[["Saranno le dieci.","Serán las diez."],["Avrà trent'anni.","Tendrá unos treinta años."],["fra due ore","dentro de dos horas"],["tra un mese","dentro de un mes"]],ej:[["Il volo partirà fra un'ora.","El vuelo saldrá dentro de una hora."],["Dove sarà la mia valigia?","¿Dónde estará mi maleta?"],["Arriveremo tra poco.","Llegaremos dentro de poco."]]},
+{t:"Condizionale presente",e:"Raíz del futuro + <b>-ei, -esti, -ebbe, -emmo, -este, -ebbero</b>. Se usa para cortesía, deseos y consejos (<b>dovresti</b> = deberías).",tb:[["parlare","parlerei"],["essere","sarei"],["avere","avrei"],["potere","potrei"],["dovere","dovrei"],["piacere","mi piacerebbe"]],ej:[["Dovresti riposare.","Deberías descansar."],["Mi piacerebbe viaggiare.","Me gustaría viajar."],["Potrei avere il menù?","¿Podría tener la carta?"]]},
+{t:"Congiuntivo presente",e:"Se usa tras verbos de opinión, duda o deseo + <b>che</b>: penso che, credo che, spero che, voglio che. -are: <b>-i, -i, -i, -iamo, -iate, -ino</b>. -ere/-ire: <b>-a, -a, -a, -iamo, -iate, -ano</b>.",tb:[["parlare","che io parli"],["prendere","che io prenda"],["partire","che io parta"],["andare","che io vada (irreg.)"],["fare","che io faccia (irreg.)"]],ej:[["Penso che Marco abbia ragione.","Pienso que Marco tiene razón."],["Credo che parta domani.","Creo que viaja mañana."],["Voglio che tu venga.","Quiero que vengas."]]},
+{t:"Congiuntivo con emociones",e:"Tras emociones y frases impersonales + <b>che</b> va congiuntivo: sono contento che, ho paura che, è importante che, è meglio che. Si el sujeto es el mismo se usa <b>di + infinitivo</b>.",tb:[["Sono felice che tu sia qui.","Me alegra que estés aquí."],["È meglio che tu vada.","Es mejor que te vayas."],["Ho paura che piova.","Temo que llueva."],["Ho paura di sbagliare.","Tengo miedo de equivocarme (mismo sujeto)."]],ej:[["È importante che tu studi.","Es importante que estudies."],["Sono contento di vederti.","Me alegra verte."],["Mi dispiace che tu sia triste.","Siento que estés triste."]]},
+{t:"Forma impersonal y pasiva",e:"<b>Si</b> + verbo en 3ª persona = 'se' impersonal: <b>si dice</b>, <b>si vendono</b>. Pasiva con <b>essere</b> o <b>venire</b> + participio: <b>l'indice viene calcolato</b>.",tb:[["Si dice che…","Se dice que…"],["Si vendono case.","Se venden casas."],["L'indice viene calcolato ogni mese.","El índice se calcula cada mes."],["I dati sono stati pubblicati.","Los datos fueron publicados."],["Si prevede un aumento.","Se prevé un aumento."]],ej:[["Si prevede un calo dei prezzi.","Se prevé una baja de precios."],["I prezzi vengono rilevati ogni mese.","Los precios se recogen cada mes."],["In Italia si mangia bene.","En Italia se come bien."]]},
+{t:"Pronombres combinados · NE y CI",e:"Indirecto + directo: <b>mi, ti, ci, vi</b> → <b>me, te, ce, ve</b>; <b>gli / le</b> → <b>glie-</b> (glielo). <b>Ne</b> = de eso / cantidad. <b>Ci</b> = allí / en eso.",tb:[["mi + lo","me lo"],["ti + la","te la"],["gli / le + lo","glielo"],["ci + li","ce li"],["vi + le","ve le"],["ne","de eso / algunos"],["ci","allí"]],ej:[["Me lo puoi spiegare?","¿Me lo puedes explicar?"],["Quanti caffè? Ne prendo due.","¿Cuántos cafés? Tomo dos."],["Vai a Roma? Sì, ci vado domani.","¿Vas a Roma? Sí, voy mañana."]]},
+{t:"Verbos pronominales coloquiales",e:"Verbos con pronombres fijos muy usados al hablar: <b>farcela</b> (lograrlo), <b>andarsene</b> (irse), <b>prendersela</b> (ofenderse), <b>cavarsela</b> (arreglárselas).",tb:[["farcela","ce la faccio (lo logro)"],["andarsene","me ne vado (me voy)"],["prendersela","me la prendo (me ofendo)"],["cavarsela","me la cavo (me las arreglo)"]],ej:[["Non ce la faccio più!","¡Ya no puedo más!"],["È tardi, me ne vado.","Es tarde, me voy."],["Non te la prendere!","¡No te ofendas!"]]},
+{t:"Periodo ipotetico (condicionales)",e:"<b>Tipo 1</b> real: se + presente → presente/futuro. <b>Tipo 2</b> posible: se + congiuntivo imperfetto → condizionale. <b>Tipo 3</b> imposible (pasado): se + congiuntivo trapassato → condizionale passato.",tb:[["Se piove, resto a casa.","Tipo 1 (real)"],["Se piovesse, resterei a casa.","Tipo 2 (posible)"],["Se fosse piovuto, sarei rimasto a casa.","Tipo 3 (imposible)"]],ej:[["Se ho tempo, ti chiamo.","Si tengo tiempo, te llamo."],["Se avessi soldi, comprerei una casa.","Si tuviera dinero, compraría una casa."],["Se avessi studiato, avrei passato l'esame.","Si hubiera estudiado, habría aprobado el examen."]]},
+{t:"Conectores del discurso",e:"Algunos conectores exigen <b>congiuntivo</b>: sebbene, benché, affinché, prima che, a meno che. Otros van con indicativo: perché (porque), quindi, mentre, però, inoltre.",tb:[["sebbene / benché","aunque (+ cong.)"],["affinché","para que (+ cong.)"],["prima che","antes de que (+ cong.)"],["quindi / dunque","por lo tanto (+ ind.)"],["mentre","mientras (+ ind.)"],["inoltre","además"]],ej:[["Benché sia stanco, lavoro.","Aunque estoy cansado, trabajo."],["Te lo dico affinché tu lo sappia.","Te lo digo para que lo sepas."],["Piove, quindi resto a casa.","Llueve, por lo tanto me quedo en casa."]]}
+];
+const E=[
+{g:"Saludar en cualquier momento del día, preguntar cómo está alguien y despedirte.",s:["En italiano casi todo se lee como se escribe. La regla clave: <b>C</b> y <b>G</b> cambian ante <b>E</b> e <b>I</b>: <i>ce, ci</i> = 'che, chi' (ciao, cena); <i>ca, co, cu</i> = 'ka, ko, ku' (casa). La <b>H</b> es muda y solo endurece: <i>che</i> = 'ke'.",["ciao","cena","casa","che","gelato","spaghetti"]],p:[["¿Cómo saludas a las 9 de la mañana?","Buongiorno!"],["¿Qué respondes cuando te dicen «Grazie»?","Prego!"],["Di: «Estoy bien, gracias».","Sto bene, grazie."],["¿Cómo suena «ch» en «che»?","~Como «k»: ke"],["¿Cuándo usas «buonanotte»?","~Solo al despedirte para ir a dormir."]],t:"Saluda en voz alta a 3 personas imaginarias: una por la mañana, otra por la tarde y otra antes de dormir. Pregúntales cómo están y despídete."},
+{g:"Presentarte: tu nombre, de dónde eres y tus datos, en forma informal (tu) y formal (Lei).",s:["Fíjate en la <b>z</b> de <i>grazie</i> (suena 'ts') y en <b>gi</b> de <i>buongiorno</i> (suena 'dy'). La <b>è</b> (es) es abierta, como la 'e' de «perro».",["grazie","piacere","buongiorno","è","come si chiama?"]],p:[["Completa: Noi ___ peruviani.","siamo"],["Completa: Tu ___ di Roma?","sei"],["Di: «No soy italiana».","Non sono italiana."],["Pregunta en forma formal: «¿Cómo se llama?»","Come si chiama?"],["Di: «Tengo dos hermanos».","Ho due fratelli."]],t:"Preséntate en voz alta durante 30 segundos: saludo, nombre, nacionalidad, ciudad y despedida. Hazlo una vez con «tu» y otra con «Lei»."},
+{g:"Contar del 0 al 2000, decir tu edad y dictar tu número de teléfono.",s:["Los números están llenos de <b>dobles consonantes</b>: <i>quattro, sette, otto, diciassette</i>. Haz una pequeña pausa antes de la doble. La <b>h</b> de <i>ho, hai, ha, hanno</i> no suena.",["quattro","sette","otto","diciassette","ho","hanno"]],p:[["Escribe en letras: 48","quarantotto"],["Escribe en letras: 73","settantatré"],["Completa: Loro ___ una casa grande.","hanno"],["Di: «Tenemos dos gatos».","Abbiamo due gatti."],["Pregunta la edad en forma formal.","Quanti anni ha?"]],t:"Di en voz alta tu edad, tu número de teléfono cifra por cifra, cuántos hermanos tienes y cuántas personas viven en tu casa."},
+{g:"Describir a tu familia y usar los posesivos mio, tuo, suo, nostro, vostro, loro.",s:["Practica <b>gli</b>: <i>famiglia, figlio, moglie</i>. No es 'li' separado: es un solo sonido, con la lengua pegada al paladar, como una 'll' muy marcada.",["famiglia","figlio","figlia","moglie","i miei genitori"]],p:[["Completa: ___ madre è medico. (mi)","Mia madre"],["Completa: ___ fratelli sono alti. (mis)","I miei fratelli"],["Completa: Anna e ___ marito. (su)","suo marito"],["Di: «Hablamos español en familia».","Parliamo spagnolo in famiglia."],["Di: «Su padre (de ellos) es amable».","Il loro padre è gentile."]],t:"Describe a 4 miembros de tu familia: nombre, edad, dónde viven y cómo son (un adjetivo para cada uno)."},
+{g:"Describir objetos por su color y hacer concordar los adjetivos.",s:["Alarga las dobles de <i>rosso, giallo, bello</i>. La <b>gi</b> de <i>giallo</i> suena 'dy' y la <b>gi</b> de <i>grigio</i> también: 'GRI-dyo'.",["rosso","giallo","grigio","arancione","azzurro"]],p:[["Concordancia: le borse ___ (rojo)","rosse"],["Concordancia: i pantaloni ___ (azul)","blu"],["Concordancia: la casa ___ (blanco)","bianca"],["¿Por qué «verde» no cambia en femenino?","~Porque termina en -e: verde (singular), verdi (plural)."],["Di: «Veo dos carros negros».","Vedo due macchine nere."]],t:"Describe 6 objetos de tu casa con su color, primero en singular y luego en plural."},
+{g:"Hablar de lo que comes, de lo que te gusta y pedir cantidades con el partitivo.",s:["<b>sc + e/i</b> suena 'sh': <i>pesce</i>. <b>cch</b> suena 'k' larga: <i>zucchero, bicchiere</i>. Y <i>piacciono</i> se dice 'PIAT-cho-no'.",["pesce","zucchero","formaggio","bicchiere","mi piacciono"]],p:[["Partitivo: ___ formaggio (algo de queso)","del formaggio"],["Partitivo: ___ uova (unos huevos)","delle uova"],["Completa: Mi ___ le olive.","piacciono"],["Di: «Tengo hambre y sed».","Ho fame e sete."],["Responde que a ti también te gusta.","Anche a me!"]],t:"Cuenta qué comes en un día normal (desayuno, almuerzo y cena) y di 5 cosas que te gustan y 3 que no."},
+{g:"Describir tu casa y decir dónde están las cosas con las preposiciones.",s:["<b>gn</b> suena como la ñ: <i>bagno</i> = 'baño'. La <b>z</b> de <i>stanza</i> suena 'ts'. <i>Specchio</i> se lee 'SPEK-kio'.",["bagno","cucina","stanza","specchio","giardino"]],p:[["Completa: Le chiavi sono ___ borsa. (in + la)","nella"],["Completa: Il libro è ___ tavolo. (su + il)","sul"],["Completa: Vado ___ mercato. (a + il)","al"],["Di: «El baño está a la derecha».","Il bagno è a destra."],["Di: «Vivo en una casa con jardín».","Abito in una casa con giardino."]],t:"Haz un recorrido en voz alta por tu casa: nombra 6 ambientes y di qué hay en cada uno y dónde está."},
+{g:"Decir la hora, los días de la semana, los meses y organizar tu semana.",s:["Los días de lunes a viernes llevan la fuerza al final y con tilde: lu-ne-DÌ. En cambio <i>sabato</i> y <i>domenica</i> la llevan adelante: SA-ba-to, do-ME-ni-ca.",["lunedì","mercoledì","venerdì","sabato","domenica"]],p:[["Di la hora: 2:30","Sono le due e mezza."],["Di la hora: 6:45","Sono le sette meno un quarto."],["Di la hora: 1:15","È l'una e un quarto."],["¿Qué significa «il sabato»?","~Todos los sábados."],["Di: «Mi cumpleaños es en julio».","Il mio compleanno è a luglio."]],t:"Explica tu horario de la semana: qué haces cada día y a qué hora. Termina diciendo tu mes favorito y por qué."},
+{g:"Preguntar y explicar cómo llegar a un lugar.",s:["La <b>s</b> entre vocales suena suave (como zumbido): <i>casa, chiesa</i>. La <b>r</b> vibra clara, como en español: <i>destra, dritto</i>.",["a destra","a sinistra","sempre dritto","il semaforo","la stazione"]],p:[["Pregunta dónde está la estación.","Scusi, dov'è la stazione?"],["Di: «Siga todo recto».","Vada sempre dritto."],["Di: «Hay dos bancos en la plaza».","Ci sono due banche in piazza."],["Pregunta si está lejos.","È lontano?"],["Di: «Gire a la izquierda en el semáforo».","Al semaforo giri a sinistra."]],t:"Explica en voz alta cómo llegar desde tu casa hasta la tienda o el mercado más cercano, usando al menos 5 expresiones de hoy."},
+{g:"Hacer todo tipo de preguntas y expresar lo que quieres. Repaso del nivel básico.",s:["Practica <b>gli</b> en <i>voglio, vogliono</i> y la doble <b>cc</b> suave de <i>faccio</i> ('FAT-cho'). En las preguntas, la voz sube al final.",["voglio","vogliono","faccio","perché?","quanto costa?"]],p:[["Completa: Noi ___ (andare) al mare.","andiamo"],["Completa: Loro ___ (fare) la spesa.","fanno"],["Di: «¿Quieres venir?»","Vuoi venire?"],["Di: «No entiendo nada».","Non capisco niente."],["Pregunta cuánto cuesta.","Quanto costa?"]],t:"Mini prueba del nivel básico: hazte 8 preguntas (chi, che cosa, dove, quando, perché, come, quanto, quale) y respóndelas en voz alta. Grábate y escúchate."},
+{g:"Contar tu rutina diaria y decir lo que estás haciendo ahora.",s:["Los grupos <b>sv</b> y <b>sb</b> van sin 'e' delante: se dice «sve-LLIAR-si», no «esvelliarsi». Practica: <i>mi sveglio, svegliarsi</i>.",["mi sveglio","svegliarsi","mi vesto","mi riposo","sto mangiando"]],p:[["Completa: Noi ___ (alzarsi) alle otto.","ci alziamo"],["Completa: Lei ___ (vestirsi) in fretta.","si veste"],["Di: «Ahora estoy comiendo».","Sto mangiando."],["Di de dos formas: «Tengo que levantarme».","Mi devo alzare. Devo alzarmi."],["Di: «Me acuesto a medianoche».","Vado a letto a mezzanotte."]],t:"Describe tu rutina completa durante 90 segundos, con al menos 8 acciones y la hora de cada una."},
+{g:"Describir ropa, elegir entre objetos (questo / quello) y probarte prendas.",s:["<b>qu</b> siempre suena 'ku': <i>quanto, quello, questo</i>. La doble <b>ll</b> se alarga, nunca suena como 'y'.",["quanto costa?","questo","quello","quella","quelli"]],p:[["Completa: ___ scarpe sono care. (esos)","Quelle"],["Completa: ___ zaino è nuovo. (esa mochila)","Quello"],["Pregunta si puedes probártela.","Posso provarla?"],["Di: «Me queda bien, me la llevo».","Mi sta bene, la prendo."],["Pregunta la talla en forma formal.","Che taglia porta?"]],t:"Simula una compra de dos prendas: pregunta precio, talla y color, pide probártela y decide si la compras. Haz los dos papeles."},
+{g:"Comprar, preguntar precios, pagar y pedir descuentos.",s:["<b>sc + a/o/u</b> suena 'sk': <i>sconto, scontrino</i>. Ojo con <i>ottanta</i> y <i>cento</i>: 'ot-TAN-ta', 'CHEN-to'.",["sconto","scontrino","contanti","ottanta euro","duecento"]],p:[["Pregunta si puedes pagar con tarjeta.","Posso pagare con la carta?"],["Escribe en letras: 250","duecentocinquanta"],["Di: «Es demasiado caro».","È troppo caro."],["Conjuga dovere con «noi».","dobbiamo"],["Di: «¿Me da la boleta?»","Mi dà lo scontrino?"]],t:"Simula comprar 3 cosas: pregunta el precio, pide un descuento, elige la forma de pago y pide la boleta."},
+{g:"Pedir comida y bebida con cortesía en un restaurante y pedir la cuenta.",s:["Practica la <b>sc</b> suave y la <b>cch</b> dura en palabras de restaurante: <i>pesce</i> (PE-she), <i>bicchiere</i> (bik-KIE-re), <i>zucchero</i> (TSUK-ke-ro).",["pesce","bicchiere","zucchero","il conto, per favore","vorrei"]],p:[["Pide cortésmente un café.","Vorrei un caffè, per favore."],["Pide la cuenta.","Il conto, per favore."],["¿Qué es «il contorno»?","~La guarnición (verduras, papas, ensalada)."],["La pizza? ___ prendo.","La prendo."],["Gli spaghetti? ___ mangio sempre.","Li mangio sempre."]],t:"Haz los dos papeles del diálogo: cliente y mesero. Luego inventa tu pedido completo: bebida, primo, secondo, contorno y dolce."},
+{g:"Contar lo que hiciste ayer o la semana pasada.",s:["Los participios irregulares tienen doble consonante: <i>fatto, detto, letto, scritto</i>. Los regulares llevan la fuerza en la penúltima: par-LA-to, a-VU-to, fi-NI-to.",["ho mangiato","ho fatto","ho visto","ho preso","abbiamo letto"]],p:[["Completa: Ieri ___ (io, comprare) il pane.","ho comprato"],["Completa: Loro ___ (fare) colazione al bar.","hanno fatto"],["Completa: ___ (tu, leggere) il giornale?","Hai letto"],["Di: «Todavía no he terminado».","Non ho ancora finito."],["Di: «Hace tres días escribí un correo».","Tre giorni fa ho scritto un'email."]],t:"Cuenta durante 90 segundos lo que hiciste ayer, de la mañana a la noche, usando al menos 8 verbos en pasado con avere."},
+{g:"Contar viajes y movimientos, haciendo concordar el participio.",s:["La <b>r</b> vibra con fuerza, sobre todo la doble <b>rr</b>: <i>arrivato, terra</i>. Practica <i>siamo arrivati</i> marcando la rr.",["sono arrivato","siamo arrivati","sono partita","il treno","siamo tornati"]],p:[["Completa: Maria ___ (uscire) alle otto.","è uscita"],["Completa: Noi ___ (arrivare) tardi. (grupo mixto)","siamo arrivati"],["Completa: Le ragazze ___ (divertirsi) molto.","si sono divertite"],["Pregunta dónde nació alguien (tú).","Dove sei nato?"],["¿Avere o essere? «___ mangiato e poi ___ uscito.»","Ho mangiato e poi sono uscito."]],t:"Cuenta tu último viaje o paseo (2 minutos): adónde fuiste, con quién, cómo llegaste, qué hiciste y cuándo volviste. Mezcla verbos con avere y con essere."},
+{g:"Hablar del clima, las estaciones y comparar.",s:["La <b>gg</b> de <i>pioggia</i> suena 'dy' alargada: 'PIOD-dya'. La <b>v</b> italiana se pronuncia con los dientes sobre el labio: <i>vento, inverno</i>.",["pioggia","freddo","vento","inverno","nuvoloso"]],p:[["Di: «Hace frío».","Fa freddo."],["Di: «Llueve desde ayer».","Piove da ieri."],["Conjuga venire con «io».","vengo"],["Di: «Hoy hace más calor que ayer».","Oggi fa più caldo di ieri."],["Di: «¿Qué tiempo hace?»","Che tempo fa?"]],t:"Describe el clima de tu ciudad en cada estación del año y compáralo con el de Italia usando più… di / meno… di."},
+{g:"Explicar qué te duele y entender las indicaciones del médico.",s:["<b>sch</b> suena 'sk': <i>schiena</i> = 'SKIE-na'. La <b>g</b> ante a/o/u es fuerte: <i>gola, gamba</i>.",["schiena","gola","stomaco","mi fa male","febbre"]],p:[["Di: «Me duele la cabeza».","Mi fa male la testa."],["Di: «Me duelen los pies».","Mi fanno male i piedi."],["Plural de «la mano».","le mani"],["Plural de «il braccio».","le braccia"],["Imperativo formal de prendere.","Prenda!"]],t:"Simula una consulta médica: di tus síntomas, desde cuándo los tienes y repite en voz alta lo que te indica el médico."},
+{g:"Describir cómo eras y lo que hacías antes, y combinar los dos pasados.",s:["El imperfetto tiene un ritmo muy regular: la fuerza cae en el sufijo: par-LA-vo, a-VE-vo, dor-MI-vo. En «loro» retrocede: par-LA-va-no.",["ero","avevo","giocavo","andavamo","parlavano"]],p:[["Completa: Da bambina ___ (io, avere) un gatto.","avevo"],["Completa: Noi ___ (essere) molto felici.","eravamo"],["Completa: Mentre ___ (io, cucinare), è squillato il telefono.","cucinavo"],["Di: «Cada domingo visitábamos a la abuela».","Ogni domenica visitavamo la nonna."],["¿Cuál es la pista para usar imperfetto?","~Si en español dirías «-aba / -ía», casi siempre es imperfetto."]],t:"Describe tu infancia durante 2 minutos: cómo eras, dónde vivías, qué hacías cada verano. Termina con una anécdota: «una volta, mentre…»."},
+{g:"Hablar de tu trabajo actual y del anterior. Repaso del nivel intermedio.",s:["<i>ufficio</i> se lee 'uf-FI-cho' (la i no suena). <i>riunione</i>: 'riu-NIO-ne'. <i>stipendio</i>: 'sti-PEN-dio'.",["ufficio","riunione","stipendio","collega","progetto"]],p:[["Di: «Trabajo aquí desde hace tres años».","Lavoro qui da tre anni."],["Conjuga fare en imperfetto con «noi».","facevamo"],["Pregunta: «¿En qué trabajas?»","Che lavoro fai?"],["Di: «Tengo una reunión a las diez».","Ho una riunione alle dieci."],["Conjuga avere en imperfetto con «io».","avevo"]],t:"Mini prueba del nivel intermedio (90 segundos): qué trabajo haces, qué hacías antes, cómo es tu día en la oficina y qué hiciste ayer."},
+{g:"Hablar de tus planes y del futuro.",s:["El futuro lleva la fuerza en la última sílaba, siempre con tilde en «io»: par-le-RÒ, an-DRÒ, sa-RÀ.",["sarò","andrò","farò","parlerò","sarà"]],p:[["Completa: Domani ___ (io, andare) in ufficio.","andrò"],["Completa: L'anno prossimo ___ (noi, essere) in Italia.","saremo"],["Di: «Te llamaré esta noche».","Ti chiamerò stasera."],["Conjuga fare en futuro con «io».","farò"],["Di: «¿Dónde estará Marco?»","Dove sarà Marco?"]],t:"Habla 1 minuto sobre tus planes para el próximo año: dónde estarás, qué harás, qué aprenderás y adónde viajarás."},
+{g:"Moverte en un aeropuerto: check-in, aduana, retrasos y equipaje.",s:["<i>bagaglio</i> une la g fuerte y la <b>gli</b>: 'ba-GA-llio'. La <b>z</b> de <i>partenza</i> suena 'ts'.",["bagaglio","partenza","passaporto","ritardo","dogana"]],p:[["Di: «El vuelo está retrasado».","Il volo è in ritardo."],["Conjuga avere en futuro con «io».","avrò"],["Pregunta a qué hora sale el vuelo.","A che ora parte il volo?"],["Di: «Saldré dentro de dos horas».","Partirò fra due ore."],["Di: «Perdí la maleta».","Ho perso la valigia."]],t:"Simula tu llegada a Italia: pasa por migraciones (cuánto tiempo te quedas y por qué), recoge tu maleta y pide un taxi al hotel."},
+{g:"Pedir y ofrecer cosas con mucha cortesía, dar consejos y hacer reservas.",s:["El condicional tiene dobles <b>bb</b> y <b>mm</b> que se alargan: <i>sarebbe, potremmo, vorremmo</i>.",["vorrei","potrei","sarebbe","potremmo","mi piacerebbe"]],p:[["Completa: ___ (tu, potere) aiutarmi?","Potresti"],["Di: «Me gustaría visitar Florencia».","Mi piacerebbe visitare Firenze."],["Pregunta: «¿Sería posible cambiar la habitación?»","Sarebbe possibile cambiare la camera?"],["Aconseja: «Deberías descansar».","Dovresti riposare."],["Di: «Quisiera reservar una mesa».","Vorrei prenotare un tavolo."]],t:"Llama a un hotel imaginario y reserva una habitación usando el condicional: fechas, tipo de habitación, desayuno y forma de pago."},
+{g:"Dar tu opinión, estar de acuerdo o en desacuerdo, usando el congiuntivo.",s:["Une las palabras sin pausas y usa los conectores como pequeños descansos: <i>allora…, secondo me…, comunque…</i>",["secondo me","penso che sia","sono d'accordo","non sono d'accordo","comunque"]],p:[["Completa: Penso che Marco ___ (essere) stanco.","sia"],["Completa: Secondo me, Roma ___ (essere) bellissima.","è"],["Expresa desacuerdo con cortesía.","Non sono d'accordo, secondo me…"],["Di: «Creo que tienes razón».","Credo che tu abbia ragione."],["¿Por qué «secondo me» va con indicativo?","~Porque no es un verbo de opinión + che; con «penso che» sí va congiuntivo."]],t:"Da tu opinión sobre 3 temas (el clima de tu ciudad, aprender idiomas y el trabajo desde casa) usando penso che, secondo me y però."},
+{g:"Expresar cómo te sientes y reaccionar a lo que sienten los demás.",s:["En las exclamaciones la voz sube y baja con fuerza: <i>Che bello!</i> En las disculpas baja suave: <i>Mi dispiace.</i>",["Che bello!","Mi dispiace.","Non ti preoccupare.","felice","arrabbiato"]],p:[["Di: «Espero que tengas razón».","Spero che tu abbia ragione."],["Di: «Me alegro por ti».","Sono felice per te."],["Conjuga avere en congiuntivo con «loro».","che abbiano"],["Di: «No te preocupes».","Non ti preoccupare."],["Di: «Tengo miedo de equivocarme».","Ho paura di sbagliare."]],t:"Cuenta 3 momentos de tu vida (uno feliz, uno triste y uno de nervios) y cómo te sentiste en cada uno."},
+{g:"Leer y comentar datos de precios, inflación y economía.",s:["Los decimales se leen con <i>virgola</i> y el porcentaje con <i>per cento</i>: 0,3% = 'zero virgola tre per cento'.",["zero virgola tre per cento","inflazione","aumento","mensile","consumatore"]],p:[["Lee: 0,5%","zero virgola cinque per cento"],["Di: «Los precios subieron».","I prezzi sono aumentati."],["Di: «Se prevé un aumento».","Si prevede un aumento."],["Conjuga fare en congiuntivo con «io».","che io faccia"],["Di: «El índice se calcula cada mes».","L'indice viene calcolato ogni mese."]],t:"Presenta en 1 minuto un resultado de inflación mensual: cuánto varió, qué subió, qué bajó y tu opinión sobre la causa."},
+{g:"Evitar repeticiones con los pronombres lo, la, gli, le, ne y ci.",s:["Las contracciones se dicen como una sola palabra: <i>l'ho visto</i> suena 'LO VIS-to'. <i>Glielo</i> se lee 'LLIE-lo'.",["l'ho visto","glielo do","ne voglio due","ci vado domani","me lo dai?"]],p:[["Sustituye: Vedo Marco domani.","Lo vedo domani."],["Sustituye: Telefono a Anna.","Le telefono."],["Sustituye: Ho letto le lettere.","Le ho lette."],["Responde con ne: Quanti figli hai? (2)","Ne ho due."],["Responde con ci: Vai al mercato oggi?","Sì, ci vado oggi."]],t:"Responde en voz alta 8 preguntas sobre tu semana usando pronombres: ¿llamaste a tu madre?, ¿compraste pan?, ¿cuántos cafés tomas?, ¿vas al trabajo mañana?"},
+{g:"Usar expresiones idiomáticas para sonar natural.",s:["Las expresiones se dicen de corrido, como una sola palabra: «in-boc-ca-al-LU-po». Imita la melodía, no solo las palabras.",["In bocca al lupo!","Crepi!","Non vedo l'ora!","Che figata!","Meno male!"]],p:[["¿Qué respondes a «In bocca al lupo»?","Crepi!"],["Di: «Estoy sin dinero».","Sono al verde."],["Conjuga dire con «noi».","diciamo"],["Di: «Llueve a cántaros».","Piove a catinelle."],["Di: «No digas nada».","Acqua in bocca!"]],t:"Cuenta una pequeña historia (real o inventada) usando al menos 4 expresiones de hoy."},
+{g:"Imaginar situaciones con «se…» y decir qué harías.",s:["Alarga la doble <b>ss</b> de <i>fossi, avessi, potessi</i>: si no, suena 'fosi'. El condicional lleva fuerza en -REI: fa-REI, an-DREI.",["se fossi","se avessi","se potessi","farei","andrei"]],p:[["Completa: Se ___ (io, avere) tempo, viaggerei.","avessi"],["Completa: Se fossi ricco, ___ (io, comprare) una casa.","comprerei"],["Completa (tipo 1): Se piove, ___ (io, restare) a casa.","resto"],["Di: «Si yo fuera tú, estudiaría».","Se fossi in te, studierei."],["Conjuga essere en congiuntivo imperfetto con «loro».","fossero"]],t:"Responde en voz alta: ¿qué harías si ganaras la lotería, si vivieras en Italia y si hablaras italiano perfecto?"},
+{g:"Conectar ideas con fluidez y hacer la evaluación final del curso.",s:["Para sonar fluido, une las ideas con conectores y no hagas pausas largas: <i>allora…, insomma…, comunque…, quindi…</i>",["allora","insomma","comunque","quindi","sebbene"]],p:[["Une con «aunque»: «Fa freddo. Esco lo stesso.»","Anche se fa freddo, esco lo stesso."],["Di: «Aunque está cansado, trabaja».","Benché sia stanco, lavora."],["Conjuga sapere con «noi».","sappiamo"],["Di: «Te lo digo para que lo sepas».","Te lo dico affinché tu lo sappia."],["Di: «Llueve, por lo tanto me quedo en casa».","Piove, quindi resto a casa."]],t:"Evaluación final (5 minutos, grábate): 1) preséntate; 2) describe a tu familia; 3) cuenta tu rutina; 4) narra un viaje en pasado; 5) explica tus planes del próximo año; 6) da tu opinión sobre aprender italiano. Escúchate y anota qué días repasar."}
+];
+const GX={
+5:{cap:"Partitivo (di + artículo) = algo de / unos",head:["Artículo","Partitivo","Ejemplo"],rows:[["il","del","del pane"],["lo","dello","dello zucchero"],["la","della","della pasta"],["l'","dell'","dell'acqua"],["i","dei","dei pomodori"],["gli","degli","degli spaghetti"],["le","delle","delle olive"]]},
+6:{cap:"Preposiciones articuladas (tabla completa)",head:["","il","lo","la","l'","i","gli","le"],rows:[["di","del","dello","della","dell'","dei","degli","delle"],["a","al","allo","alla","all'","ai","agli","alle"],["da","dal","dallo","dalla","dall'","dai","dagli","dalle"],["in","nel","nello","nella","nell'","nei","negli","nelle"],["su","sul","sullo","sulla","sull'","sui","sugli","sulle"]]},
+10:{cap:"Stare + gerundio = estar + -ando / -iendo",head:["","stare","Ejemplo"],rows:[["io","sto","sto lavorando"],["tu","stai","stai mangiando"],["lui / lei","sta","sta leggendo"],["noi","stiamo","stiamo dormendo"],["voi","state","state facendo"],["loro","stanno","stanno uscendo"]]},
+14:{cap:"Participios irregulares frecuentes",head:["Infinitivo","Participio","Ejemplo"],rows:[["fare","fatto","ho fatto"],["vedere","visto","ho visto"],["prendere","preso","ho preso"],["leggere","letto","ho letto"],["scrivere","scritto","ho scritto"],["dire","detto","ho detto"],["aprire","aperto","ho aperto"],["bere","bevuto","ho bevuto"]]}
+};
+function pron(w){let s=w.toLowerCase();
+  s=s.replace(/(^|[^cg])h/g,"$1").replace(/sch/g,"sk").replace(/sci([aou])/g,"sh$1").replace(/sc([eièé])/g,"sh$1")
+   .replace(/gli([aeou])/g,"lli$1").replace(/gli\b/g,"lli").replace(/gn/g,"ñ")
+   .replace(/cch/g,"kk").replace(/ch/g,"k").replace(/gh([eièé])/g,"gu$1")
+   .replace(/cci([aou])/g,"tch$1").replace(/cc([eièé])/g,"tch$1").replace(/ci([aou])/g,"ch$1").replace(/c([eièé])/g,"ch$1")
+   .replace(/ggi([aou])/g,"ddy$1").replace(/gg([eièé])/g,"ddy$1").replace(/gi([aou])/g,"dy$1").replace(/g([eièé])/g,"dy$1")
+   .replace(/zz/g,"ts").replace(/z/g,"ts").replace(/qu/g,"ku");
+  return s===w.toLowerCase()?"":s}
+const PR6=["io","tu","lui / lei / Lei","noi","voi","loro"];
+const GR=[
+{i:"<p><b>Essere</b> significa ser <b>y</b> estar. Es el verbo más importante: apréndelo de memoria hoy. En italiano casi siempre se omite el pronombre: <i>Sono peruviano</i> ya significa «yo soy peruano».</p><p>Para hablar de usted se usa <b>Lei</b> (con mayúscula) y el verbo en tercera persona: <i>Lei è italiano?</i></p>",
+ t:[{c:"Essere (ser / estar)",h:["Pronombre","Forma","Español"],r:[["io","sono","yo soy"],["tu","sei","tú eres"],["lui / lei / Lei","è","él / ella es, usted es"],["noi","siamo","nosotros somos"],["voi","siete","ustedes son"],["loro","sono","ellos son"]],k:[0,1]}],
+ n:["<b>Negación:</b> se pone <i>non</i> antes del verbo: <i>Non sono italiano</i>.","<b>Pregunta:</b> el orden no cambia, solo la voz sube al final: <i>Sei italiano?</i>","<b>Tu o Lei:</b> usa <i>tu</i> con amigos, familia y jóvenes; <i>Lei</i> con desconocidos, en tiendas y oficinas."]},
+{i:"<p>Los sustantivos que terminan en <b>-o</b> suelen ser masculinos y los que terminan en <b>-a</b>, femeninos. Los que terminan en <b>-e</b> pueden ser de cualquier género: apréndelos siempre con su artículo.</p><p><b>Lo / gli</b> se usan ante palabras masculinas que empiezan por <b>s + consonante</b>, <b>z</b>, <b>gn</b>, <b>ps</b> o <b>y</b>. Ante vocal se usa <b>l'</b>.</p>",
+ t:[{c:"Artículo determinado (el, la, los, las)",h:["Uso","Singular","Plural"],r:[["masculino normal","il libro","i libri"],["masc. s+consonante, z","lo studente","gli studenti"],["masc. ante vocal","l'amico","gli amici"],["femenino","la casa","le case"],["fem. ante vocal","l'amica","le amiche"]],k:[1,2]}],
+ n:["Las palabras con tilde final no cambian en plural: <i>il caffè → i caffè, la città → le città</i>.","<i>Gli</i> se pronuncia como una «ll» muy marcada: <i>gli amici</i>."]},
+{i:"<p>El artículo indeterminado (un, una) también depende de cómo empieza la palabra. El plural de los sustantivos sigue una regla muy simple según la última letra.</p><p>Con los números, desde el 20 se pierde la última vocal antes de <i>uno</i> y <i>otto</i>: <i>ventuno, ventotto, trentuno</i>. Y <i>tre</i> lleva tilde al final de un número compuesto: <i>ventitré</i>.</p>",
+ t:[{c:"Artículo indeterminado",h:["Uso","Forma","Ejemplo"],r:[["masculino normal / vocal","un","un libro, un amico"],["masc. s+consonante, z","uno","uno zaino"],["femenino","una","una casa"],["fem. ante vocal","un'","un'amica"]],k:[2]},
+  {c:"Plural de los sustantivos",h:["Termina en","Plural","Ejemplo"],r:[["-o","-i","libro → libri"],["-a","-e","casa → case"],["-e","-i","notte → notti"],["con tilde","no cambia","città → città"]],k:[2]}],
+ n:["<b>Edad:</b> se usa <i>avere</i>: <i>Quanti anni hai? — Ho trentacinque anni</i>.","<b>C'è / ci sono</b> = hay: <i>C'è un problema</i>, <i>Ci sono due bar</i>."]},
+{i:"<p>En italiano el posesivo va <b>con artículo</b>: <i>la mia casa, il tuo libro</i>.</p><p>Excepción: con un familiar en <b>singular</b> y sin adjetivo se quita el artículo: <i>mia madre, tuo fratello</i>. En plural vuelve: <i>i miei fratelli</i>. Con <b>loro</b> siempre hay artículo: <i>il loro padre</i>.</p>",
+ t:[{c:"Adjetivos posesivos",h:["","masc. sing.","fem. sing.","masc. pl.","fem. pl."],r:[["mi","il mio","la mia","i miei","le mie"],["tu","il tuo","la tua","i tuoi","le tue"],["su (de él / ella / usted)","il suo","la sua","i suoi","le sue"],["nuestro","il nostro","la nostra","i nostri","le nostre"],["vuestro","il vostro","la vostra","i vostri","le vostre"],["su (de ellos)","il loro","la loro","i loro","le loro"]],k:[1,2,3,4]}],
+ n:["<i>Suo</i> concuerda con la cosa poseída, no con el dueño: <i>Marco e sua sorella</i>, <i>Anna e suo marito</i>.","Adjetivos útiles: alto, basso, giovane, anziano, simpatico, gentile, bello, carino."]},
+{i:"<p>El adjetivo va normalmente <b>después</b> del sustantivo y concuerda en género y número, como en español.</p><p>Hay dos tipos: los que terminan en <b>-o</b> (4 formas) y los que terminan en <b>-e</b> (2 formas, iguales para masculino y femenino). Algunos colores no cambian nunca: <b>blu, rosa, viola, beige</b>.</p>",
+ t:[{c:"Concordancia del adjetivo",h:["Tipo","masc. sing.","fem. sing.","masc. pl.","fem. pl."],r:[["-o","rosso","rossa","rossi","rosse"],["-o","nero","nera","neri","nere"],["-e","verde","verde","verdi","verdi"],["-e","grande","grande","grandi","grandi"],["invariable","blu","blu","blu","blu"]],k:[1,2,3,4]}],
+ n:["<i>Bello</i> y <i>buono</i> suelen ir antes: <i>una bella casa, un buon caffè</i>.","Para intensificar: <i>molto bello</i> o <i>bellissimo</i>."]},
+{i:"<p>Los verbos en <b>-are</b> son los más numerosos: quita <i>-are</i> y añade <b>-o, -i, -a, -iamo, -ate, -ano</b>. Ojo: en «loro» la fuerza va atrás: <i>PAR-la-no, MAN-gia-no</i>.</p><p><b>Piacere</b> funciona exactamente como «gustar»: lo que gusta es el sujeto. <b>Piace</b> con una cosa o un infinitivo, <b>piacciono</b> con varias cosas.</p>",
+ t:[{c:"mangiare (-are)",h:["","Forma"],r:PR6.map((p,i)=>[p,["mangio","mangi","mangia","mangiamo","mangiate","mangiano"][i]]),k:[1]},
+  {c:"Pronombres con piacere",h:["Persona","Forma","Español"],r:[["a me","mi piace","me gusta"],["a te","ti piace","te gusta"],["a lui","gli piace","le gusta (a él)"],["a lei / a Lei","le piace / Le piace","le gusta (a ella / usted)"],["a noi","ci piace","nos gusta"],["a voi","vi piace","les gusta"],["a loro","gli piace","les gusta (a ellos)"]],k:[1]}],
+ n:["Verbos en -care y -gare añaden h en tu y noi: <i>pagare → paghi, paghiamo</i>.","<i>Mi piace molto</i> = me gusta mucho; <i>non mi piace per niente</i> = no me gusta nada.","<i>Anche a me</i> = a mí también; <i>neanche a me</i> = a mí tampoco."]},
+{i:"<p>Las preposiciones <b>di, a, da, in, su</b> se unen al artículo en una sola palabra. Es uno de los puntos más importantes del italiano: aparece en casi cada frase.</p>",
+ t:[{c:"Preposiciones articuladas",h:["","il","lo","la","l'","i","gli","le"],r:[["di","del","dello","della","dell'","dei","degli","delle"],["a","al","allo","alla","all'","ai","agli","alle"],["da","dal","dallo","dalla","dall'","dai","dagli","dalle"],["in","nel","nello","nella","nell'","nei","negli","nelle"],["su","sul","sullo","sulla","sull'","sui","sugli","sulle"]],k:[1,2,3,4,5,6,7]}],
+ n:["<b>a</b> = a (ciudades, lugares): <i>vado a Roma, al bar</i>. <b>in</b> = en (países, regiones, medios): <i>in Italia, in treno</i>.","<b>da</b> = desde / a casa de: <i>vengo da Lima, vado dal medico</i>.","<b>Abitare:</b> <i>abito a Chimbote</i> (ciudad), <i>abito in Perù</i> (país)."]},
+{i:"<p>Para preguntar la hora: <b>Che ore sono?</b> Se responde con <b>sono le</b> + número, excepto la una, el mediodía y la medianoche, que van con <b>è</b>.</p><p><b>Fare</b> (hacer) es irregular y aparece en muchas expresiones fijas: <i>fare colazione, fare la spesa, fare una passeggiata, fa caldo</i>.</p>",
+ t:[{c:"La hora",h:["Hora","Italiano"],r:[["1:00","È l'una"],["3:00","Sono le tre"],["8:30","Sono le otto e mezza"],["5:15","Sono le cinque e un quarto"],["8:45","Sono le nove meno un quarto"],["12:00","È mezzogiorno"],["0:00","È mezzanotte"],["¿A qué hora?","A che ora? — Alle sette"]],k:[1]}],
+ n:["Con los días: <i>il lunedì</i> = todos los lunes; <i>lunedì</i> = este lunes.","Días y meses se escriben con minúscula: <i>martedì, gennaio</i>."]},
+{i:"<p><b>C'è</b> + singular y <b>ci sono</b> + plural equivalen a «hay».</p><p>Los verbos en <b>-ere</b> e <b>-ire</b> se conjugan casi igual. Algunos verbos en -ire (capire, finire, preferire) añaden <b>-isc-</b> en todas las personas excepto noi y voi.</p>",
+ t:[{c:"scrivere (-ere)",h:["","Forma"],r:PR6.map((p,i)=>[p,["scrivo","scrivi","scrive","scriviamo","scrivete","scrivono"][i]]),k:[1]},
+  {c:"dormire (-ire)",h:["","Forma"],r:PR6.map((p,i)=>[p,["dormo","dormi","dorme","dormiamo","dormite","dormono"][i]]),k:[1]},
+  {c:"capire (-isc-)",h:["","Forma"],r:PR6.map((p,i)=>[p,["capisco","capisci","capisce","capiamo","capite","capiscono"][i]]),k:[1]}],
+ n:["En «loro» la fuerza va atrás: <i>SCRI-vo-no, DOR-mo-no, ca-PI-sco-no</i>.","<b>Da + tiempo</b> = desde hace: <i>Studio italiano da una settimana</i>."]},
+{i:"<p>Para negar basta poner <b>non</b> delante del verbo. A diferencia del inglés, en italiano la <b>doble negación es correcta</b>: <i>non… mai, non… niente</i>.</p><p>Para preguntar no cambia el orden de las palabras: solo sube la entonación al final, igual que en español.</p>",
+ t:[{c:"Negaciones",h:["Italiano","Español","Ejemplo"],r:[["non… mai","nunca","Non mangio mai carne."],["non… niente","nada","Non capisco niente."],["non… nessuno","nadie","Non c'è nessuno."],["non… più","ya no","Non abito più qui."],["non… ancora","todavía no","Non ho ancora mangiato."]],k:[2]},
+  {c:"Palabras para preguntar",h:["Italiano","Español","Ejemplo"],r:[["chi","quién","Chi è?"],["che cosa / cosa","qué","Che cosa fai?"],["dove","dónde","Dove abiti?"],["quando","cuándo","Quando parti?"],["perché","por qué","Perché studi italiano?"],["come","cómo","Come stai?"],["quanto / quanti","cuánto / cuántos","Quanto costa?"],["quale","cuál","Qual è il tuo nome?"]],k:[2]}],
+ n:["<i>Perché</i> sirve para preguntar y para responder: <i>Perché? — Perché mi piace</i>.","<i>Qual è</i> se escribe sin apóstrofo."]},
+{i:"<p>Los verbos reflexivos llevan un pronombre antes del verbo conjugado, igual que en español: <i>mi sveglio</i> = me despierto. En infinitivo, el pronombre se pega al final: <i>svegliarsi</i>.</p>",
+ t:[{c:"svegliarsi (despertarse)",h:["","Forma"],r:PR6.map((p,i)=>[p,["mi sveglio","ti svegli","si sveglia","ci svegliamo","vi svegliate","si svegliano"][i]]),k:[1]},
+  {c:"vestirsi (vestirse)",h:["","Forma"],r:PR6.map((p,i)=>[p,["mi vesto","ti vesti","si veste","ci vestiamo","vi vestite","si vestono"][i]]),k:[1]}],
+ n:["Con modales el pronombre puede ir delante o pegado: <i>Mi devo alzare</i> = <i>Devo alzarmi</i>.","Conectores de secuencia: <i>prima</i> (primero), <i>poi</i> (luego), <i>dopo</i> (después), <i>alla fine</i> (al final)."]},
+{i:"<p><b>Questo</b> (este) funciona como un adjetivo normal. <b>Quello</b> (ese / aquel) cambia como el artículo determinado.</p>",
+ t:[{c:"questo",h:["","Singular","Plural"],r:[["masculino","questo libro","questi libri"],["femenino","questa camicia","queste camicie"]],k:[1,2]},
+  {c:"quello (como el artículo)",h:["Artículo","quello","Ejemplo"],r:[["il / i","quel / quei","quel negozio, quei pantaloni"],["lo / gli","quello / quegli","quello zaino, quegli zaini"],["l'","quell'","quell'albergo"],["la / le","quella / quelle","quella borsa, quelle scarpe"]],k:[2]}],
+ n:["<i>Che taglia porta?</i> = ¿qué talla usa? <i>Che numero porta?</i> = ¿qué número calza?","<i>La prendo</i> = me la llevo; <i>lo prendo</i> = me lo llevo."]},
+{i:"<p><b>Potere, volere, dovere</b> van seguidos de un infinitivo: <i>Posso entrare? Devo lavorare. Voglio mangiare.</i> Los tres son irregulares.</p>",
+ t:[{c:"potere / volere / dovere",h:["","potere","volere","dovere"],r:PR6.map((p,i)=>[p,["posso","puoi","può","possiamo","potete","possono"][i],["voglio","vuoi","vuole","vogliamo","volete","vogliono"][i],["devo","devi","deve","dobbiamo","dovete","devono"][i]]),k:[1,2,3]},
+  {c:"Números grandes",h:["Cifra","Italiano"],r:[["20 / 30 / 40","venti / trenta / quaranta"],["50 / 60 / 70","cinquanta / sessanta / settanta"],["80 / 90","ottanta / novanta"],["100 / 200 / 500","cento / duecento / cinquecento"],["1000 / 2000","mille / duemila"]],k:[1]}],
+ n:["Los números se escriben juntos: 250 = <i>duecentocinquanta</i>.","<i>Mille</i> en plural es <i>-mila</i>: duemila, tremila."]},
+{i:"<p><b>Vorrei</b> (quisiera) es la forma más cortés de pedir algo; también <b>prendo</b> (tomo) o <b>per me</b> (para mí).</p><p>Los pronombres de objeto directo reemplazan a la cosa o persona y van <b>delante del verbo</b>: <i>La pizza? La prendo.</i></p>",
+ t:[{c:"Pronombres de objeto",h:["Persona","Directo","Indirecto"],r:[["yo","mi","mi"],["tú","ti","ti"],["él","lo","gli"],["ella / usted","la / La","le / Le"],["nosotros","ci","ci"],["ustedes","vi","vi"],["ellos","li","gli"],["ellas","le","gli"]],k:[1,2]}],
+ n:["Con infinitivo el pronombre se pega al final: <i>Voglio prenderlo</i>.","<i>Siete in due?</i> = ¿son dos personas? En Italia el <i>coperto</i> (cubierto) se cobra aparte."]},
+{i:"<p>El <b>passato prossimo</b> es el pasado más usado al hablar. Se forma con <b>avere</b> (o essere) + <b>participio</b>. Sirve tanto para «comí» como para «he comido».</p>",
+ t:[{c:"Participios regulares",h:["Infinitivo","Participio","Ejemplo"],r:[["-are","-ato","mangiare → ho mangiato"],["-ere","-uto","avere → ho avuto"],["-ire","-ito","dormire → ho dormito"]],k:[2]},
+  {c:"Participios irregulares frecuentes",h:["Infinitivo","Participio"],r:[["fare","fatto"],["vedere","visto"],["prendere","preso"],["leggere","letto"],["scrivere","scritto"],["aprire","aperto"],["dire","detto"],["mettere","messo"],["bere","bevuto"],["chiudere","chiuso"]],k:[0,1]}],
+ n:["<i>Ho già mangiato</i> = ya comí. <i>Non ho ancora mangiato</i> = todavía no he comido.","Con avere el participio no cambia: <i>Anna ha mangiato, loro hanno mangiato</i>."]},
+{i:"<p>Usan <b>essere</b> los verbos de movimiento o cambio de estado (andare, venire, partire, arrivare, tornare, uscire, entrare, nascere, diventare, restare, stare) y <b>todos los reflexivos</b>.</p><p>Con essere, el participio <b>concuerda</b> con el sujeto como un adjetivo.</p>",
+ t:[{c:"andare en passato prossimo",h:["","Masculino","Femenino"],r:PR6.map((p,i)=>[p,["sono andato","sei andato","è andato","siamo andati","siete andati","sono andati"][i],["sono andata","sei andata","è andata","siamo andate","siete andate","sono andate"][i]]),k:[1,2]},
+  {c:"Reflexivos en pasado",h:["Presente","Pasado"],r:[["mi sveglio","mi sono svegliato/a"],["ti diverti","ti sei divertito/a"],["si alza","si è alzato/a"],["ci riposiamo","ci siamo riposati/e"]],k:[0,1]}],
+ n:["Grupo mixto (hombres y mujeres): masculino plural: <i>siamo andati</i>.","<i>Dove sei nato?</i> → <i>Sono nato a Lima</i>."]},
+{i:"<p>Para el clima se usa <b>fare</b>: <i>fa caldo, fa freddo, fa bel tempo</i>; o verbos propios: <i>piove</i> (llueve), <i>nevica</i> (nieva).</p><p>Para comparar: <b>più … di</b> (más … que), <b>meno … di</b> (menos … que) y <b>… come</b> (tan … como).</p>",
+ t:[{c:"El clima",h:["Italiano","Español"],r:[["Che tempo fa?","¿Qué tiempo hace?"],["Fa caldo / fa freddo","Hace calor / hace frío"],["C'è il sole / c'è vento","Hay sol / hay viento"],["Piove / nevica","Llueve / nieva"],["È nuvoloso","Está nublado"],["Ci sono trenta gradi","Hace treinta grados"]],k:[0]},
+  {c:"Comparativos",h:["Italiano","Español","Ejemplo"],r:[["più … di","más … que","Oggi fa più caldo di ieri."],["meno … di","menos … que","Roma è meno cara di Milano."],["… come","tan … como","È bella come Firenze."],["il più …","el más …","È il mese più freddo."],["migliore / peggiore","mejor / peor","Questo è migliore."]],k:[2]}],
+ n:["Estaciones: <i>primavera, estate, autunno, inverno</i>.","Recuerda: Italia está en el hemisferio norte; su verano es de junio a setiembre."]},
+{i:"<p>El <b>imperativo</b> sirve para dar órdenes o indicaciones. Con <b>tu</b> los verbos en -are terminan en <b>-a</b>; los demás en <b>-i</b>. Con <b>Lei</b> (formal) se cambia la vocal: -are → <b>-i</b>, -ere/-ire → <b>-a</b>.</p><p>Para el dolor se usa <b>fare male</b> como «doler»: <i>mi fa male</i> + singular, <i>mi fanno male</i> + plural.</p>",
+ t:[{c:"Imperativo",h:["Verbo","tu","Lei (formal)"],r:[["riposare","riposa!","riposi!"],["prendere","prendi!","prenda!"],["dormire","dormi!","dorma!"],["bere","bevi!","beva!"],["andare","va'!","vada!"]],k:[1,2]},
+  {c:"Doler",h:["Italiano","Español"],r:[["Mi fa male la testa.","Me duele la cabeza."],["Mi fa male la gola.","Me duele la garganta."],["Mi fanno male i piedi.","Me duelen los pies."],["Ti fa male?","¿Te duele?"]],k:[0]}],
+ n:["Imperativo negativo con tu: <i>non</i> + infinitivo: <i>Non mangiare!</i> (¡no comas!).","Plurales irregulares: <i>la mano → le mani, il braccio → le braccia</i>."]},
+{i:"<p>El <b>imperfetto</b> se usa para describir (cómo era algo), para hábitos del pasado (lo que hacías siempre) y para la acción de fondo que es interrumpida.</p><p><b>Passato prossimo</b> = acción terminada y concreta. <b>Imperfetto</b> = descripción o costumbre. <i>Mentre leggevo, è arrivato Marco</i> (mientras leía, llegó Marco).</p>",
+ t:[{c:"Imperfetto regular",h:["","parlare","avere","dormire"],r:PR6.map((p,i)=>[p,["parlavo","parlavi","parlava","parlavamo","parlavate","parlavano"][i],["avevo","avevi","aveva","avevamo","avevate","avevano"][i],["dormivo","dormivi","dormiva","dormivamo","dormivate","dormivano"][i]]),k:[1,2,3]},
+  {c:"Irregulares",h:["","essere","fare"],r:PR6.map((p,i)=>[p,["ero","eri","era","eravamo","eravate","erano"][i],["facevo","facevi","faceva","facevamo","facevate","facevano"][i]]),k:[1,2]}],
+ n:["<i>Bere → bevevo; dire → dicevo</i>.","Pista: si en español dirías «-aba / -ía», casi siempre es imperfetto."]},
+{i:"<p>Para hablar del tiempo hay tres palabras clave: <b>da</b> (desde hace, con presente), <b>fa</b> (hace, con pasado) y <b>per</b> (durante).</p><p>Con el imperfetto describes cómo era tu trabajo antes; con el presente + da, cuánto tiempo llevas en el actual.</p>",
+ t:[{c:"Expresiones de tiempo",h:["Italiano","Español","Ejemplo"],r:[["da + tiempo","desde hace","Lavoro qui da tre anni."],["tiempo + fa","hace (pasado)","Ho cominciato due anni fa."],["per + tiempo","durante","Ho lavorato lì per cinque anni."],["prima","antes","Prima facevo l'insegnante."],["adesso / ora","ahora","Adesso sono economista."]],k:[2]}],
+ n:["Con profesiones se usa a menudo <i>fare</i> + artículo: <i>faccio l'ingegnere</i> = soy ingeniero.","<i>Che lavoro fai?</i> = ¿en qué trabajas?"]},
+{i:"<p>El <b>futuro semplice</b> expresa planes y suposiciones. Se forma con el infinitivo sin la -e final + <b>-ò, -ai, -à, -emo, -ete, -anno</b>. Los verbos en -are cambian la <b>a</b> por <b>e</b>: <i>parlare → parlerò</i>.</p>",
+ t:[{c:"Futuro regular",h:["","parlare","prendere","partire"],r:PR6.map((p,i)=>[p,["parlerò","parlerai","parlerà","parleremo","parlerete","parleranno"][i],["prenderò","prenderai","prenderà","prenderemo","prenderete","prenderanno"][i],["partirò","partirai","partirà","partiremo","partirete","partiranno"][i]]),k:[1,2,3]},
+  {c:"Raíces irregulares",h:["Infinitivo","Futuro (io)"],r:[["essere","sarò"],["avere","avrò"],["andare","andrò"],["fare","farò"],["potere","potrò"],["volere","vorrò"],["venire","verrò"]],k:[1]}],
+ n:["Para planes cercanos el italiano usa mucho el presente: <i>Sabato vado al mare</i>.","No uses «vado a + infinitivo» para el futuro: solo significa ir a un lugar."]},
+{i:"<p>El futuro también sirve para hacer <b>suposiciones sobre el presente</b>: <i>Saranno le dieci</i> (serán las diez), <i>Dove sarà Marco?</i> (¿dónde estará Marco?).</p><p><b>Fra</b> o <b>tra</b> + tiempo = «dentro de»: <i>fra due ore</i>.</p>",
+ t:[{c:"Futuro de suposición y fra / tra",h:["Italiano","Español"],r:[["Saranno le dieci.","Serán las diez."],["Avrà trent'anni.","Tendrá unos treinta años."],["Dove sarà la mia valigia?","¿Dónde estará mi maleta?"],["fra due ore","dentro de dos horas"],["tra un mese","dentro de un mes"]],k:[0]}],
+ n:["<i>Fra</i> y <i>tra</i> significan lo mismo; se elige la que suena mejor.","En el aeropuerto escucharás <i>il volo è in ritardo</i> (retrasado) y <i>uscita</i> (puerta de embarque)."]},
+{i:"<p>El <b>condizionale</b> sirve para deseos, consejos y peticiones corteses. Usa la misma raíz del futuro + <b>-ei, -esti, -ebbe, -emmo, -este, -ebbero</b>.</p><p><i>Vorrei</i>, que conoces desde el restaurante, es el condicional de volere.</p>",
+ t:[{c:"parlare: futuro y condicional",h:["","Futuro","Condicional"],r:PR6.map((p,i)=>[p,["parlerò","parlerai","parlerà","parleremo","parlerete","parleranno"][i],["parlerei","parleresti","parlerebbe","parleremmo","parlereste","parlerebbero"][i]]),k:[1,2]},
+  {c:"Raíces irregulares",h:["Infinitivo","Condicional (io)"],r:[["essere","sarei"],["avere","avrei"],["andare","andrei"],["fare","farei"],["potere","potrei"],["volere","vorrei"],["dovere","dovrei"]],k:[1]}],
+ n:["Consejo: <i>dovresti</i> + infinitivo = deberías: <i>Dovresti riposare</i>.","Deseo: <i>mi piacerebbe</i> + infinitivo = me gustaría."]},
+{i:"<p>Con <b>secondo me</b> o <b>per me</b> se usa el indicativo normal: <i>Secondo me, l'italiano è facile</i>.</p><p>Con <b>penso che, credo che, spero che, mi sembra che</b> el italiano usa el <b>congiuntivo</b> (subjuntivo), aunque en español usemos el indicativo: <i>Penso que es…</i> → <i>Penso che sia…</i></p>",
+ t:[{c:"Congiuntivo presente regular",h:["","parlare","prendere","partire"],r:[["che io / tu / lui","parli","prenda","parta"],["che noi","parliamo","prendiamo","partiamo"],["che voi","parliate","prendiate","partiate"],["che loro","parlino","prendano","partano"]],k:[1,2,3]},
+  {c:"Formas clave irregulares",h:["Infinitivo","che io","Ejemplo"],r:[["essere","sia","Penso che sia difficile."],["avere","abbia","Credo che abbia ragione."],["andare","vada","Spero che vada bene."],["fare","faccia","Penso che faccia freddo."]],k:[2]}],
+ n:["Como io, tu y lui tienen la misma forma, a veces se pone el pronombre: <i>Penso che tu sia…</i>","Si el sujeto es el mismo, se usa <i>di</i> + infinitivo: <i>Penso di andare</i> (pienso ir)."]},
+{i:"<p>Después de expresar una emoción o una frase impersonal + <b>che</b>, va congiuntivo: <i>Sono contento che tu sia qui</i>.</p><p>Si quien siente y quien actúa es la misma persona, se usa <b>di + infinitivo</b>: <i>Sono contento di essere qui</i>.</p>",
+ t:[{c:"Emociones + congiuntivo",h:["Italiano","Español"],r:[["Sono felice che tu sia qui.","Me alegra que estés aquí."],["Mi dispiace che tu sia triste.","Siento que estés triste."],["Ho paura che piova.","Temo que llueva."],["È importante che tu studi.","Es importante que estudies."],["È meglio che tu vada.","Es mejor que te vayas."]],k:[0]},
+  {c:"Mismo sujeto: di + infinitivo",h:["Italiano","Español"],r:[["Sono contento di vederti.","Me alegra verte."],["Ho paura di sbagliare.","Tengo miedo de equivocarme."]],k:[0]}],
+ n:["Adjetivos de emoción concuerdan: <i>contento / contenta / contenti / contente</i>."]},
+{i:"<p>El <b>si impersonal</b> equivale al «se» del español: <i>si dice</i> (se dice), <i>si vendono case</i> (se venden casas). El verbo concuerda con lo que viene después.</p><p>La <b>voz pasiva</b> se forma con <b>essere</b> o <b>venire</b> + participio: <i>L'indice viene calcolato ogni mese</i>. Es muy usada en informes y noticias.</p>",
+ t:[{c:"Impersonal y pasiva",h:["Italiano","Español"],r:[["Si dice che…","Se dice que…"],["Si prevede un aumento.","Se prevé un aumento."],["Si vendono case.","Se venden casas."],["L'indice viene calcolato ogni mese.","El índice se calcula cada mes."],["I dati sono stati pubblicati.","Los datos fueron publicados."]],k:[0]},
+  {c:"Leer cifras",h:["Cifra","Italiano"],r:[["0,3%","zero virgola tre per cento"],["1,5%","uno virgola cinque per cento"],["−0,2%","meno zero virgola due per cento"],["2026","duemilaventisei"]],k:[1]}],
+ n:["En italiano los decimales se escriben con coma, como en Perú: <i>0,5</i>.","Verbos de informe: <i>aumentare, diminuire, calare, salire, scendere, restare stabile</i>."]},
+{i:"<p>Cuando hay un pronombre indirecto y uno directo juntos, el indirecto va primero y cambia la <b>i</b> por <b>e</b>: <i>mi + lo → me lo</i>. <i>Gli</i> y <i>le</i> se convierten en <b>glie-</b> y se unen: <i>glielo</i>.</p><p><b>Ne</b> sustituye una cantidad («de eso») y <b>ci</b> un lugar («allí»).</p>",
+ t:[{c:"Pronombres combinados",h:["","+ lo","+ la","+ li","+ le","+ ne"],r:[["mi","me lo","me la","me li","me le","me ne"],["ti","te lo","te la","te li","te le","te ne"],["gli / le","glielo","gliela","glieli","gliele","gliene"],["ci","ce lo","ce la","ce li","ce le","ce ne"],["vi","ve lo","ve la","ve li","ve le","ve ne"]],k:[1,2,3,4,5]},
+  {c:"Ne y ci",h:["Pronombre","Significado","Ejemplo"],r:[["ne","de eso / cantidad","Quante mele vuoi? Ne voglio due."],["ci","allí / a ese lugar","Vai a Roma? Sì, ci vado domani."]],k:[2]}],
+ n:["En pasado con avere, el participio concuerda con lo / la / li / le: <i>La torta? L'ho mangiata.</i>","Con infinitivo se pegan al final: <i>Voglio dartelo</i>."]},
+{i:"<p>Algunos verbos llevan pronombres fijos y cambian de significado. Son muy frecuentes al hablar y te harán sonar natural.</p>",
+ t:[{c:"Verbos pronominales",h:["Infinitivo","Presente (io)","Significado"],r:[["farcela","ce la faccio","lograrlo / poder con algo"],["andarsene","me ne vado","irse"],["prendersela","me la prendo","ofenderse"],["cavarsela","me la cavo","arreglárselas"],["volerci","ci vuole / ci vogliono","hacer falta (tiempo, cosas)"]],k:[1]}],
+ n:["<i>Ci vuole un'ora</i> = hace falta una hora; <i>ci vogliono due ore</i> = hacen falta dos horas.","Los modismos no se traducen palabra por palabra: apréndelos como bloques."]},
+{i:"<p>El <b>periodo ipotetico</b> son las frases con «si». Funciona casi igual que en español, en tres tipos según qué tan posible es la situación.</p>",
+ t:[{c:"Los tres tipos",h:["Tipo","Estructura","Ejemplo"],r:[["1 · real","se + presente → presente / futuro","Se piove, resto a casa."],["2 · posible","se + cong. imperfetto → condicional","Se piovesse, resterei a casa."],["3 · imposible (pasado)","se + cong. trapassato → condicional pasado","Se fosse piovuto, sarei rimasto a casa."]],k:[2]},
+  {c:"Congiuntivo imperfetto",h:["","essere","avere","parlare"],r:[["che io / tu","fossi","avessi","parlassi"],["che lui / lei","fosse","avesse","parlasse"],["che noi","fossimo","avessimo","parlassimo"],["che voi","foste","aveste","parlaste"],["che loro","fossero","avessero","parlassero"]],k:[1,2,3]}],
+ n:["Error típico: «se sarei» ✗. Después de <i>se</i> nunca va el condicional: <i>se fossi</i> ✓.","<i>Se fossi in te…</i> = si yo fuera tú (para dar consejos)."]},
+{i:"<p>Los conectores unen ideas y te hacen sonar fluido. Algunos exigen <b>congiuntivo</b> (sebbene, benché, affinché, prima che); otros van con el indicativo normal (perché, quindi, mentre, però).</p>",
+ t:[{c:"Conectores",h:["Italiano","Español","Modo"],r:[["sebbene / benché","aunque","congiuntivo"],["affinché","para que","congiuntivo"],["prima che","antes de que","congiuntivo"],["a meno che","a menos que","congiuntivo"],["anche se","aunque","indicativo"],["quindi / dunque","por lo tanto","indicativo"],["mentre","mientras","indicativo"],["inoltre","además","indicativo"],["comunque","de todos modos","indicativo"]],k:[0]}],
+ n:["<i>Anche se</i> y <i>sebbene</i> significan lo mismo, pero <i>anche se</i> va con indicativo: más fácil al hablar.","Siguiente paso: repite los días 15 a 30 durante una semana y escucha 15 minutos diarios de podcasts o series en italiano."]}
+];
+const S2=[
+{i:"En italiano casi todo se lee como se escribe. Solo cambian algunas letras:",r:[["Regla clave","<b>C</b> y <b>G</b> cambian de sonido antes de <b>E</b> e <b>I</b>","v"],["La H es muda","No suena: solo endurece la C y la G","a"]],f:[["ce, ci","ciao"],["ce, ci","cena"],["ca, co, cu","casa"],["che, chi","che"],["ge, gi","gelato"],["ghe, ghi","spaghetti"]]},
+{i:"Hoy: tres sonidos que aparecen al saludar.",r:[["La Z","Suena «ts» (a veces «ds»), nunca como la z española","v"],["GI + vocal","Suena «dy» y la i no se oye: giorno = dyorno","v"],["È (es)","Es una e abierta, como en «perro»","a"]],f:[["z","grazie"],["gi","buongiorno"],["gi","giorno"],["ce","piacere"],["è","è"]]},
+{i:"Los números están llenos de consonantes dobles.",r:[["Doble consonante","Se alarga y hace una pequeña pausa: quat-tro, set-te","v"],["La H es muda","ho = o, hanno = anno","a"]],f:[["tt","quattro"],["tt","sette"],["tt","otto"],["ss","diciassette"],["h muda","ho"],["h muda","hanno"]]},
+{i:"Hoy aprendes el sonido más italiano de todos.",r:[["GLI","Un solo sonido: lengua pegada al paladar, como una «ll» muy marcada","v"],["No es «li»","famiglia no se dice fa-mi-gli-a","a"]],f:[["gli","famiglia"],["gli","figlio"],["gli","figlia"],["gli","moglie"],["gli","i miei genitori"]]},
+{i:"Los colores repasan las dobles y el sonido gi.",r:[["Doble consonante","Se alarga: ros-so, gial-lo","v"],["GI","Suena «dy»: giallo, grigio","v"]],f:[["ss","rosso"],["gi + ll","giallo"],["gi","grigio"],["ci","arancione"],["zz","azzurro"]]},
+{i:"Sonidos de la cocina.",r:[["SC + E / I","Suena «sh»: pesce = peshe","v"],["CCH","Suena «k» larga: zucchero = tsukkero","v"]],f:[["sce","pesce"],["cch","zucchero"],["gg","formaggio"],["cch","bicchiere"],["cci","mi piacciono"]]},
+{i:"Sonidos de la casa.",r:[["GN","Suena como la ñ: bagno = baño","v"],["La Z","Suena «ts»: stanza = stantsa","a"]],f:[["gn","bagno"],["ci","cucina"],["z","stanza"],["cch","specchio"],["gi","giardino"]]},
+{i:"Dónde cae la fuerza en los días de la semana.",r:[["Tilde al final","lunedì: la fuerza va en la última sílaba","v"],["Sin tilde","sabato, domenica: la fuerza va adelante","a"]],f:[["-dì","lunedì"],["-dì","mercoledì"],["-dì","venerdì"],["SA-ba-to","sabato"],["do-ME-ni-ca","domenica"]]},
+{i:"Sonidos para pedir direcciones.",r:[["S entre vocales","Suena suave, como un zumbido: casa, chiesa","v"],["La R","Vibra clara, igual que en español: destra, dritto","a"]],f:[["s","a destra"],["s","a sinistra"],["tt","sempre dritto"],["s","il semaforo"],["z","la stazione"]]},
+{i:"Sonidos de los verbos irregulares y de las preguntas.",r:[["GLI","voglio = vollio","v"],["CC + I","Suena «tch» larga: faccio = fatcho","v"],["Preguntas","La voz sube al final","a"]],f:[["gli","voglio"],["gli","vogliono"],["cci","faccio"],["é","perché?"],["qu","quanto costa?"]]},
+{i:"Grupos de consonantes al inicio.",r:[["SV / SB","Sin «e» delante: svegliarsi, no «esvegliarsi»","v"],["Gerundio","-ando / -endo, como en español","a"]],f:[["sv","mi sveglio"],["sv + gli","svegliarsi"],["st","mi vesto"],["s","mi riposo"],["-ando","sto mangiando"]]},
+{i:"Sonidos de la tienda de ropa.",r:[["QU","Siempre suena «ku»: quanto, quello","v"],["LL doble","Se alarga, nunca suena como «y»","a"]],f:[["qu","quanto costa?"],["qu","questo"],["qu + ll","quello"],["qu + ll","quella"],["qu + ll","quelli"]]},
+{i:"Sonidos al pagar.",r:[["SC + A / O / U","Suena «sk»: sconto, scontrino","v"],["Doble T","ottanta = ot-tan-ta","a"]],f:[["sc","sconto"],["sc","scontrino"],["c","contanti"],["tt","ottanta euro"],["c","duecento"]]},
+{i:"Palabras del restaurante.",r:[["SC + E","Suena «sh»: pesce","v"],["CCH","Suena «k» larga: bicchiere, zucchero","v"]],f:[["sce","pesce"],["cch","bicchiere"],["cch","zucchero"],["c","il conto, per favore"],["rr","vorrei"]]},
+{i:"Participios del pasado.",r:[["Irregulares","Tienen doble consonante: fatto, detto, letto","v"],["Regulares","La fuerza va en la penúltima: man-GIA-to","a"]],f:[["gia","ho mangiato"],["tt","ho fatto"],["s","ho visto"],["s","ho preso"],["tt","abbiamo letto"]]},
+{i:"La R italiana.",r:[["RR doble","Vibra con fuerza: arrivato, terra","v"],["Participio","Concuerda: arrivato / arrivata","a"]],f:[["rr","sono arrivato"],["rr","siamo arrivati"],["rt","sono partita"],["tr","il treno"],["rn","siamo tornati"]]},
+{i:"Sonidos del clima.",r:[["GG + I","Suena «dy» alargada: pioggia = pioddya","v"],["La V","Dientes sobre el labio: vento, inverno","a"]],f:[["ggi","pioggia"],["dd","freddo"],["v","vento"],["v","inverno"],["v","nuvoloso"]]},
+{i:"Sonidos del cuerpo.",r:[["SCH","Suena «sk»: schiena = skiena","v"],["G + A / O / U","Suena fuerte: gola, gamba","a"]],f:[["sch","schiena"],["g","gola"],["st","stomaco"],["ff","mi fa male"],["bb","febbre"]]},
+{i:"El ritmo del imperfetto.",r:[["Fuerza en el sufijo","par-LA-vo, a-VE-vo, dor-MI-vo","v"],["Con «loro»","La fuerza retrocede: par-LA-va-no","a"]],f:[["-ero","ero"],["-evo","avevo"],["-avo","giocavo"],["-avamo","andavamo"],["-avano","parlavano"]]},
+{i:"Palabras de oficina.",r:[["CI + vocal","La i no suena: ufficio = ufficho","v"],["IO / IE","Se dicen juntas: riunione, stipendio","a"]],f:[["ff + ci","ufficio"],["io","riunione"],["io","stipendio"],["ll","collega"],["tt","progetto"]]},
+{i:"El acento del futuro.",r:[["Tilde al final","Con «io» la fuerza va al final: parlerò","v"]],f:[["-rò","sarò"],["-rò","andrò"],["-rò","farò"],["-rò","parlerò"],["-rà","sarà"]]},
+{i:"Palabras de aeropuerto.",r:[["G + GLI","bagaglio = bagallio","v"],["La Z","partenza = partentsa","a"]],f:[["gli","bagaglio"],["z","partenza"],["ss","passaporto"],["rd","ritardo"],["g","dogana"]]},
+{i:"Las dobles del condicional.",r:[["BB / MM","Se alargan: sarebbe, potremmo","v"],["-REI","La fuerza va en -rei: vor-REI","a"]],f:[["rr","vorrei"],["-rei","potrei"],["bb","sarebbe"],["mm","potremmo"],["cc + bb","mi piacerebbe"]]},
+{i:"Hablar con fluidez.",r:[["Une las palabras","Sin pausas entre ellas: secondome","v"],["Conectores","Úsalos como pequeños descansos","a"]],f:[["c","secondo me"],["ch","penso che sia"],["cc","sono d'accordo"],["non","non sono d'accordo"],["qu","comunque"]]},
+{i:"La melodía de las emociones.",r:[["Exclamación","La voz sube y baja con fuerza: Che bello!","v"],["Disculpa","La voz baja suave: Mi dispiace.","a"]],f:[["!","Che bello!"],["ci","Mi dispiace."],["cc","Non ti preoccupare."],["f","felice"],["rr","arrabbiato"]]},
+{i:"Cómo leer cifras.",r:[["Decimales","Se leen con «virgola»: 0,3 = zero virgola tre","v"],["Porcentaje","% = per cento","a"]],f:[["0,3%","zero virgola tre per cento"],["z","inflazione"],["au","aumento"],["-ile","mensile"],["c","consumatore"]]},
+{i:"Contracciones de pronombres.",r:[["Una sola palabra","l'ho visto suena «lovisto»","v"],["GLIE-","glielo = llielo","a"]],f:[["l'ho","l'ho visto"],["glie","glielo do"],["gli","ne voglio due"],["ci","ci vado domani"],["me lo","me lo dai?"]]},
+{i:"La melodía de los modismos.",r:[["De corrido","Dilos como una sola palabra: inboccaallupo","v"],["Imita","Copia la melodía, no solo las palabras","a"]],f:[["cc","In bocca al lupo!"],["c","Crepi!"],["l'ora","Non vedo l'ora!"],["g","Che figata!"],["!","Meno male!"]]},
+{i:"Las dobles de las hipótesis.",r:[["SS doble","Alárgala: fossi, no «fosi»","v"],["-REI","La fuerza va en -rei: fa-REI","a"]],f:[["ss","se fossi"],["ss","se avessi"],["ss","se potessi"],["-rei","farei"],["-rei","andrei"]]},
+{i:"Sonar fluido al conectar ideas.",r:[["Sin pausas largas","Une las ideas con conectores","v"]],f:[["ll","allora"],["mm","insomma"],["qu","comunque"],["qu","quindi"],["bb","sebbene"]]}
+];
+const OJ=["No uses <i>tu</i> con desconocidos o en tiendas: ahí va <i>Lei</i>.", "✗ il studente → ✓ <i>lo studente</i>: ante s + consonante va lo.", "✗ una amica → ✓ <i>un'amica</i>: ante vocal, una pierde la a.", "✗ la mia madre → ✓ <i>mia madre</i>: sin artículo con un familiar en singular.", "✗ le case blue → ✓ <i>le case blu</i>: blu no cambia nunca.", "✗ mi gusta → ✓ <i>mi piace</i>.", "✗ su il tavolo → ✓ <i>sul tavolo</i>: la preposición y el artículo siempre se unen.", "✗ sono le una → ✓ <i>è l'una</i>.", "✗ capo (de capire) → ✓ <i>capisco</i>: lleva -isc-.", "✗ no capisco → ✓ <i>non capisco</i>: «no» solo sirve para responder.", "✗ io sveglio alle sei → ✓ <i>mi sveglio alle sei</i>: no olvides el pronombre.", "✗ quello cappello → ✓ <i>quel cappello</i>: quello cambia como el artículo.", "✗ tengo che pagare → ✓ <i>devo pagare</i>.", "✗ prendo la → ✓ <i>la prendo</i>: el pronombre va antes del verbo.", "✗ ho facciato → ✓ <i>ho fatto</i>: fare es irregular.", "✗ ho andato → ✓ <i>sono andato</i>: los verbos de movimiento usan essere.", "✗ più grande que → ✓ <i>più grande di</i>.", "✗ mi fa male i piedi → ✓ <i>mi fanno male i piedi</i>: con plural va fanno.", "✗ ieri giocavo a calcio (una sola vez) → ✓ <i>ieri ho giocato a calcio</i>: acción puntual = passato prossimo.", "✗ lavoro qui per tre anni (y sigo) → ✓ <i>lavoro qui da tre anni</i>.", "✗ vado a mangiare domani → ✓ <i>mangerò domani</i>.", "✗ entro due ore → ✓ <i>fra due ore</i>.", "✗ voglio un caffè (suena brusco) → ✓ <i>vorrei un caffè</i>.", "✗ penso che è vero → ✓ <i>penso che sia vero</i>.", "✗ sono contento che sei qui → ✓ <i>sono contento che tu sia qui</i>.", "✗ se vendono case → ✓ <i>si vendono case</i>: en italiano es si.", "✗ gli lo do → ✓ <i>glielo do</i>: van unidos.", "✗ non posso più (cansancio) → ✓ <i>non ce la faccio più</i>.", "✗ se sarei ricco → ✓ <i>se fossi ricco</i>: después de se nunca va el condicional.", "✗ benché è stanco → ✓ <i>benché sia stanco</i>."];
+GR[0].n.unshift("<b>Lei vs lei:</b> <b>Lei</b> con L mayúscula = <b>usted</b>; <b>lei</b> con minúscula = <b>ella</b>. <i>Lei è italiana?</i>");
+GR[0].n=GR[0].n.filter(x=>!x.startsWith("<b>Tu o Lei"));
+const LV=[["Básico · A1","var(--b)",0,10],["Intermedio · A2","var(--i)",10,20],["Avanzado · B1 (introducción)","var(--a)",20,30]];
+const lvlOf=i=>LV.find(l=>i>=l[2]&&i<l[3]);
+
+// ---------- estado ----------
+let done={},rate=0.9,USER=null,TOKEN=null;
+const API="https://script.google.com/macros/s/AKfycbxycHF8DjWdqoUFCwMVvMT99uPL6ptTsLj_b1XDwvEKG-ld46qhJSzSGVKfD8RpIC_g/exec";
+const GAS=!!(window.google&&google.script&&google.script.run);
+const GS=GAS||API.startsWith("https://");
+
+// ---------- voz ----------
+let voice=null;
+function pickVoice(){try{const vs=speechSynthesis.getVoices();voice=vs.find(v=>v.lang==="it-IT")||vs.find(v=>v.lang&&v.lang.startsWith("it"))||null}catch(e){}}
+try{pickVoice();speechSynthesis.onvoiceschanged=pickVoice}catch(e){}
+function say(t,slow,pitch){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="it-IT";if(voice)u.voice=voice;u.rate=slow?0.55:rate;if(pitch)u.pitch=pitch;speechSynthesis.speak(u)}catch(e){toast("Tu navegador no permite audio aquí.")}}
+const esc=s=>s.replace(/'/g,"\\'");
+const spk=(t,ic="🔊")=>`<button class="spk" title="Escuchar" onclick="say('${esc(t)}')">${ic}</button>`;
+const spkS=t=>`<button class="spk" title="Lento" onclick="say('${esc(t)}',1)">🐢</button>`;
+const shuf=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+const norm=s=>s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[’`]/g,"'").replace(/[^a-z' /]/g,"").replace(/\s+/g," ").trim();
+const clean=s=>s.toLowerCase().replace(/[’`]/g,"'").replace(/[.,!?¿¡]/g,"").replace(/\s+/g," ").trim();
+function toast(m){const d=document.createElement("div");d.className="modal";d.innerHTML=`<div class="card"><p>${m}</p><button class="btn p" onclick="this.closest('.modal').remove()">OK</button></div>`;document.body.append(d)}
+
+const app=document.getElementById("app");
+let cur=0,mode="aprender",view="home";
+
+// ---------- inicio ----------
+function home(){
+  view="home";const n=Object.keys(done).length;
+  let h=`<div class="row" style="justify-content:space-between"><span class="mut">Ciao, <b style="color:var(--ink)">${USER?USER.n:""}</b> 👋</span><button class="btn sm" onclick="logout()">⎋ Cerrar sesión</button></div><h1>🇮🇹 Italiano en 30 días</h1><p class="sub">Del nivel básico al avanzado: vocabulario, gramática, verbos, audio, escritura, pronunciación y conversación.</p>
+  <div class="card"><div class="row" style="justify-content:space-between"><span class="score">Progreso: ${n}/30 días</span>
+  <span class="row"><label class="mut">Velocidad voz</label><input type="range" min="0.5" max="1.2" step="0.1" value="${rate}" oninput="rate=+this.value"><button class="btn sm" onclick="say('Benvenuto! Iniziamo a studiare l\\'italiano.')">🔊 Probar</button></span></div>
+  <div class="bar" style="margin-top:10px"><i style="width:${n/30*100}%"></i></div>
+  <div class="row" style="margin-top:12px"><button class="btn p" onclick="openDay(${nextDay()})">▶ Continuar: Día ${nextDay()+1}</button><button class="btn" onclick="verbs()">📚 Todos los verbos</button><button class="btn" onclick="repaso()">🧠 Repaso</button><button class="btn" onclick="tips()">💡 Tips y trucos</button></div></div>`;
+  LV.forEach(([nm,c,a,b])=>{h+=`<div class="lvl"><span class="dot" style="background:${c}"></span>${nm} · Días ${a+1}-${b}</div><div class="grid">`;
+    for(let i=a;i<b;i++)h+=`<div class="day" style="--c:${c}" onclick="openDay(${i})">${done[i]?'<span class="ok">✓</span>':""}<b>Día ${i+1}</b><small>${D[i].t}</small><small>🔤 ${D[i].v[0]} · ${D[i].v[2].split(" ")[0]}</small></div>`;
+    h+=`</div>`});
+  h+=`<details class="card" style="margin-top:22px" ${Object.keys(done).length?"":"open"}><summary style="cursor:pointer;font-weight:600">🧭 Cómo estudiar cada día (60 a 90 minutos) y qué esperar</summary>
+  <ol style="line-height:1.7">
+  <li><b>🔉 Sonido (5 min):</b> escucha los ejemplos y repítelos 3 veces, primero en lento.</li>
+  <li><b>📖 Aprender (15 min):</b> escucha, repite y escribe cada palabra. Repasa las de los dos días anteriores.</li>
+  <li><b>📘 Gramática y 🔤 Verbo (15 min):</b> lee la explicación y recita las tablas en voz alta hasta decirlas sin mirar.</li>
+  <li><b>🎧 ✍️ 🗣️ Práctica (15 min):</b> Escuchar, Escribir y Pronunciar.</li>
+  <li><b>💬 Conversación (10 min):</b> escucha el diálogo, oculta la traducción y repite al mismo tiempo que el audio (<i>shadowing</i>). Luego usa el juego de roles.</li>
+  <li><b>❓ Esercizi y 🎙️ Parla! (10 min):</b> responde en voz alta y grábate.</li>
+  <li><b>🏁 Ejercicio final:</b> con 70% o más el día queda aprobado.</li></ol>
+  <p class="mut" style="margin-bottom:0">Meta realista: en 30 días puedes llegar a un A2 sólido (presentarte, comprar, pedir comida, preguntar direcciones, contar el pasado y hacer planes) con una introducción a B1. El B1 completo suele tomar algunos meses más de práctica constante. Como hablas español ya entiendes mucho italiano escrito: la pronunciación y la conversación diaria son lo que más te hará avanzar.</p></details>
+  <div class="card note" style="margin-top:12px"><b>Rutina rápida:</b> 1) Aprender: escucha cada palabra 3 veces. 2) Gramática y Verbo: repite la conjugación en voz alta. 3) Escuchar, Escribir y Pronunciar. 4) Conversación con juego de roles. 5) Ejercicio final: con 70% o más el día queda aprobado. 6) Usa Repaso cada 3 días.</div>`;
+  app.innerHTML=h;scrollTo(0,0);
+}
+const nextDay=()=>{for(let i=0;i<30;i++)if(!done[i])return i;return 29};
+
+// ---------- día ----------
+const SECS=[["s-sonido","Il suono del giorno","Pronunciación",()=>sonido()],["s-aprender","Il vocabolario","Vocabulario",()=>aprender()],["s-gram","La grammatica","Gramática",()=>gramatica()],["s-verbo","Il verbo del giorno","Verbo",()=>verbo()],["s-conv","Il dialogo","Diálogo",()=>conversacion()],["s-prac","Esercizi","Práctica",()=>practica()]];
+const EXS=[["escuchar","🎧 Escuchar"],["escribir","✍️ Escribir"],["pronunciar","🗣️ Pronunciar"],["final","🏁 Ejercicio final"]];
+const sec=id=>document.getElementById(id);
+const goTo=id=>{const el=sec(id);if(el&&el.scrollIntoView)el.scrollIntoView({behavior:"smooth",block:"start"})};
+function openDay(i,m){const same=view==="day"&&cur===i;cur=i;view="day";if(!same)renderDay();
+  const ex={escuchar,escribir,pronunciar,final}[m];
+  if(ex){ex();document.querySelectorAll("[data-ex]").forEach(b=>b.classList.toggle("on",b.dataset.ex===m));goTo("s-ex")}
+  else if(m){const id={sonido:"s-sonido",aprender:"s-aprender",gramatica:"s-gram",verbo:"s-verbo",conversacion:"s-conv",practica:"s-prac"}[m];if(id)goTo(id)}
+  else scrollTo(0,0)}
+function idxToggle(f){const m=sec("idx"),b=sec("fab");if(!m)return;const open=f===undefined?m.hidden:f;m.hidden=!open;b.textContent=open?"✕":"☰";if(open)idxMark()}
+function idxGo(id){idxToggle(false);if(id)goTo(id);else scrollTo({top:0,behavior:"smooth"})}
+function idxMark(){const ids=[...SECS.map(s=>s[0]),"s-ex"];let act=ids[0];ids.forEach(id=>{const e=sec(id);if(e&&e.getBoundingClientRect&&e.getBoundingClientRect().top<200)act=id});document.querySelectorAll("#idx [data-s]").forEach(b=>b.classList.toggle("on",b.dataset.s===act))}
+function renderDay(){
+  const d=D[cur],L=lvlOf(cur);
+  app.innerHTML=`<div class="row" style="justify-content:space-between"><button class="btn sm" onclick="home()">← Plan</button>
+   <span class="row">${cur>0?`<button class="btn sm" onclick="openDay(${cur-1})">‹ Día ${cur}</button>`:""}${cur<29?`<button class="btn sm" onclick="openDay(${cur+1})">Día ${cur+2} ›</button>`:""}</span></div>
+   <p class="eyebrow"><span class="dot" style="display:inline-block;background:${L[1]}"></span> Día ${cur+1} de 30 · ${L[0]}</p>
+   <h1 style="margin-top:4px">${d.t}</h1><p class="sub">🎯 <b>Objetivo:</b> ${E[cur].g}</p>
+   <div id="idx" class="idx" hidden>${SECS.map((s,i)=>`<button data-s="${s[0]}" onclick="idxGo('${s[0]}')">${i+1} · ${s[2]}</button>`).join("")}<button data-s="s-ex" onclick="idxGo('s-ex')">7 · Ejercicios</button><button class="up" onclick="idxGo()">↑ Volver arriba</button></div>
+   <button id="fab" class="fab" aria-label="Índice" onclick="idxToggle()">☰</button>
+   ${SECS.map((s,i)=>`<section class="blk"><h3 class="sec" id="${s[0]}h">${i+1} · <i>${s[1]}</i> <small>${s[2]}</small></h3><div id="${s[0]}"></div></section>`).join("")}
+   <section class="blk" id="s-ex"><h3 class="sec">7 · <i>Mettiti alla prova</i> <small>Ejercicios con nota</small></h3>
+   <p class="mut" style="margin-top:0">Elige un ejercicio: se abre aquí mismo, debajo. Con 70% o más en el <b>Ejercicio final</b> el día queda aprobado.</p>
+   <div class="row">${EXS.map(([k,l])=>`<button class="tab" data-ex="${k}" onclick="openDay(${cur},'${k}')">${l}</button>`).join("")}</div>
+   <div id="pane" style="margin-top:10px"></div></section>
+   <div class="card row" style="justify-content:space-between;margin-top:20px"><span>${done[cur]?"✅ Día aprobado con "+done[cur]+"%":"Aprueba el ejercicio final (70% o más) para completar el día."}</span>
+   ${done[cur]?"":`<button class="btn g" onclick="openDay(${cur},'final')">🏁 Ir al ejercicio final</button>`}</div>
+   <div class="row" style="justify-content:space-between">${cur>0?`<button class="btn" onclick="openDay(${cur-1})">← Día ${cur}</button>`:"<span></span>"}${cur<29?`<button class="btn p" onclick="openDay(${cur+1})">Día ${cur+2} →</button>`:""}</div>`;
+  SECS.forEach(s=>s[3]());
+}
+const pane=()=>document.getElementById("pane");
+
+function aprender(){
+  const d=D[cur];
+  sec("s-aprender").innerHTML=`<div class="card"><h2>Vocabulario (${d.w.length} palabras)</h2><p class="mut" style="margin-top:0">🔊 normal · 🐢 lento · <span class="pr">[así se lee]</span> para un hispanohablante</p><div class="vocab">${d.w.map(([it,es])=>`<div class="w"><div><div class="it">${it}${pron(it)?` <span class="pr">[${pron(it)}]</span>`:""}</div><div class="es">${es}</div></div><span>${spk(it)} ${spkS(it)}</span></div>`).join("")}</div>
+  <button class="btn" style="margin-top:12px" onclick="playAll()">▶ Escuchar todas</button></div>
+  <div class="card"><h2>Frases útiles (${d.f.length})</h2>${d.f.map(([it,es])=>`<div class="w" style="margin:6px 0"><div><div class="it">${it}</div><div class="es">${es}</div></div><span>${spk(it)} ${spkS(it)}</span></div>`).join("")}</div>
+  <div class="card note">💡 ${d.n}</div>`;
+}
+function playAll(){const ws=D[cur].w;let k=0;try{speechSynthesis.cancel()}catch(e){}
+  const nx=()=>{if(k>=ws.length)return;const u=new SpeechSynthesisUtterance(ws[k][0]);u.lang="it-IT";if(voice)u.voice=voice;u.rate=rate;u.onend=()=>setTimeout(nx,700);k++;try{speechSynthesis.speak(u)}catch(e){}};nx()}
+
+function tbl(t){return `<div class="card" style="padding:0;overflow-x:auto"><table><caption class="cap">${t.c}</caption><tr><th></th>${t.h.map(x=>`<th class="th">${x}</th>`).join("")}</tr>${t.r.map(r=>{const s=t.k.map(j=>r[j]).join(". ").replace(/[→—]/g,",").replace(/\//g,",");return `<tr><td style="width:40px">${spk(s)}</td>${r.map((c,j)=>`<td style="width:auto;${t.k.includes(j)?"color:var(--ink);font-weight:500":"color:var(--mut)"}">${c}</td>`).join("")}</tr>`}).join("")}</table></div>`}
+function claves(ns,oj){const ex=t=>{const m=t.match(/<i>(.*?)<\/i>/);return m?m[1].replace(/<[^>]+>/g,""):""};
+  const card=(cls,title,txt)=>{const e=ex(txt);return `<div class="clave ${cls}"><small>${title}</small><div>${txt}</div>${e?`<div class="cx">${spk(e)} <span>${e}</span></div>`:""}</div>`};
+  return `<p class="lbl">🔑 Claves del día</p>${ns.map((n,i)=>{const m=n.match(/^<b>([^<]+):<\/b>\s*/);return card(i?"b":"v","🔑 Clave"+(m?": "+m[1]:""),m?n.slice(m[0].length):n)}).join("")}${card("a","⚠️ Ojo: error típico",oj)}`}
+function gramatica(){
+  const g=G[cur],r=GR[cur],x=(cur===5||cur===10)?GX[cur]:null;
+  sec("s-gram").innerHTML=`<h2 style="margin:6px 0 8px">📘 ${g.t}</h2><div class="prose">${r.i}</div>
+  <div class="tblgrid">${r.t.map(tbl).join("")}${x?tbl({c:x.cap,h:x.head,r:x.rows,k:[1,2]}):""}</div>
+  ${claves(r.n,OJ[cur])}
+  <div class="card"><h2>Ejemplos</h2>${g.ej.map(([it,es])=>`<div class="w" style="margin:6px 0"><div><div class="it">${it}</div><div class="es">${es}</div></div><span>${spk(it)} ${spkS(it)}</span></div>`).join("")}</div>`;
+}
+function sonido(){
+  const s=S2[cur];let prev=null;
+  sec("s-sonido").innerHTML=`<div class="card"><p class="mut" style="margin-top:0">${s.i}</p>
+  ${s.r.map(([t,x,c])=>`<div class="rule ${c}"><small>${t}</small><div>${x}</div></div>`).join("")}
+  <p class="lbl">Así suena</p><div class="sndt"><div class="sr hd"><span>Se escribe</span><span>Ejemplo · se lee</span><span></span></div>
+  ${s.f.map(([w,ex])=>{const lab=w===prev?"":w;prev=w;const p=pron(ex);return `<div class="sr"><b>${lab}</b><span>${ex}${p?` <span class="pr">[${p}]</span>`:""}</span><span>${spk(ex)}</span></div>`}).join("")}</div>
+  <div class="row" style="margin-top:12px"><button class="btn sm" onclick="sayList(1)">🐢 Escuchar todos lento</button><button class="btn sm" onclick="sayList()">▶ Normal</button></div></div>
+  <div class="card note">Escucha cada ejemplo y <b>repítelo 3 veces en voz alta</b>, primero en lento.</div>`;
+}
+function sayList(slow){const ex=S2[cur].f.map(x=>x[1]);let k=0;try{speechSynthesis.cancel()}catch(e){}
+  const nx=()=>{if(k>=ex.length)return;const u=new SpeechSynthesisUtterance(ex[k++]);u.lang="it-IT";if(voice)u.voice=voice;u.rate=slow?0.55:rate;u.onend=()=>setTimeout(nx,700);try{speechSynthesis.speak(u)}catch(e){}};nx()}
+function practica(){
+  const e=E[cur];
+  sec("s-prac").innerHTML=`<div class="card"><h2>❓ Esercizi</h2><p class="mut" style="margin-top:0">Responde <b>en voz alta</b> antes de abrir la respuesta.</p>
+  ${e.p.map(([qq,a],i)=>{const sp=a.startsWith("~"),ans=sp?a.slice(1):a;return `<details class="w" style="display:block;margin:8px 0"><summary style="cursor:pointer;font-weight:500">${i+1}. ${qq}</summary>
+   <div class="row" style="margin-top:8px;color:var(--verde);font-weight:600">${sp?"":spk(ans)} ${ans}</div></details>`}).join("")}</div>
+  <div class="card" style="background:#fbe5e2;border-color:#f3c9c4"><h2>🎙️ Parla! — Tarea oral</h2><p style="line-height:1.6;margin:0">${e.t}</p>
+  <p class="mut" style="margin-bottom:0">Consejo: grábate con el celular y escúchate al final del día.</p></div>`;
+}
+
+function conjTable(v){return `<table>${v[3].map((f,i)=>`<tr><td>${f.startsWith("che ")||f.startsWith("se ")?"":P[i]}</td><td><b>${f}</b></td><td style="text-align:right">${spk((f.startsWith("che ")||f.startsWith("se ")||f.startsWith("mi ")||f.startsWith("ti ")||f.startsWith("si ")||f.startsWith("ci ")||f.startsWith("vi ")?"":P[i].split("/")[0]+" ")+f.replace(/\/[ae]$/,""))}</td></tr>`).join("")}</table>`}
+function verbo(){
+  const v=D[cur].v;
+  sec("s-verbo").innerHTML=`<div class="card"><h2>${v[0]} <span class="mut" style="font-size:1rem">(${v[1]})</span> ${spk(v[0])}</h2><p class="mut" style="margin-top:0">Tiempo: <b>${v[2]}</b></p>${conjTable(v)}
+  <button class="btn" style="margin-top:10px" onclick="sayConj()">▶ Escuchar conjugación completa</button></div>
+  <div class="card"><h2>Practica</h2><div id="vq"></div></div>`;
+  vq();
+}
+function sayConj(){const v=D[cur].v;say(v[3].map((f,i)=>(/^(che|se|mi|ti|si|ci|vi) /.test(f)?"":P[i].split("/")[0]+" ")+f.replace(/\/[ae]$/,"")).join(", "))}
+function exVerb(v,i){const j=(i+3)%6,f=v[3][j],pr=f.match(/^(che \w+|se \w+)\s/);return `<p class="hint">Ejemplo: para <b>${pr?pr[1]:P[j]}</b> escribes <span class="ej">${pr?f.slice(pr[0].length):f}</span></p>`}
+function otherW(it){const o=D[cur].w.filter(w=>w[0]!==it);return o[Math.floor(Math.random()*o.length)]}
+function vq(){
+  const v=D[cur].v,i=Math.floor(Math.random()*6),ans=v[3][i];
+  const pref=ans.match(/^(che \w+|se \w+)\s/);const shown=pref?pref[1]:P[i];const target=pref?ans.slice(pref[0].length):ans;
+  document.getElementById("vq").innerHTML=`<p style="margin-bottom:4px">Conjuga <b>${v[0]}</b> (${v[2]}) para: <b style="font-size:1.2rem">${shown}</b></p>${exVerb(v,i)}
+  <input type="text" id="vin" placeholder="Escribe la forma…" autocomplete="off" onkeydown="if(event.key==='Enter')chkV()">${accBar("vin")}
+  <div class="row" style="margin-top:10px"><button class="btn p" onclick="chkV()">Comprobar</button><button class="btn" onclick="vq()">Otra</button></div><div class="fb" id="vfb"></div>`;
+  window.__vt=target;
+}
+function chkV(){const g=clean(document.getElementById("vin").value),t=window.__vt,fb=document.getElementById("vfb");
+  const ok=[t,...t.includes("/")?[t.replace(/\/[ae]$/,""),t.replace(/([oi])\/([ae])$/,"$2")]:[]].some(x=>clean(x)===g);
+  if(ok){fb.className="fb ok";fb.textContent="✓ Corretto! ";say(t.replace(/\/[ae]$/,""));setTimeout(vq,1300)}
+  else if([t,t.replace(/\/[ae]$/,"")].some(x=>norm(x)===norm(g))){fb.className="fb ok";fb.textContent="≈ Casi: cuida el acento → "+t}
+  else{fb.className="fb bad";fb.textContent="✗ Era: "+t}}
+const accBar=id=>`<div class="acc">${["à","è","é","ì","ò","ù"].map(c=>`<button class="btn sm" onclick="const e=document.getElementById('${id}');e.value+='${c}';e.focus()">${c}</button>`).join("")}</div>`;
+
+// ---------- escuchar ----------
+let q=null;
+function escuchar(){
+  const ws=[...shuf(D[cur].w).slice(0,7),...shuf(D[cur].f).slice(0,3)];q={items:shuf(ws),k:0,ok:0};nextL();
+}
+// ---------- errores ----------
+let ERR={};
+function errLoad(){try{ERR=JSON.parse(LS.get("it30err_"+(USER?USER.u:""))||"{}")}catch(e){ERR={}}}
+function errSave(){if(USER)LS.set("it30err_"+USER.u,JSON.stringify(ERR))}
+function addErr(t,it,es,ans){(ERR[cur]=ERR[cur]||{})[t+"|"+it]={t,it,es,ans:ans||""};errSave()}
+function delErr(t,it){if(ERR[cur]){delete ERR[cur][t+"|"+it];errSave()}}
+const errList=()=>Object.values(ERR[cur]||{});
+const TIPO={L:["🎧","Escuchar"],W:["✍️","Escribir"],P:["🗣️","Pronunciar"],R:["🎭","Juego de roles"]};
+function endCard(title,again,next,nextLbl){const n=errList().length;
+  return `<div class="card" style="text-align:center"><h2>${title}</h2>${n?`<p class="mut">Tienes <b>${n}</b> ${n===1?"error guardado":"errores guardados"} para reforzar antes del ejercicio final.</p>`:""}
+  <div class="row" style="justify-content:center"><button class="btn" onclick="${again}()">↺ Repetir</button>${next?`<button class="btn p" onclick="openDay(${cur},'${next}')">${nextLbl} →</button>`:""}</div></div>`}
+function nextL(){
+  if(q.k>=q.items.length){pane().innerHTML=endCard(`Resultado: ${q.ok}/${q.items.length}`,"escuchar","escribir","Siguiente: Escribir");return}
+  const it=q.items[q.k],pool=[...D[cur].w,...D[cur].f].filter(x=>x!==it);
+  const opts=shuf([it,...shuf(pool).slice(0,3)]);
+  pane().innerHTML=`<div class="card"><p class="mut" style="margin-bottom:4px">Pregunta ${q.k+1}/${q.items.length} · Escucha y elige el significado</p>${(o=>`<p class="hint">Ejemplo: si oyes <i>${o[0]}</i>, eliges <span class="ej">${o[1]}</span></p>`)(otherW(it[0]))}
+  <div style="text-align:center;margin:18px 0"><button class="btn p" style="font-size:1.4rem;padding:14px 26px" onclick="say('${esc(it[0])}')">🔊 Escuchar</button> <button class="btn" onclick="say('${esc(it[0])}',1)">🐢 Lento</button></div>
+  <div class="opts">${opts.map(o=>`<button class="opt" data-r="${o===it?1:0}" data-t="${esc(o[1]).replace(/"/g,"&quot;")}" onclick="ansL(this)">${o[1]}</button>`).join("")}</div><div class="fb" id="lfb"></div></div>`;
+  setTimeout(()=>say(it[0]),250);
+}
+function ansL(b){const it=q.items[q.k];document.querySelectorAll(".opt").forEach(o=>{o.disabled=true;if(o.dataset.r==="1")o.classList.add("ok")});
+  const fb=document.getElementById("lfb");if(b.dataset.r==="1"){q.ok++;fb.className="fb ok";fb.textContent="✓ "+it[0]}else{b.classList.add("bad");fb.className="fb bad";fb.textContent="✗ Era: "+it[0]+" = "+it[1];addErr("L",it[0],it[1],"elegiste «"+b.textContent+"»")}
+  q.k++;setTimeout(nextL,1500)}
+// ---------- escribir ----------
+function escribir(){
+  const w=shuf(D[cur].w);const items=shuf([...w.slice(0,6).map(x=>({m:"dict",it:x[0],es:x[1]})),...w.slice(6,8).map(x=>({m:"trad",it:x[0],es:x[1]})),...shuf(D[cur].f).slice(0,2).map(x=>({m:"dict",it:x[0],es:x[1]}))]);
+  q={items,k:0,ok:0};nextW();
+}
+function nextW(){
+  if(q.k>=q.items.length){pane().innerHTML=endCard(`Resultado: ${q.ok}/${q.items.length}`,"escribir","pronunciar","Siguiente: Pronunciar");return}
+  const x=q.items[q.k];
+  pane().innerHTML=`<div class="card"><p class="mut" style="margin-bottom:4px">Ejercicio ${q.k+1}/${q.items.length} · ${x.m==="dict"?"Dictado: escucha y escribe en italiano":"Traducción: escribe en italiano"}</p>${(o=>x.m==="dict"?`<p class="hint">Ejemplo: si oyes <i>${o[0]}</i>, escribes <span class="ej">${o[0]}</span></p>`:`<p class="hint">Ejemplo: <i>${o[1]}</i> → escribes <span class="ej">${o[0]}</span></p>`)(otherW(x.it))}
+  ${x.m==="dict"?`<div style="text-align:center;margin:14px 0"><button class="btn p" style="font-size:1.3rem;padding:12px 24px" onclick="say('${esc(x.it)}')">🔊 Escuchar</button> <button class="btn" onclick="say('${esc(x.it)}',1)">🐢 Lento</button></div>`:`<div class="big">${x.es}</div>`}
+  <input type="text" id="win" placeholder="Escribe en italiano…" autocomplete="off" onkeydown="if(event.key==='Enter')chkW()">${accBar("win")}
+  <div class="row" style="margin-top:10px"><button class="btn p" id="wb" onclick="chkW()">Comprobar</button><button class="btn" onclick="hint()">Pista</button></div><div class="fb" id="wfb"></div></div>`;
+  if(x.m==="dict")setTimeout(()=>say(x.it),250);
+}
+function hint(){const x=q.items[q.k];document.getElementById("wfb").className="fb mut";document.getElementById("wfb").textContent="Empieza con: "+x.it.slice(0,Math.ceil(x.it.length/3))+"…"}
+function chkW(){const x=q.items[q.k],g=document.getElementById("win").value,fb=document.getElementById("wfb"),b=document.getElementById("wb");
+  if(b.dataset.next){q.k++;nextW();return}
+  if(clean(g)===clean(x.it)){q.ok++;fb.className="fb ok";fb.textContent="✓ Perfetto! "+x.it+" = "+x.es}
+  else if(norm(g)===norm(x.it)){q.ok++;fb.className="fb ok";fb.textContent="≈ Bien, pero cuida acentos/apóstrofos: "+x.it}
+  else{fb.className="fb bad";fb.textContent="✗ Correcto: "+x.it+" ("+x.es+")";addErr("W",x.it,x.es,"escribiste «"+(g.trim()||"(vacío)")+"»")}
+  say(x.it);b.textContent="Siguiente →";b.dataset.next=1}
+// ---------- micrófono ----------
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+let MIC=null,MICBLOCK=false;
+function lev(a,b){const m=a.length,n=b.length,d=Array.from({length:m+1},(_,i)=>[i]);for(let j=1;j<=n;j++)d[0][j]=j;
+  for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[m][n]}
+function sim(a,b){a=norm(a);b=norm(b);if(!a||!b)return 0;if(a===b||a.includes(b))return 1;return 1-lev(a,b)/Math.max(a.length,b.length)}
+function micUI(boxId,target,cb){MIC={target,cb,box:boxId};const b=sec(boxId);if(!b)return;
+  b.innerHTML=`<button class="micb" id="mb" onclick="micStart()">🎤 Toca y habla</button><div class="fb" id="ms" style="text-align:center"></div>
+  <div id="mk" style="display:${MICBLOCK?"block":"none"}"><p class="hint" style="margin:8px 0 4px">Toca el cuadro y usa el <b>🎤 de tu teclado</b> para dictar en italiano:</p>
+  <input type="text" id="mki" autocomplete="off" placeholder="Dicta aquí…" onkeydown="if(event.key==='Enter')micEval([this.value])"><div class="row" style="margin-top:8px"><button class="btn p" onclick="micEval([sec('mki').value])">Comprobar</button></div></div>
+  ${MICBLOCK?"":`<button class="btn sm" style="margin-top:8px" onclick="micDict()">⌨️ Dictar con el teclado</button>`}`;}
+function micDict(msg){MICBLOCK=MICBLOCK||!!msg;const k=sec("mk");if(k)k.style.display="block";const s=sec("ms");if(s){s.className="fb mut";s.textContent=msg||""}}
+function micStart(){if(!MIC)return;const s=sec("ms");
+  if(!SR){micDict("Tu navegador no permite el micrófono aquí. Usa el dictado del teclado.");return}
+  try{try{speechSynthesis.cancel()}catch(e){}const r=new SR();r.lang="it-IT";r.maxAlternatives=4;r.interimResults=false;
+    s.className="fb mut";s.textContent="🎙️ Escuchando… habla ahora";const mb=sec("mb");if(mb)mb.classList.add("on");
+    r.onresult=e=>{micEval([...e.results[0]].map(a=>a.transcript))};
+    r.onerror=e=>{if(mb)mb.classList.remove("on");if(["not-allowed","service-not-allowed","audio-capture"].includes(e.error))micDict("El micrófono está bloqueado aquí. Usa el 🎤 de tu teclado en el cuadro de abajo.");else{s.className="fb mut";s.textContent="No te escuché bien. Toca y habla otra vez."}};
+    r.onend=()=>{if(mb)mb.classList.remove("on")};r.start()}catch(e){micDict("El micrófono está bloqueado aquí. Usa el 🎤 de tu teclado en el cuadro de abajo.")}}
+function micEval(alts){if(!MIC)return;alts=alts.filter(a=>a&&a.trim());if(!alts.length)return;
+  const best=alts.reduce((b,a)=>sim(a,MIC.target)>sim(b,MIC.target)?a:b),ok=sim(best,MIC.target)>=0.78;MIC.cb(ok,best)}
+// ---------- pronunciar ----------
+function pronunciar(){q={items:shuf([...shuf(D[cur].w).slice(0,8),...shuf(D[cur].f).slice(0,2)]),k:0,ok:0};nextP()}
+function nextP(){
+  if(q.k>=q.items.length){pane().innerHTML=endCard(`¡Práctica terminada! ${q.ok}/${q.items.length} bien pronunciadas`,"pronunciar","final","Ir al Ejercicio final");return}
+  const x=q.items[q.k],p=pron(x[0]);
+  pane().innerHTML=`<div class="card" style="text-align:center"><p class="mut" style="margin-bottom:4px">Palabra ${q.k+1}/${q.items.length} · 1) Escucha  2) Toca 🎤 y dila en voz alta</p>
+  <p class="hint">Ejemplo: escuchas <i>ciao</i>, tocas 🎤 y dices <span class="ej">ciao</span></p>
+  <div class="big">${x[0]}</div><p class="mut">${x[1]}${p?` · <span class="pr">[${p}]</span>`:""}</p>
+  <div class="row" style="justify-content:center;margin-bottom:12px"><button class="btn" onclick="say('${esc(x[0])}')">🔊 Escuchar</button><button class="btn" onclick="say('${esc(x[0])}',1)">🐢 Lento</button></div>
+  <div id="pmic"></div><div id="pact" class="row" style="justify-content:center;margin-top:10px"><button class="btn sm" onclick="pNext(false)">Saltar →</button></div></div>`;
+  micUI("pmic",x[0],(ok,heard)=>{const s=sec("ms");s.className="fb "+(ok?"ok":"bad");
+    s.textContent=ok?"✓ Ottimo! Se entendió: «"+heard+"»":"✗ Se entendió: «"+heard+"». Escucha y vuelve a intentar.";
+    if(ok){q.ok++;delErr("P",x[0]);setTimeout(()=>{q.k++;nextP()},1300)}
+    else{addErr("P",x[0],x[1],"se entendió «"+heard+"»");sec("pact").innerHTML=`<button class="btn" onclick="micStart()">↺ Intentar otra vez</button><button class="btn p" onclick="pNext(true)">Siguiente →</button>`}});
+  setTimeout(()=>say(x[0]),250);
+}
+function pNext(had){const x=q.items[q.k];if(!had)addErr("P",x[0],x[1],"no se practicó");q.k++;nextP()}
+function silabas(s){return s.replace(/([aeiouàèéìòù])(?=[bcdfglmnpqrstvz][aeiouàèéìòù])/gi,"$1·")}
+// ---------- antes del final: errores y reforzar ----------
+function preFinal(){const L=errList();
+  pane().innerHTML=`<div class="card"><h2>Antes del examen: corrige tus errores</h2><p class="mut" style="margin-top:0">En la práctica te equivocaste en <b>${L.length}</b>. Revísalos o refuérzalos:</p>
+  <div class="sndt">${L.map(e=>`<div class="er"><span>${TIPO[e.t][0]}</span><span><b>${e.it}</b> = ${e.es}<br><small class="bad">${e.ans}</small></span><span>${spk(e.it)}</span></div>`).join("")}</div>
+  <button class="btn g" style="width:100%;margin-top:12px" onclick="reforzar()">💪 Reforzar ${L.length===1?"este error":"estos "+L.length}</button>
+  <button class="btn p" style="width:100%;margin-top:8px" onclick="final(true)">Ir al Ejercicio final →</button></div>`}
+function reforzar(){q={items:shuf(errList()),k:0,ok:0,tries:{}};nextRf()}
+function nextRf(){
+  if(q.k>=q.items.length){const n=errList().length;pane().innerHTML=`<div class="card" style="text-align:center"><h2>💪 Refuerzo terminado</h2><p>${n?`Te quedan <b>${n}</b> por corregir.`:"¡Corregiste todos tus errores! 🎉"}</p>
+    <div class="row" style="justify-content:center">${n?`<button class="btn" onclick="preFinal()">Ver lista</button><button class="btn g" onclick="reforzar()">💪 Reforzar otra vez</button>`:""}<button class="btn p" onclick="final(true)">Ir al Ejercicio final →</button></div></div>`;return}
+  const e=q.items[q.k],oral=e.t==="P"||e.t==="R",hd=`<p class="mut" style="margin-bottom:4px">Refuerzo ${q.k+1}/${q.items.length} · ${TIPO[e.t][0]} ${TIPO[e.t][1]}</p>`;
+  if(oral){pane().innerHTML=`<div class="card" style="text-align:center">${hd}<p class="hint">Escucha y dilo en voz alta con el 🎤</p><div class="big" style="font-size:1.6rem">${e.it}</div><p class="mut">${e.es}</p>
+    <div class="row" style="justify-content:center;margin-bottom:12px"><button class="btn" onclick="say('${esc(e.it)}')">🔊 Escuchar</button><button class="btn" onclick="say('${esc(e.it)}',1)">🐢 Lento</button></div><div id="rmic"></div><div id="ract" class="row" style="justify-content:center;margin-top:10px"><button class="btn sm" onclick="q.k++;nextRf()">Saltar →</button></div></div>`;
+    micUI("rmic",e.it,(ok,h)=>{const s=sec("ms");s.className="fb "+(ok?"ok":"bad");s.textContent=ok?"✓ Corregido: «"+h+"»":"✗ Se entendió: «"+h+"»";
+      if(ok){delErr(e.t,e.it);setTimeout(()=>{q.k++;nextRf()},1200)}else sec("ract").innerHTML=`<button class="btn" onclick="micStart()">↺ Otra vez</button><button class="btn p" onclick="q.k++;nextRf()">Siguiente →</button>`});
+    setTimeout(()=>say(e.it),250);return}
+  pane().innerHTML=`<div class="card">${hd}<p class="hint">Escucha y escríbelo en italiano. Ejemplo: oyes <i>ciao</i> → escribes <span class="ej">ciao</span></p>
+   <div style="text-align:center;margin:12px 0"><button class="btn p" onclick="say('${esc(e.it)}')">🔊 Escuchar</button> <button class="btn" onclick="say('${esc(e.it)}',1)">🐢 Lento</button></div><p class="mut" style="text-align:center">Significa: ${e.es}</p>
+   <input type="text" id="rfi" autocomplete="off" placeholder="Escribe en italiano…" onkeydown="if(event.key==='Enter')chkRf()">${accBar("rfi")}
+   <div class="row" style="margin-top:10px"><button class="btn p" id="rfb" onclick="chkRf()">Comprobar</button></div><div class="fb" id="rff"></div></div>`;
+  setTimeout(()=>say(e.it),250);
+}
+function chkRf(){const e=q.items[q.k],b=sec("rfb"),f=sec("rff");if(b.dataset.next){q.k++;nextRf();return}
+  const ok=norm(sec("rfi").value)===norm(e.it);f.className="fb "+(ok?"ok":"bad");f.textContent=ok?"✓ Corregido: "+e.it:"✗ Correcto: "+e.it;if(ok)delErr(e.t,e.it);say(e.it);b.textContent="Siguiente →";b.dataset.next=1}
+// ---------- conversación ----------
+let roleMode=false,showTr=true;
+let RP=null;
+function conversacion(){
+  const c=D[cur].c;
+  sec("s-conv").innerHTML=`<div class="card"><h2>💬 Conversación</h2>
+  <p style="margin:0 0 2px"><b>1.</b> Escucha el diálogo completo.</p><p style="margin:0 0 12px"><b>2.</b> Luego practica en <b>Juego de roles</b>.</p>
+  <div class="row" style="margin-bottom:12px"><button class="btn p" onclick="playDialog()">▶ Reproducir diálogo</button><button class="btn" onclick="playDialog(1)">🐢 Lento</button>
+  <button class="btn" onclick="showTr=!showTr;document.querySelectorAll('#dlg .es').forEach(e=>e.style.display=showTr?'':'none');this.textContent=(showTr?'Ocultar':'Mostrar')+' traducción'">${showTr?"Ocultar":"Mostrar"} traducción</button></div>
+  <div id="dlg">${c.map(([it,es],i)=>{const B=i%2==1;return `<div class="w" id="cl${i}" style="margin:6px 0;${B?"margin-left:40px;background:#f3f8f5":"margin-right:40px"}">
+   <div><div class="mut" style="font-size:.75rem;font-weight:600">${B?"B":"A"}</div><div class="it">${it}</div><div class="es" style="${showTr?"":"display:none"}">${es}</div></div><span>${spk(it)}</span></div>`}).join("")}</div></div>
+  <div class="card" id="rp"></div>`;
+  rpIntro();
+}
+function rpIntro(){const r=sec("rp");if(!r)return;
+  r.innerHTML=`<h2>🎭 Juego de roles</h2><p style="margin:0">Se abre la conversación: la otra persona habla y, en tu turno, <b>tú hablas con el 🎤</b> para que la conversación siga.</p>
+  <p class="hint">Ejemplo: A dice «Ciao! Come stai?» → tú tocas 🎤 y dices <span class="ej">Bene, grazie. E tu?</span></p>
+  <div class="row" style="margin-top:10px"><button class="btn g" onclick="rpStart('B')">▶ Empezar: yo soy B</button><button class="btn" onclick="rpStart('A')">Yo soy A</button></div>`}
+function rpStart(me){RP={me,k:0,ok:0,bad:0,tok:Date.now()};const r=sec("rp");
+  r.innerHTML=`<div class="row" style="justify-content:space-between;margin-bottom:8px"><b>🎭 Tú eres ${me}</b><button class="btn sm" onclick="RP=null;try{speechSynthesis.cancel()}catch(e){};rpIntro()">Salir</button></div>
+  <div id="chat" class="chat"></div><div id="rpt"></div>`;rpStep()}
+function rpVoice(u,other){u.lang="it-IT";try{const vs=speechSynthesis.getVoices().filter(v=>v.lang&&v.lang.startsWith("it"));const f=vs.find(v=>/female|donna|alice|elsa|federica|paola|carla|isabella|google/i.test(v.name));if(f)u.voice=f;else if(voice)u.voice=voice}catch(e){}u.pitch=other?1.2:0.9;u.rate=rate}
+function bubble(who,txt,cls){const ch=sec("chat");if(!ch)return;const d=document.createElement("div");d.className="bb "+cls;d.innerHTML=`<small>${who}</small>${txt}`;ch.appendChild(d)}
+function rpStep(){const c=D[cur].c,t=sec("rpt");if(!RP||!t)return;const tok=RP.tok,mine=i=>(RP.me==="B")===(i%2===1);
+  if(RP.k>=c.length){t.innerHTML=`<div style="text-align:center;margin-top:10px"><p><span style="color:var(--verde);font-weight:600">✓ ${RP.ok} bien</span> · <span style="color:var(--rojo);font-weight:600">✗ ${RP.bad} por mejorar</span></p>
+    <div class="row" style="justify-content:center"><button class="btn" onclick="rpStart('${RP.me}')">↺ Repetir</button><button class="btn p" onclick="rpStart('${RP.me==="B"?"A":"B"}')">Cambiar papel (yo soy ${RP.me==="B"?"A":"B"})</button></div></div>`;return}
+  const [it,es]=c[RP.k];
+  if(!mine(RP.k)){t.innerHTML=`<p class="mut" style="text-align:center">🔊 Escucha…</p>`;bubble((RP.me==="B"?"A":"B")+" 🔊",it+`<div class="es">${es}</div>`,"other");
+    let done=false;const go=()=>{if(done||!RP||RP.tok!==tok)return;done=true;RP.k++;rpStep()};
+    try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(it);rpVoice(u,true);u.onend=()=>setTimeout(go,400);speechSynthesis.speak(u)}catch(e){}
+    setTimeout(go,2500+it.length*120);return}
+  t.innerHTML=`<div class="bb turn"><small>🎤 Tu turno: di en italiano</small><b>«${es}»</b><div class="mut" style="font-size:.85rem">Empieza con: ${it.split(" ")[0]}…</div></div><div id="rmic2"></div><div id="ract2" class="row" style="justify-content:center;margin-top:8px"><button class="btn sm" onclick="rpShow()">💡 Ver respuesta</button></div>`;
+  micUI("rmic2",it,(ok,h)=>{if(!RP||RP.tok!==tok)return;
+    if(ok){RP.ok++;delErr("R",it);bubble("Tú ✓",h,"me ok");RP.k++;setTimeout(rpStep,500)}
+    else{const s=sec("ms");s.className="fb bad";s.textContent="✗ Se entendió: «"+h+"». Inténtalo otra vez.";addErr("R",it,es,"se entendió «"+h+"»");
+      sec("ract2").innerHTML=`<button class="btn sm" onclick="micStart()">↺ Otra vez</button><button class="btn sm" onclick="rpShow()">💡 Ver respuesta</button><button class="btn sm" onclick="rpSkip()">Seguir →</button>`}});
+}
+function rpShow(){const [it]=D[cur].c[RP.k],s=sec("ms");if(s){s.className="fb mut";s.innerHTML="Respuesta: <b>"+it+"</b>"}try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(it);rpVoice(u,false);speechSynthesis.speak(u)}catch(e){}}
+function rpSkip(){const [it,es]=D[cur].c[RP.k];RP.bad++;addErr("R",it,es,"no se logró");bubble("Tú ✗",it,"me bad");RP.k++;rpStep()}
+
+function playDialog(slow){const c=D[cur].c;let k=0;try{speechSynthesis.cancel()}catch(e){}
+  const nx=()=>{document.querySelectorAll('[id^="cl"]').forEach(e=>e.style.outline="");if(k>=c.length)return;
+    const el=document.getElementById("cl"+k);if(el)el.style.outline="2px solid var(--oro)";
+    const u=new SpeechSynthesisUtterance(c[k][0]);u.lang="it-IT";if(voice)u.voice=voice;u.rate=slow?0.6:rate;u.pitch=k%2?0.8:1.25;u.onend=()=>setTimeout(nx,600);k++;
+    try{speechSynthesis.speak(u)}catch(e){}};nx()}
+
+// ---------- ejercicio final ----------
+function final(skip){
+  if(!skip&&errList().length){preFinal();return}
+  const d=D[cur],qs=[];
+  const fr=shuf(d.f.filter(x=>x[0].split(" ").length>=3));
+  fr.slice(0,3).forEach(x=>qs.push({t:"ord",it:x[0],es:x[1]}));
+  const allW=[...new Set(d.c.concat(d.f).flatMap(x=>x[0].replace(/[.,!?:]/g,"").split(" ")).filter(w=>w.length>3))];
+  const ci=shuf([0,1,2,3,4,5]),resp=ci.find(i=>i%2===1),rest=ci.filter(i=>i!==resp),dict=rest[0];
+  rest.slice(1,3).forEach(i=>{const x=d.c[i],ws=x[0].replace(/[.,!?:]/g,"").split(" ").filter(w=>w.length>2),w=ws.sort((a,b)=>b.length-a.length)[0];
+    qs.push({t:"gap",it:x[0],es:x[1],w,prev:i>0?d.c[i-1][0]:"",opts:shuf([w,...shuf(allW.filter(z=>z.toLowerCase()!==w.toLowerCase())).slice(0,3)])})});
+  qs.push({t:"verb",v:d.v,i:Math.floor(Math.random()*6)});
+  const wd=shuf(d.w)[0];qs.push({t:"trad",it:wd[0],es:wd[1]});
+  const tf=fr[3]||shuf(d.f.filter(x=>!fr.slice(0,3).includes(x)))[0]||d.f[0];
+  qs.push({t:"hard",m:"dict",it:d.c[dict][0],es:d.c[dict][1]});
+  qs.push({t:"hard",m:"trad",it:tf[0],es:tf[1]});
+  qs.push({t:"hard",m:"resp",it:d.c[resp][0],es:d.c[resp][1],prev:d.c[resp-1][0]});
+  q={items:qs,k:0,ok:0};nextF();
+}
+function nextF(){
+  if(q.k>=q.items.length){const pct=Math.round(q.ok/q.items.length*100);registrar(pct);
+    pane().innerHTML=`<div class="card" style="text-align:center"><h2>🏁 Puntaje final: ${q.ok*2}/${q.items.length*2}</h2><p class="mut" style="margin-top:0">${q.ok} de ${q.items.length} respuestas correctas · ${pct}% · se aprueba con ${Math.ceil(q.items.length*0.7)*2} puntos</p>
+    <p>${pct>=70?"¡Bravissimo! Aprobaste el día "+(cur+1)+" 🎉 Tu avance quedó guardado.":"Repasa el vocabulario y la conversación, y vuelve a intentarlo."}</p>
+    <div class="row" style="justify-content:center"><button class="btn" onclick="final(true)">Repetir</button>${pct>=70&&cur<29?`<button class="btn p" onclick="openDay(${cur+1})">Día ${cur+2} →</button>`:""}</div></div>`;return}
+  const x=q.items[q.k],hd=`<div class="row" style="justify-content:space-between"><span class="mut">Pregunta ${q.k+1}/${q.items.length} · vale 2 puntos</span><span class="mut">Puntos: <b style="color:var(--ink)">${q.ok*2}</b>/${q.items.length*2}</span></div>${x.t==="hard"?`<p class="hard">⭐ Pregunta difícil</p>`:""}`;
+  if(x.t==="ord"){window.__lock=false;window.__built=[];window.__pool=shuf(x.it.split(" "));
+    pane().innerHTML=`<div class="card">${hd}<h2>Ordena la frase</h2><p class="hint">Ejemplo: toca las palabras en orden → <span class="ej">Mi chiamo Marco</span></p><p class="mut">“${x.es}”</p><div id="built" style="min-height:48px;border:2px dashed var(--line);border-radius:10px;padding:8px;margin:10px 0" class="row"></div><div id="pool" class="row"></div>
+    <div class="row" style="margin-top:12px"><button class="btn p" id="fb2" onclick="chkOrd()">Comprobar</button><button class="btn" onclick="window.__built=[];window.__pool=shuf(q.items[q.k].it.split(' '));drawOrd()">↺ Reiniciar</button></div><div class="fb" id="ffb"></div></div>`;drawOrd()}
+  else if(x.t==="gap"){const line=x.it.replace(new RegExp("\\b"+x.w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\b"),"_____");
+    pane().innerHTML=`<div class="card">${hd}<h2>Completa el diálogo</h2><p class="hint">Ejemplo: en «Mi ____ Marco» eliges <span class="ej">chiamo</span></p>${x.prev?`<div class="w" style="margin:6px 40px 6px 0"><div class="it">A: ${x.prev}</div>${spk(x.prev)}</div>`:""}
+    <div class="w" style="margin:6px 0 12px 40px;background:#f3f8f5"><div class="it">B: ${line}</div></div><p class="mut">${x.es}</p>
+    <div class="opts">${x.opts.map(o=>`<button class="opt" data-r="${o===x.w?1:0}" onclick="ansF(this)">${o}</button>`).join("")}</div><div class="fb" id="ffb"></div></div>`}
+  else if(x.t==="verb"){const ans=x.v[3][x.i],pref=ans.match(/^(che \w+|se \w+)\s/);window.__vt=pref?ans.slice(pref[0].length):ans;
+    pane().innerHTML=`<div class="card">${hd}<h2>Verbo del día</h2><p style="margin-bottom:4px">Conjuga <b>${x.v[0]}</b> (${x.v[2]}) para <b>${pref?pref[1]:P[x.i]}</b></p>${exVerb(x.v,x.i)}
+    <input type="text" id="fin" autocomplete="off" onkeydown="if(event.key==='Enter')chkFT()">${accBar("fin")}<div class="row" style="margin-top:10px"><button class="btn p" id="fb2" onclick="chkFT()">Comprobar</button></div><div class="fb" id="ffb"></div></div>`}
+  else if(x.t==="hard"){window.__vt=x.it;const ttl={dict:"Dictado: escribe la frase completa",trad:"Traduce la frase completa",resp:"Responde en el diálogo"}[x.m];
+    const body=x.m==="dict"?`<p class="hint">Ejemplo: si oyes <i>Ciao! Come stai?</i>, escribes <span class="ej">Ciao! Come stai?</span></p><div style="text-align:center;margin:12px 0"><button class="btn p" onclick="say('${esc(x.it)}')">🔊 Escuchar</button> <button class="btn" onclick="say('${esc(x.it)}',1)">🐢 Lento</button></div>`
+     :x.m==="trad"?`<p class="hint">Ejemplo: <i>Estoy bien, gracias.</i> → escribes <span class="ej">Sto bene, grazie.</span></p><div class="big" style="font-size:1.5rem">${x.es}</div>`
+     :`<p class="hint">Ejemplo: A dice «Come stai?» y te piden «Bien, ¿y tú?» → escribes <span class="ej">Bene, e tu?</span></p><div class="w" style="margin:6px 40px 6px 0"><div><div class="mut" style="font-size:.75rem">A dice</div><div class="it">${x.prev}</div></div>${spk(x.prev)}</div><p>Tú (B) quieres decir: <b>«${x.es}»</b></p>`;
+    pane().innerHTML=`<div class="card">${hd}<h2>${ttl}</h2>${body}
+    <input type="text" id="fin" autocomplete="off" placeholder="Escribe en italiano…" onkeydown="if(event.key==='Enter')chkFT()">${accBar("fin")}<div class="row" style="margin-top:10px"><button class="btn p" id="fb2" onclick="chkFT()">Comprobar</button></div><div class="fb" id="ffb"></div></div>`;
+    if(x.m==="dict")setTimeout(()=>say(x.it),300)}
+  else{window.__vt=x.it;pane().innerHTML=`<div class="card">${hd}<h2>Traduce al italiano</h2>${(o=>`<p class="hint">Ejemplo: <i>${o[1]}</i> → escribes <span class="ej">${o[0]}</span></p>`)(otherW(x.it))}<div class="big">${x.es}</div>
+    <input type="text" id="fin" autocomplete="off" onkeydown="if(event.key==='Enter')chkFT()">${accBar("fin")}<div class="row" style="margin-top:10px"><button class="btn p" id="fb2" onclick="chkFT()">Comprobar</button></div><div class="fb" id="ffb"></div></div>`}
+}
+function drawOrd(){if(window.__lock)return;document.getElementById("built").innerHTML=window.__built.map((w,i)=>`<button class="btn sm" onclick="window.__pool.push(window.__built.splice(${i},1)[0]);drawOrd()">${w}</button>`).join("");
+  document.getElementById("pool").innerHTML=window.__pool.map((w,i)=>`<button class="btn sm" onclick="window.__built.push(window.__pool.splice(${i},1)[0]);drawOrd()">${w}</button>`).join("")}
+function fNext(ok,msg,it){const fb=document.getElementById("ffb");if(ok)q.ok++;fb.className="fb "+(ok?"ok":"bad");fb.textContent=msg;say(it);q.k++;
+  const b=document.getElementById("fb2");if(b){b.textContent="Siguiente →";b.onclick=nextF}else setTimeout(nextF,1800)}
+function chkOrd(){const x=q.items[q.k],ok=norm(window.__built.join(" "))===norm(x.it);window.__lock=true;const pl=document.getElementById("pool");if(pl)pl.innerHTML="";fNext(ok,(ok?"✓ Perfetto! ":"✗ Correcto: ")+x.it,x.it)}
+function ansF(b){const x=q.items[q.k];document.querySelectorAll(".opt").forEach(o=>{o.disabled=true;if(o.dataset.r==="1")o.classList.add("ok")});if(b.dataset.r!=="1")b.classList.add("bad");
+  fNext(b.dataset.r==="1",(b.dataset.r==="1"?"✓ ":"✗ ")+x.it,x.it)}
+function chkFT(){const g=document.getElementById("fin").value,t=window.__vt,alts=[t,t.replace(/\/[ae]$/,""),t.replace(/([oi])\/([ae])$/,"$2")];
+  const ok=alts.some(a=>norm(a)===norm(g));fNext(ok,(ok?"✓ Corretto! ":"✗ Correcto: ")+t,t.replace(/\/[ae]$/,""))}
+
+// ---------- sesión ----------
+const LS={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}},del:k=>{try{localStorage.removeItem(k)}catch(e){}}};
+const save=()=>{if(USER)LS.set("it30_"+USER.u,JSON.stringify(done))};
+const srv=(fn,...a)=>GAS?new Promise((res,rej)=>google.script.run.withSuccessHandler(res).withFailureHandler(rej)[fn](...a))
+  :fetch(API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({fn,args:a})}).then(r=>r.json()).then(r=>{if(r&&r.error)throw new Error(r.error);return r.data});
+function showLogin(msg){
+  view="login";
+  app.innerHTML=`<div style="display:flex;justify-content:center;padding:30px 0"><div class="card" style="width:100%;max-width:360px;padding:0;overflow:hidden">
+  <div style="height:6px;background:linear-gradient(90deg,var(--verde) 0 33.3%,#fff 33.3% 66.6%,var(--rojo) 66.6%)"></div>
+  <form style="padding:24px" onsubmit="event.preventDefault();doLogin()">
+   <div style="text-align:center;margin-bottom:18px"><div style="width:56px;height:56px;border-radius:50%;background:#e3f4ea;display:inline-flex;align-items:center;justify-content:center;font-size:28px">📗</div>
+   <h2 style="margin:8px 0 2px">Italiano en 30 días</h2><p class="mut" style="margin:0">Benvenuto! Ingresa para ver tu avance</p></div>
+   <label class="mut">Usuario</label><input type="text" id="lu" autocomplete="username" style="margin:4px 0 12px">
+   <label class="mut">Contraseña</label><div style="position:relative"><input type="password" id="lp" autocomplete="current-password" style="margin:4px 0 8px;padding-right:44px">
+   <button type="button" class="spk" style="position:absolute;right:6px;top:12px" onclick="const p=document.getElementById('lp');p.type=p.type==='password'?'text':'password'">👁️</button></div>
+   <label class="mut row" style="gap:6px;margin-bottom:14px"><input type="checkbox" id="lr" checked> Recordarme en este equipo</label>
+   <button class="btn p" id="lb" style="width:100%;padding:12px">Ingresar</button>
+   <div class="fb bad" id="lm" style="text-align:center">${msg||""}</div>
+   <p class="mut" style="text-align:center;font-size:.85rem;border-top:1px solid var(--line);padding-top:12px;margin-bottom:0">${GS?"¿Olvidaste tu contraseña? Pídela al administrador.":"Modo sin conexión: escribe cualquier usuario; el avance se guarda en este equipo."}</p>
+  </form></div></div>`;
+  setTimeout(()=>document.getElementById("lu").focus(),50);
+}
+async function doLogin(){
+  const u=document.getElementById("lu").value.trim(),p=document.getElementById("lp").value,r=document.getElementById("lr").checked,m=document.getElementById("lm"),b=document.getElementById("lb");
+  if(!u||(GS&&!p)){m.textContent="Escribe tu usuario y contraseña.";return}
+  if(!GS){if(r)LS.set("it30user",u);entrar({u,nombre:u,avance:null},null);return}
+  b.textContent="Verificando…";b.disabled=true;
+  try{const x=await srv("login",u,p);
+    if(x&&x.ok){if(r)LS.set("it30tk",x.token);entrar(x,x.token)}else{m.textContent=x.msg||"Usuario o contraseña incorrectos";b.textContent="Ingresar";b.disabled=false}}
+  catch(e){m.textContent="No hay conexión con el servidor. Intenta otra vez.";b.textContent="Ingresar";b.disabled=false}
+}
+function entrar(r,tk){USER={u:r.u,n:r.nombre};errLoad();TOKEN=tk;let loc={};try{loc=JSON.parse(LS.get("it30_"+r.u)||"{}")}catch(e){}done=r.avance||loc;save();home()}
+function logout(){if(GS&&TOKEN)srv("logout",TOKEN).catch(()=>{});LS.del("it30tk");LS.del("it30user");USER=null;TOKEN=null;done={};showLogin()}
+async function start(){
+  const tk=LS.get("it30tk");
+  if(GS&&tk){app.innerHTML=`<p class="mut" style="text-align:center;padding:60px">Cargando…</p>`;try{const r=await srv("sesion",tk);if(r&&r.ok){entrar(r,tk);return}}catch(e){}LS.del("it30tk")}
+  if(!GS){const u=LS.get("it30user");if(u){entrar({u,nombre:u,avance:null},null);return}}
+  showLogin();
+}
+function registrar(pct){
+  if(pct>=70&&(!done[cur]||pct>done[cur]))done[cur]=pct;save();
+  if(GS&&TOKEN)srv("guardarDia",TOKEN,cur+1,D[cur].t,q.ok,q.items.length).then(r=>{if(r&&r.ok&&r.avance){done=r.avance;save()}else if(r&&r.msg==="sesion"){toast("Tu sesión expiró. Ingresa de nuevo.");logout()}}).catch(()=>toast("No se pudo guardar en el servidor. Revisa tu conexión."));
+}
+
+// ---------- tips y trucos ----------
+const TIPS=[
+{t:"🗣️ Pronunciación que sí importa",i:[
+["Las dobles cambian el significado: <b>pala</b> (pala) ≠ <b>palla</b> (pelota), <b>caro</b> ≠ <b>carro</b>, <b>sete</b> (sed) ≠ <b>sette</b> (siete), <b>nono</b> (noveno) ≠ <b>nonno</b> (abuelo). Alarga la consonante como si hicieras una pausa.","pala, palla. caro, carro. sete, sette. nono, nonno"],
+["<b>ce/ci</b> = 'che/chi' (cena, ciao) · <b>che/chi</b> = 'ke/ki' (chi, perché) · <b>ge/gi</b> = 'ye/yi' fuerte (gelato) · <b>ghe/ghi</b> = 'gue/gui' (spaghetti).","cena, ciao, chi, perché, gelato, spaghetti"],
+["<b>Z</b> suena 'ts' o 'ds', nunca como la z española: pizza = 'pitsa', zero = 'dsero'.","pizza, zero, grazie"],
+["<b>gn</b> = ñ (gnocchi, bagno) · <b>gli</b> ≈ 'lli' suave (figlio, famiglia) · <b>sc+e/i</b> = 'sh' (pesce, scienza).","gnocchi, bagno, figlio, famiglia, pesce"],
+["El acento escrito solo aparece en la última sílaba: città, perché, caffè, università. Si no hay tilde, casi siempre es palabra llana.","città, perché, caffè, università"],
+["Ventaja peruana: las vocales y la R son casi iguales al español. ¡No las 'americanices'!",""]]},
+{t:"🔁 Trucos para pasar del español al italiano",i:[
+["<b>-ción → -zione</b>: nación → nazione, información → informazione, estación → stazione.","nazione, informazione, stazione"],
+["<b>-dad → -tà</b>: ciudad → città, universidad → università, libertad → libertà.","città, università, libertà"],
+["<b>-ble → -bile</b>: posible → possibile, terrible → terribile.","possibile, terribile"],
+["La <b>h</b> inicial del español suele ser <b>f</b>: hacer → fare, hijo → figlio, harina → farina, hierro → ferro, hoja → foglia.","fare, figlio, farina, ferro, foglia"],
+["<b>ue/ie → o/e</b>: puerta → porta, tiempo → tempo, fiesta → festa, nuevo → nuovo.","porta, tempo, festa, nuovo"],
+["<b>-mente</b>, <b>-oso</b>, <b>-ista</b> casi no cambian: rapidamente, famoso, turista.","rapidamente, famoso, turista"]]},
+{t:"⚠️ Falsos amigos (¡cuidado!)",i:[
+["<b>burro</b> = mantequilla","burro"],["<b>caldo</b> = caliente","caldo"],["<b>salire</b> = subir (no salir → uscire)","salire, uscire"],["<b>guardare</b> = mirar (guardar → conservare)","guardare"],["<b>camera</b> = habitación","camera"],["<b>gamba</b> = pierna","gamba"],["<b>largo</b> = ancho (largo → lungo)","largo, lungo"],["<b>imbarazzata</b> = avergonzada, no embarazada (incinta)","imbarazzata, incinta"],["<b>topo</b> = ratón","topo"],["<b>autista</b> = chofer","autista"],["<b>aceto</b> = vinagre (aceite → olio)","aceto, olio"],["<b>subito</b> = enseguida, no 'súbito'","subito"]]},
+{t:"❌ Errores típicos de hispanohablantes",i:[
+["✗ Sono 30 anni → ✓ <b>Ho 30 anni</b> (la edad se 'tiene').","Ho trent'anni"],
+["✗ Mi gusta → ✓ <b>Mi piace</b> / <b>Mi piacciono</b>.","Mi piace, mi piacciono"],
+["✗ Tengo che andare → ✓ <b>Devo andare</b>.","Devo andare"],
+["✗ Vado a mangiare domani (futuro) → ✓ <b>Mangerò domani</b>. 'Vado a' solo es movimiento.","Mangerò domani"],
+["Estar en un lugar = <b>essere</b>: Sono a casa (no 'sto a casa' en el uso estándar).","Sono a casa"],
+["✗ Penso que → ✓ <b>Penso che</b> + congiuntivo: Penso che sia vero.","Penso che sia vero"],
+["<b>Molto</b> con adjetivo no cambia (molto belle); con sustantivo sí (molte case).","molto belle, molte case"],
+["Las horas: ✗ Sono le una → ✓ <b>È l'una</b>.","È l'una"]]},
+{t:"💬 Palabras que te hacen sonar nativo",i:[
+["<b>Allora…</b> = bueno… / entonces… (para empezar a hablar)","Allora"],["<b>Dai!</b> = ¡vamos! / ¡anda ya!","Dai!"],["<b>Magari!</b> = ¡ojalá!","Magari!"],["<b>Boh</b> = ni idea","Boh"],["<b>Figurati!</b> = ¡de nada! / ¡ni lo menciones!","Figurati!"],["<b>Ecco!</b> = ¡eso es! / aquí está","Ecco!"],["<b>Insomma</b> = en fin / más o menos","Insomma"],["<b>Cioè</b> = o sea","Cioè"],["<b>Vabbè</b> = bueno, está bien","Vabbè"],["<b>Prego</b> sirve para: de nada, pase, ¿qué desea?","Prego"]]},
+{t:"☕ Cultura que nadie te cuenta",i:[
+["En el bar, <b>un caffè</b> es un espresso. Se toma de pie y en un minuto.","Un caffè, per favore"],
+["El <b>cappuccino</b> es solo para el desayuno: pedirlo después de almorzar delata al turista.","Un cappuccino"],
+["Usa <b>Lei</b> (usted) con desconocidos, en tiendas y oficinas; <b>tu</b> con amigos y jóvenes.","Lei, tu"],
+["Al saludar se dan <b>dos besos</b> (derecha e izquierda) entre conocidos.",""],
+["<b>Buonasera</b> se usa desde media tarde (≈ 16:00), no solo de noche.","Buonasera"],
+["Al brindar se dice <b>Salute!</b> o <b>Cin cin!</b>","Salute! Cin cin!"]]},
+{t:"🧠 Trucos de estudio que funcionan",i:[
+["<b>Shadowing</b>: pon el audio en 🐢 y repite al mismo tiempo, imitando el ritmo y la melodía.",""],
+["<b>Repaso espaciado</b>: usa la sección Repaso al 1º, 3º y 7º día de haber aprendido algo.",""],
+["<b>15 minutos diarios</b> valen más que 2 horas el domingo. La constancia gana.",""],
+["Habla solo en voz alta: describe lo que haces (<b>Adesso cucino, poi mangio</b>).","Adesso cucino, poi mangio"],
+["Pon tu celular en italiano y escucha podcasts y música italiana mientras caminas.",""],
+["No traduzcas palabra por palabra: aprende <b>frases completas</b> como bloques.",""]]}
+];
+function tips(){view="tips";
+  app.innerHTML=`<button class="btn sm" onclick="home()">← Plan</button><h1>💡 Tips y trucos reales</h1><p class="sub">Lo que de verdad marca la diferencia al aprender italiano siendo hispanohablante.</p>
+  ${TIPS.map(s=>`<div class="card"><h2>${s.t}</h2>${s.i.map(([tx,au])=>`<div class="w" style="margin:6px 0;align-items:flex-start"><div style="line-height:1.55">${tx}</div>${au?`<span>${spk(au)}</span>`:""}</div>`).join("")}</div>`).join("")}`;scrollTo(0,0)}
+
+// ---------- repaso ----------
+function repaso(){view="repaso";
+  const dias=Object.keys(done).map(Number);const src=dias.length?dias:[...Array(nextDay()+1).keys()];
+  const pool=shuf(src.flatMap(i=>D[i].w.concat(D[i].f.slice(0,2)))).slice(0,15);
+  q={items:pool,k:0,ok:0,again:[]};nextR();
+}
+function nextR(){
+  if(q.k>=q.items.length&&q.again.length){q.items=q.items.concat(q.again);q.again=[]}
+  if(q.k>=q.items.length){app.innerHTML=`<button class="btn sm" onclick="home()">← Plan</button><div class="card" style="text-align:center"><h2>🧠 Repaso terminado</h2><p>Recordaste ${q.ok} tarjetas a la primera.</p><button class="btn p" onclick="repaso()">Otro repaso</button></div>`;return}
+  const x=q.items[q.k];
+  app.innerHTML=`<button class="btn sm" onclick="home()">← Plan</button><h1>🧠 Repaso rápido</h1><p class="sub">Tarjetas de los días que ya aprobaste. Tarjeta ${q.k+1}/${q.items.length}</p>
+  <div class="card" style="text-align:center;min-height:240px"><div class="big">${x[0]}</div><div>${spk(x[0])} ${spkS(x[0])}</div>
+  <div style="margin-top:16px"><button class="btn p" id="vb" onclick="this.style.display='none';document.getElementById('back').style.display='block'">Ver significado</button>
+  <div id="back" style="display:none"><p style="font-size:1.3rem">${x[1]}</p><div class="row" style="justify-content:center"><button class="btn" onclick="q.again.push(q.items[q.k]);q.k++;nextR()">🔁 Repasar otra vez</button><button class="btn g" onclick="q.ok++;q.k++;nextR()">✓ Lo sabía</button></div></div></div></div>`;
+  setTimeout(()=>say(x[0]),200);
+}
+
+// ---------- verbos ----------
+function verbs(){view="verbs";
+  app.innerHTML=`<button class="btn sm" onclick="home()">← Plan</button><h1>📚 Los 30 verbos del plan</h1><p class="sub">Toca 🔊 para escuchar cada forma.</p>
+  ${D.map((d,i)=>`<div class="card"><div class="row" style="justify-content:space-between"><h2>${d.v[0]} <span class="mut" style="font-size:1rem">· ${d.v[1]} · ${d.v[2]}</span></h2><button class="btn sm" onclick="openDay(${i},'verbo')">Día ${i+1} →</button></div>${conjTable(d.v)}</div>`).join("")}`;scrollTo(0,0)}
+
+document.addEventListener("focusin",e=>{if(e.target.matches&&e.target.matches('input[type=text]')){document.body.classList.add("typing");const c=e.target.closest(".card")||e.target.parentElement;setTimeout(()=>{if(c&&c.scrollIntoView)c.scrollIntoView({block:"start",behavior:"smooth"})},380)}});
+document.addEventListener("focusout",e=>{if(e.target.matches&&e.target.matches('input[type=text]'))setTimeout(()=>{if(!(document.activeElement&&document.activeElement.matches&&document.activeElement.matches('input[type=text]')))document.body.classList.remove("typing")},150)});
+start();
+</script>
+</body>
+</html>
