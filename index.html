@@ -114,6 +114,7 @@ body.typing .fab,body.typing .idx{display:none!important}
 .cbx.ok{background:#e3f4ea;color:#0f5c3b}.cbx.ok b{text-decoration:underline;text-decoration-thickness:2px}
 .cbx .spk{padding:2px 5px;font-size:.85rem}
 .rd{font-size:1.35rem;font-weight:600;color:var(--ink);margin:4px 0}
+.day.locked{opacity:.55;background:#f4f1ea}
 .modal{position:fixed;inset:0;background:#0006;display:flex;align-items:center;justify-content:center;z-index:9}
 .modal .card{max-width:400px;text-align:center}
 @media(max-width:560px){.opts{grid-template-columns:1fr}h1{font-size:1.6rem}}
@@ -488,7 +489,7 @@ function home(){
   <div class="bar" style="margin-top:10px"><i style="width:${n/30*100}%"></i></div>
   <div class="row" style="margin-top:12px"><button class="btn p" onclick="openDay(${nextDay()})">▶ Continuar: Día ${nextDay()+1}</button><button class="btn" onclick="verbs()">📚 Todos los verbos</button><button class="btn" onclick="repaso()">🧠 Repaso</button><button class="btn" onclick="tips()">💡 Tips y trucos</button></div></div>`;
   LV.forEach(([nm,c,a,b])=>{h+=`<div class="lvl"><span class="dot" style="background:${c}"></span>${nm} · Días ${a+1}-${b}</div><div class="grid">`;
-    for(let i=a;i<b;i++)h+=`<div class="day" style="--c:${c}" onclick="openDay(${i})">${done[i]?'<span class="ok">✓</span>':""}<b>Día ${i+1}</b><small>${D[i].t}</small><small>🔤 ${D[i].v[0]} · ${D[i].v[2].split(" ")[0]}</small></div>`;
+    for(let i=a;i<b;i++)h+=`<div class="day${i+1>MAXD?" locked":""}" style="--c:${c}" onclick="openDay(${i})">${done[i]?'<span class="ok">✓</span>':i+1>MAXD?'<span class="ok">🔒</span>':""}<b>Día ${i+1}</b><small>${D[i].t}</small><small>🔤 ${D[i].v[0]} · ${D[i].v[2].split(" ")[0]}</small></div>`;
     h+=`</div>`});
   h+=`<details class="card" style="margin-top:22px" ${Object.keys(done).length?"":"open"}><summary style="cursor:pointer;font-weight:600">🧭 Cómo estudiar cada día (60 a 90 minutos) y qué esperar</summary>
   <ol style="line-height:1.7">
@@ -503,6 +504,8 @@ function home(){
   <div class="card note" style="margin-top:12px"><b>Rutina rápida:</b> 1) Aprender: escucha cada palabra 3 veces. 2) Gramática y Verbo: repite la conjugación en voz alta. 3) Escuchar, Escribir y Pronunciar. 4) Conversación con juego de roles. 5) Ejercicio final: con 70% o más el día queda aprobado. 6) Usa Repaso cada 3 días.</div>`;
   app.innerHTML=h;scrollTo(0,0);
 }
+let MAXD=30;
+function lockMsg(i){const d=document.createElement("div");d.className="modal";d.innerHTML=`<div class="card" style="text-align:center"><div style="font-size:2.2rem">🔒</div><h2 style="margin:6px 0">No tienes acceso al Día ${i+1}</h2><p class="mut">Comunícate con el administrador para que habilite la siguiente clase.</p><button class="btn p" style="width:100%" onclick="this.closest('.modal').remove()">Entendido</button></div>`;document.body.append(d)}
 const nextDay=()=>{for(let i=0;i<30;i++)if(!done[i])return i;return 29};
 
 // ---------- día ----------
@@ -510,7 +513,7 @@ const SECS=[["s-sonido","Il suono del giorno","Pronunciación",()=>sonido()],["s
 const EXS=[["escuchar","🎧 Escuchar"],["escribir","✍️ Escribir"],["pronunciar","🗣️ Pronunciar"],["final","🏁 Ejercicio final"]];
 const sec=id=>document.getElementById(id);
 const goTo=id=>{const el=sec(id);if(el&&el.scrollIntoView)el.scrollIntoView({behavior:"smooth",block:"start"})};
-function openDay(i,m){const same=view==="day"&&cur===i;cur=i;view="day";if(!same)renderDay();
+function openDay(i,m){if(i+1>MAXD){lockMsg(i);return}const same=view==="day"&&cur===i;cur=i;view="day";if(!same)renderDay();
   const ex={escuchar,escribir,pronunciar,final}[m];
   if(ex){ex();document.querySelectorAll("[data-ex]").forEach(b=>b.classList.toggle("on",b.dataset.ex===m));goTo("s-ex")}
   else if(m){const id={sonido:"s-sonido",aprender:"s-aprender",gramatica:"s-gram",verbo:"s-verbo",conversacion:"s-conv",practica:"s-prac"}[m];if(id)goTo(id)}
@@ -866,7 +869,7 @@ async function doLogin(){
     if(x&&x.ok){if(r)LS.set("it30tk",x.token);entrar(x,x.token)}else{m.textContent=x.msg||"Usuario o contraseña incorrectos";b.textContent="Ingresar";b.disabled=false}}
   catch(e){m.textContent="No hay conexión con el servidor. Intenta otra vez.";b.textContent="Ingresar";b.disabled=false}
 }
-function entrar(r,tk){USER={u:r.u,n:r.nombre};errLoad();TOKEN=tk;let loc={};try{loc=JSON.parse(LS.get("it30_"+r.u)||"{}")}catch(e){}done=r.avance||loc;save();home()}
+function entrar(r,tk){USER={u:r.u,n:r.nombre};MAXD=GS?Math.max(1,Math.min(30,Number(r.maxDia)||1)):30;errLoad();TOKEN=tk;let loc={};try{loc=JSON.parse(LS.get("it30_"+r.u)||"{}")}catch(e){}done=r.avance||loc;save();home()}
 function logout(){if(GS&&TOKEN)srv("logout",TOKEN).catch(()=>{});LS.del("it30tk");LS.del("it30user");USER=null;TOKEN=null;done={};showLogin()}
 async function start(){
   const tk=LS.get("it30tk");
@@ -876,7 +879,7 @@ async function start(){
 }
 function registrar(pct){
   if(pct>=70&&(!done[cur]||pct>done[cur]))done[cur]=pct;save();
-  if(GS&&TOKEN)srv("guardarDia",TOKEN,cur+1,D[cur].t,q.ok,q.items.length).then(r=>{if(r&&r.ok&&r.avance){done=r.avance;save()}else if(r&&r.msg==="sesion"){toast("Tu sesión expiró. Ingresa de nuevo.");logout()}}).catch(()=>toast("No se pudo guardar en el servidor. Revisa tu conexión."));
+  if(GS&&TOKEN)srv("guardarDia",TOKEN,cur+1,D[cur].t,q.ok,q.items.length).then(r=>{if(r&&r.ok&&r.avance){done=r.avance;save()}else if(r&&r.msg==="sesion"){toast("Tu sesión expiró. Ingresa de nuevo.");logout()}else if(r&&r.msg==="bloqueado"){toast("Este día no está habilitado. Comunícate con el administrador.")}}).catch(()=>toast("No se pudo guardar en el servidor. Revisa tu conexión."));
 }
 
 // ---------- tips y trucos ----------
@@ -951,6 +954,15 @@ function verbs(){view="verbs";
 
 document.addEventListener("focusin",e=>{if(e.target.matches&&e.target.matches('input[type=text]')){document.body.classList.add("typing");const c=e.target.closest(".card")||e.target.parentElement;setTimeout(()=>{if(c&&c.scrollIntoView)c.scrollIntoView({block:"start",behavior:"smooth"})},380)}});
 document.addEventListener("focusout",e=>{if(e.target.matches&&e.target.matches('input[type=text]'))setTimeout(()=>{if(!(document.activeElement&&document.activeElement.matches&&document.activeElement.matches('input[type=text]')))document.body.classList.remove("typing")},150)});
+let LEAVING=false;
+function exitAsk(){if(document.querySelector(".modal.exit"))return;const d=document.createElement("div");d.className="modal exit";
+  d.innerHTML=`<div class="card" style="text-align:center"><div style="font-size:2rem">🚪</div><h2 style="margin:6px 0">¿Deseas salir del aplicativo?</h2><p class="mut">Tu avance aprobado ya está guardado.</p><div class="row" style="justify-content:center"><button class="btn" onclick="this.closest('.modal').remove()">No, quedarme</button><button class="btn p" onclick="exitYes()">Sí, salir</button></div></div>`;document.body.append(d)}
+function exitYes(){LEAVING=true;document.querySelectorAll(".modal.exit").forEach(m=>m.remove());history.back();setTimeout(()=>{if(document.visibilityState==="visible"){LEAVING=false;try{history.pushState({it:1},"")}catch(e){}toast("Ya puedes cerrar esta pestaña.")}},700)}
+try{history.pushState({it:1},"")}catch(e){}
+window.addEventListener("popstate",()=>{if(LEAVING)return;try{history.pushState({it:1},"")}catch(e){}
+  document.querySelectorAll(".modal:not(.exit)").forEach(m=>m.remove());
+  if(view==="day"||view==="tips"||view==="repaso"||view==="verbs"){try{speechSynthesis.cancel()}catch(e){}home()}else exitAsk()});
+window.addEventListener("beforeunload",e=>{if(USER&&!LEAVING){e.preventDefault();e.returnValue=""}});
 start();
 </script>
 </body>
