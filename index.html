@@ -112,6 +112,7 @@ body.typing .fab,body.typing .idx{display:none!important}
 .cbx{border-radius:12px;padding:8px 10px;line-height:1.45}.cbx small{display:flex;align-items:center;gap:6px;font-size:.72rem;font-weight:600;margin-bottom:2px}
 .cbx.bad{background:#fbe5e2;color:#9b2a22}.cbx.bad u{text-decoration-thickness:2px;font-weight:600}
 .cbx.ok{background:#e3f4ea;color:#0f5c3b}.cbx.ok b{text-decoration:underline;text-decoration-thickness:2px}
+.micb{position:relative;overflow:hidden}.micb .fl{position:absolute;left:0;top:0;bottom:0;width:0;background:#e24b4a;transition:width .3s}.micb .tx{position:relative}
 .cbx .spk{padding:2px 5px;font-size:.85rem}
 .rd{font-size:1.35rem;font-weight:600;color:var(--ink);margin:4px 0}
 .day.locked{opacity:.55;background:#f4f1ea}
@@ -673,7 +674,7 @@ function cmpHTML(heard,target){const H=wds(heard),T=wds(target);
   const tt=target.split(/\s+/).map(w=>{const n=norm(w);return !n||H.some(h=>wsim(h,n)>=0.75)?w:`<b>${w}</b>`}).join(" ");
   return `<div class="cmp"><div class="cbx bad"><small>✗ Tú dijiste</small>${hh}</div><div class="cbx ok"><small>✓ Debió decirse ${spk(target)}</small>${tt}</div></div>`}
 function micMsg(t,c){const s=sec("ms");if(s)s.innerHTML=t?`<p class="fb ${c||"mut"}" style="text-align:center">${t}</p>`:""}
-function micSet(st,txt){const b=sec("mb");if(!b)return;b.className="micb"+(st?" "+st:"");b.innerHTML=st==="on"?`<span class="wv"><i></i><i></i><i></i><i></i></span> ${txt}`:txt}
+function micSet(st,txt){const b=sec("mb");if(!b)return;b.className="micb"+(st?" "+st:"");b.innerHTML=st==="on"?`<span class="fl" id="mfl"></span><span class="tx"><span class="wv"><i></i><i></i><i></i><i></i></span> <span id="mtx">${txt}</span></span>`:txt}
 function micUI(boxId,target,cb,lbl){if(REC){try{REC.abort()}catch(e){}REC=null}MIC={target,cb,box:boxId,lbl:lbl||"¡Habla ahora!"};const b=sec(boxId);if(!b)return;
   b.innerHTML=`<button class="micb" id="mb" onclick="micToggle()">🎤 Toca y habla</button><p class="mut" id="mh" style="text-align:center;font-size:.85rem;margin:6px 0 0"></p><div id="ms"></div>
   <div id="mk" style="display:${MICBLOCK?"block":"none"}"><p class="hint" style="margin:8px 0 4px">Toca el cuadro y usa el <b>🎤 de tu teclado</b> para dictar en italiano:</p>
@@ -688,12 +689,20 @@ function micStart(){if(!MIC)return;micMsg("");
     const arm=ms=>{clearTimeout(timer);timer=setTimeout(()=>{try{r.stop()}catch(e){}},ms)};
     const finish=()=>{if(done)return;done=true;clearTimeout(timer);REC=null;const h=sec("mh");if(h)h.textContent="";const txt=(finals.join(" ")+" "+interim).replace(/\s+/g," ").trim();
       if(!txt){micSet("","🎤 Toca y habla");micMsg("No te escuché. Toca y habla otra vez.");return}micEval([txt])};
-    r.onstart=()=>{micSet("on",MIC.lbl);const h=sec("mh");if(h)h.textContent="Te escucho… cuando calles 5 segundos termino solo · toca para terminar antes";arm(8000)};
-    r.onresult=e=>{finals=[];interim="";for(let i=0;i<e.results.length;i++){const rs=e.results[i];if(rs.isFinal)finals.push(rs[0].transcript);else interim+=rs[0].transcript}heardAny=true;arm(5000);
-      const h=sec("mh");if(h)h.textContent="🗣️ "+(finals.join(" ")+" "+interim).trim()};
+    r.onstart=()=>{micSet("on",MIC.lbl);const h=sec("mh");if(h)h.textContent="Te escucho… al llenarse el botón termino solo";arm(8000)};
+    r.onresult=e=>{finals=[];interim="";for(let i=0;i<e.results.length;i++){const rs=e.results[i];if(rs.isFinal)finals.push(rs[0].transcript);else interim+=rs[0].transcript}heardAny=true;arm(2500);
+      const all=(finals.join(" ")+" "+interim).trim(),h=sec("mh");if(h)h.textContent="🗣️ "+all;
+      const T=wds(MIC.target),Hh=wds(numWords(all)),m=T.filter(t=>Hh.some(x=>wsim(x,t)>=0.75)).length,f=sec("mfl"),tx=sec("mtx");
+      if(f)f.style.width=Math.round(m/Math.max(1,T.length)*100)+"%";if(tx)tx.textContent=`Ascolto… ${m} de ${T.length}`;
+      if(T.length&&m>=T.length){clearTimeout(timer);timer=setTimeout(()=>{try{r.stop()}catch(e){}},350)}};
     r.onerror=e=>{if(["not-allowed","service-not-allowed","audio-capture"].includes(e.error)){done=true;REC=null;clearTimeout(timer);micSet("","🎤 Toca y habla");micDict("El micrófono está bloqueado aquí. Usa el 🎤 de tu teclado en el cuadro de abajo.")}};
     r.onend=finish;r.start()}catch(e){REC=null;micDict("El micrófono está bloqueado aquí. Usa el 🎤 de tu teclado en el cuadro de abajo.")}}
-function micEval(alts){if(!MIC)return;alts=alts.filter(a=>a&&a.trim());if(!alts.length)return;
+function itNum(n){const U=["zero","uno","due","tre","quattro","cinque","sei","sette","otto","nove","dieci","undici","dodici","tredici","quattordici","quindici","sedici","diciassette","diciotto","diciannove"],T=["","","venti","trenta","quaranta","cinquanta","sessanta","settanta","ottanta","novanta"];
+  if(n<20)return U[n];if(n<100){let t=T[Math.floor(n/10)],u=n%10;if(u===1||u===8)t=t.slice(0,-1);return t+(u===0?"":u===3?"tré":U[u])}
+  if(n<1000){const c=Math.floor(n/100),r=n%100;return (c===1?"cento":U[c]+"cento")+(r?itNum(r):"")}
+  if(n<1000000){const m=Math.floor(n/1000),r=n%1000;return (m===1?"mille":itNum(m)+"mila")+(r?itNum(r):"")}return String(n)}
+function numWords(s){return s.replace(/(\d)\.(\d{3})/g,"$1$2").replace(/(\d+),(\d+)/g,"$1 virgola $2").replace(/%/g," per cento").replace(/\d+/g,m=>itNum(+m))}
+function micEval(alts){if(!MIC)return;alts=alts.filter(a=>a&&a.trim()).map(numWords);if(!alts.length)return;
   const best=alts.reduce((b,a)=>wscore(a,MIC.target)>wscore(b,MIC.target)?a:b),sc=wscore(best,MIC.target),ok=sc>=0.75;
   micSet(ok?"ok":"bad",ok?"✓ ¡Ottimo!":"✗ Intenta otra vez");if(!ok)setTimeout(()=>{if(!REC)micSet("","🎤 Toca y habla")},1600);
   MIC.cb(ok,best,cmpHTML(best,MIC.target),sc)}
