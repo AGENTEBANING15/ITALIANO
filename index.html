@@ -112,6 +112,7 @@ body.typing .fab,body.typing .idx{display:none!important}
 .cbx{border-radius:12px;padding:8px 10px;line-height:1.45}.cbx small{display:flex;align-items:center;gap:6px;font-size:.72rem;font-weight:600;margin-bottom:2px}
 .cbx.bad{background:#fbe5e2;color:#9b2a22}.cbx.bad u{text-decoration-thickness:2px;font-weight:600}
 .cbx.ok{background:#e3f4ea;color:#0f5c3b}.cbx.ok b{text-decoration:underline;text-decoration-thickness:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;justify-content:center}.chip{padding:5px 10px;border-radius:9px;font-weight:600;font-size:.95rem}.chip.ok{background:#e3f4ea;color:#0f5c3b}.chip.bad{background:#fbe5e2;color:#9b2a22}.wres{margin-top:10px;text-align:center}.wres small{font-size:.72rem;letter-spacing:.06em;color:var(--mut);font-weight:600}.bb .chips{justify-content:flex-start}.bb .chip{font-size:.85rem;padding:3px 8px}
 .micb{position:relative;overflow:hidden}.micb .fl{position:absolute;left:0;top:0;bottom:0;width:0;background:#e24b4a;transition:width .3s}.micb .tx{position:relative}
 .cbx .spk{padding:2px 5px;font-size:.85rem}
 .rd{font-size:1.35rem;font-weight:600;color:var(--ink);margin:4px 0}
@@ -669,14 +670,14 @@ const wds=s=>norm(s).split(" ").filter(Boolean);
 function wscore(heard,target){const H=wds(heard),T=wds(target);if(!T.length||!H.length)return 0;
   if(T.length===1)return Math.max(...H.map(h=>wsim(h,T[0])),sim(heard,target))>=0.75?1:0;
   return T.filter(t=>H.some(h=>wsim(h,t)>=0.75)).length/T.length}
-function cmpHTML(heard,target){const H=wds(heard),T=wds(target);
-  const hh=heard.split(/\s+/).map(w=>{const n=norm(w);return !n||T.some(t=>wsim(n,t)>=0.75)?w:`<u>${w}</u>`}).join(" ");
-  const tt=target.split(/\s+/).map(w=>{const n=norm(w);return !n||H.some(h=>wsim(h,n)>=0.75)?w:`<b>${w}</b>`}).join(" ");
-  return `<div class="cmp"><div class="cbx bad"><small>✗ Tú dijiste</small>${hh}</div><div class="cbx ok"><small>✓ Debió decirse ${spk(target)}</small>${tt}</div></div>`}
+function cmpHTML(heard,target){const H=wds(heard),ws=target.split(/\s+/).filter(w=>norm(w));let n=0;
+  const ch=ws.map(w=>{const ok=wds(w).every(p=>H.some(h=>wsim(h,p)>=0.75));if(ok)n++;return `<span class="chip ${ok?"ok":"bad"}">${w.replace(/[.,!?;:¿¡]/g,"")} ${ok?"✓":"✗"}</span>`}).join("");
+  return `<div class="wres"><small>TU PRONUNCIACIÓN, PALABRA POR PALABRA · ${n} de ${ws.length} bien</small><div class="chips">${ch}</div><p class="mut" style="font-size:.85rem;margin:4px 0">Te escuché: «${heard}»${n<ws.length?` · Debió decirse: <b>${target}</b> ${spk(target)}`:""}</p></div>`}
 function micMsg(t,c){const s=sec("ms");if(s)s.innerHTML=t?`<p class="fb ${c||"mut"}" style="text-align:center">${t}</p>`:""}
+const micIdle=()=>"🎤 Toca y habla · 0 de "+(MIC?wds(MIC.target).length:0);
 function micSet(st,txt){const b=sec("mb");if(!b)return;b.className="micb"+(st?" "+st:"");b.innerHTML=st==="on"?`<span class="fl" id="mfl"></span><span class="tx"><span class="wv"><i></i><i></i><i></i><i></i></span> <span id="mtx">${txt}</span></span>`:txt}
 function micUI(boxId,target,cb,lbl){if(REC){try{REC.abort()}catch(e){}REC=null}MIC={target,cb,box:boxId,lbl:lbl||"¡Habla ahora!"};const b=sec(boxId);if(!b)return;
-  b.innerHTML=`<button class="micb" id="mb" onclick="micToggle()">🎤 Toca y habla</button><p class="mut" id="mh" style="text-align:center;font-size:.85rem;margin:6px 0 0"></p><div id="ms"></div>
+  b.innerHTML=`<button class="micb" id="mb" onclick="micToggle()">${micIdle()}</button><p class="mut" id="mh" style="text-align:center;font-size:.85rem;margin:6px 0 0"></p><div id="ms"></div>
   <div id="mk" style="display:${MICBLOCK?"block":"none"}"><p class="hint" style="margin:8px 0 4px">Toca el cuadro y usa el <b>🎤 de tu teclado</b> para dictar en italiano:</p>
   <input type="text" id="mki" autocomplete="off" placeholder="Dicta aquí…" onkeydown="if(event.key==='Enter')micEval([this.value])"><div class="row" style="margin-top:8px"><button class="btn p" onclick="micEval([sec('mki').value])">Comprobar</button></div></div>
   ${MICBLOCK?"":`<button class="btn sm" style="margin-top:8px" onclick="micDict()">⌨️ Dictar con el teclado</button>`}`;}
@@ -688,14 +689,14 @@ function micStart(){if(!MIC)return;micMsg("");
   try{try{speechSynthesis.cancel()}catch(e){}const r=new SR();REC=r;r.lang="it-IT";r.continuous=true;r.interimResults=true;r.maxAlternatives=1;
     const arm=ms=>{clearTimeout(timer);timer=setTimeout(()=>{try{r.stop()}catch(e){}},ms)};
     const finish=()=>{if(done)return;done=true;clearTimeout(timer);REC=null;const h=sec("mh");if(h)h.textContent="";const txt=(finals.join(" ")+" "+interim).replace(/\s+/g," ").trim();
-      if(!txt){micSet("","🎤 Toca y habla");micMsg("No te escuché. Toca y habla otra vez.");return}micEval([txt])};
+      if(!txt){micSet("",micIdle());micMsg("No te escuché. Toca y habla otra vez.");return}micEval([txt])};
     r.onstart=()=>{micSet("on",MIC.lbl);const h=sec("mh");if(h)h.textContent="Te escucho… al llenarse el botón termino solo";arm(8000)};
     r.onresult=e=>{finals=[];interim="";for(let i=0;i<e.results.length;i++){const rs=e.results[i];if(rs.isFinal)finals.push(rs[0].transcript);else interim+=rs[0].transcript}heardAny=true;arm(2500);
       const all=(finals.join(" ")+" "+interim).trim(),h=sec("mh");if(h)h.textContent="🗣️ "+all;
       const T=wds(MIC.target),Hh=wds(numWords(all)),m=T.filter(t=>Hh.some(x=>wsim(x,t)>=0.75)).length,f=sec("mfl"),tx=sec("mtx");
       if(f)f.style.width=Math.round(m/Math.max(1,T.length)*100)+"%";if(tx)tx.textContent=`Ascolto… ${m} de ${T.length}`;
       if(T.length&&m>=T.length){clearTimeout(timer);timer=setTimeout(()=>{try{r.stop()}catch(e){}},350)}};
-    r.onerror=e=>{if(["not-allowed","service-not-allowed","audio-capture"].includes(e.error)){done=true;REC=null;clearTimeout(timer);micSet("","🎤 Toca y habla");micDict("El micrófono está bloqueado aquí. Usa el 🎤 de tu teclado en el cuadro de abajo.")}};
+    r.onerror=e=>{if(["not-allowed","service-not-allowed","audio-capture"].includes(e.error)){done=true;REC=null;clearTimeout(timer);micSet("",micIdle());micDict("El micrófono está bloqueado aquí. Usa el 🎤 de tu teclado en el cuadro de abajo.")}};
     r.onend=finish;r.start()}catch(e){REC=null;micDict("El micrófono está bloqueado aquí. Usa el 🎤 de tu teclado en el cuadro de abajo.")}}
 function itNum(n){const U=["zero","uno","due","tre","quattro","cinque","sei","sette","otto","nove","dieci","undici","dodici","tredici","quattordici","quindici","sedici","diciassette","diciotto","diciannove"],T=["","","venti","trenta","quaranta","cinquanta","sessanta","settanta","ottanta","novanta"];
   if(n<20)return U[n];if(n<100){let t=T[Math.floor(n/10)],u=n%10;if(u===1||u===8)t=t.slice(0,-1);return t+(u===0?"":u===3?"tré":U[u])}
@@ -704,7 +705,7 @@ function itNum(n){const U=["zero","uno","due","tre","quattro","cinque","sei","se
 function numWords(s){return s.replace(/(\d)\.(\d{3})/g,"$1$2").replace(/(\d+),(\d+)/g,"$1 virgola $2").replace(/%/g," per cento").replace(/\d+/g,m=>itNum(+m))}
 function micEval(alts){if(!MIC)return;alts=alts.filter(a=>a&&a.trim()).map(numWords);if(!alts.length)return;
   const best=alts.reduce((b,a)=>wscore(a,MIC.target)>wscore(b,MIC.target)?a:b),sc=wscore(best,MIC.target),ok=sc>=0.75;
-  micSet(ok?"ok":"bad",ok?"✓ ¡Ottimo!":"✗ Intenta otra vez");if(!ok)setTimeout(()=>{if(!REC)micSet("","🎤 Toca y habla")},1600);
+  const T=wds(MIC.target),Hb=wds(best),nb=T.filter(t=>Hb.some(x=>wsim(x,t)>=0.75)).length;micSet(ok?"ok":"bad",ok?`✓ ¡Ottimo! · ${nb} de ${T.length}`:`✗ ${nb} de ${T.length} · intenta otra vez`);if(!ok)setTimeout(()=>{if(!REC)micSet("",micIdle())},1600);
   MIC.cb(ok,best,cmpHTML(best,MIC.target),sc)}
 // ---------- pronunciar ----------
 function pronunciar(){q={items:shuf([...shuf(D[cur].w).slice(0,8),...shuf(D[cur].f).slice(0,2)]),k:0,ok:0};nextP()}
@@ -717,7 +718,7 @@ function nextP(){
   <div class="row" style="justify-content:center;margin-bottom:12px"><button class="btn" onclick="say('${esc(x[0])}')">🔊 Escuchar</button><button class="btn" onclick="say('${esc(x[0])}',1)">🐢 Lento</button></div>
   <div id="pmic"></div><div id="pact" class="row" style="justify-content:center;margin-top:10px"><button class="btn sm" onclick="pNext(false)">Saltar →</button></div></div>`;
   micUI("pmic",x[0],(ok,heard,cmp,sc)=>{
-    if(ok){q.ok++;delErr("P",x[0]);micMsg(sc<1?"✓ Bien. Cuida lo marcado:":"✓ Se entendió: «"+heard+"»","ok");if(sc<1)sec("ms").innerHTML+=cmp;setTimeout(()=>{q.k++;nextP()},sc<1?2800:1300)}
+    if(ok){q.ok++;delErr("P",x[0]);sec("ms").innerHTML=cmp;setTimeout(()=>{q.k++;nextP()},sc<1?3200:2200)}
     else{addErr("P",x[0],x[1],"se entendió «"+heard+"»");sec("ms").innerHTML=cmp;sec("pact").innerHTML=`<button class="btn" onclick="micStart()">↺ Intentar otra vez</button><button class="btn p" onclick="pNext(true)">Siguiente →</button>`}},"¡Habla ahora!");
   setTimeout(()=>say(x[0]),250);
 }
@@ -737,7 +738,7 @@ function nextRf(){
   if(oral){pane().innerHTML=`<div class="card" style="text-align:center">${hd}<p class="hint">Escucha y dilo en voz alta con el 🎤</p><div class="big" style="font-size:1.6rem">${e.it}</div><p class="mut">${e.es}</p>
     <div class="row" style="justify-content:center;margin-bottom:12px"><button class="btn" onclick="say('${esc(e.it)}')">🔊 Escuchar</button><button class="btn" onclick="say('${esc(e.it)}',1)">🐢 Lento</button></div><div id="rmic"></div><div id="ract" class="row" style="justify-content:center;margin-top:10px"><button class="btn sm" onclick="q.k++;nextRf()">Saltar →</button></div></div>`;
     micUI("rmic",e.it,(ok,hd,cmp)=>{
-      if(ok){micMsg("✓ Corregido: «"+hd+"»","ok");delErr(e.t,e.it);setTimeout(()=>{q.k++;nextRf()},1300)}else{sec("ms").innerHTML=cmp;sec("ract").innerHTML=`<button class="btn" onclick="micStart()">↺ Otra vez</button><button class="btn p" onclick="q.k++;nextRf()">Siguiente →</button>`}},"¡Habla ahora!");
+      if(ok){sec("ms").innerHTML=cmp;delErr(e.t,e.it);setTimeout(()=>{q.k++;nextRf()},2200)}else{sec("ms").innerHTML=cmp;sec("ract").innerHTML=`<button class="btn" onclick="micStart()">↺ Otra vez</button><button class="btn p" onclick="q.k++;nextRf()">Siguiente →</button>`}},"¡Habla ahora!");
     setTimeout(()=>say(e.it),250);return}
   pane().innerHTML=`<div class="card">${hd}<p class="hint">Escucha y escríbelo en italiano. Ejemplo: oyes <i>ciao</i> → escribes <span class="ej">ciao</span></p>
    <div style="text-align:center;margin:12px 0"><button class="btn p" onclick="say('${esc(e.it)}')">🔊 Escuchar</button> <button class="btn" onclick="say('${esc(e.it)}',1)">🐢 Lento</button></div><p class="mut" style="text-align:center">Significa: ${e.es}</p>
@@ -780,7 +781,7 @@ function rpStep(){const c=D[cur].c,t=sec("rpt");if(!RP||!t)return;const tok=RP.t
     setTimeout(go,2500+it.length*120);return}
   t.innerHTML=`<div class="bb turn"><small>🎤 TU TURNO · quieres decir «${es}»</small><div class="rd">${it}</div><div class="mut" style="font-size:.8rem">Léela en voz alta ${spk(it)}</div></div><div id="rmic2"></div><div id="ract2" class="row" style="justify-content:center;margin-top:8px"><button class="btn sm" onclick="rpSkip()">Saltar →</button></div>`;
   micUI("rmic2",it,(ok,hd,cmp)=>{if(!RP||RP.tok!==tok)return;
-    if(ok){RP.ok++;delErr("R",it);bubble("Tú ✓",hd,"me ok");RP.k++;setTimeout(rpStep,700)}
+    if(ok){RP.ok++;delErr("R",it);bubble("Tú ✓",cmp,"me ok");RP.k++;setTimeout(rpStep,1200)}
     else{addErr("R",it,es,"se entendió «"+hd+"»");sec("ms").innerHTML=cmp;
       sec("ract2").innerHTML=`<button class="btn sm" onclick="micStart()">↺ Intentar otra vez</button><button class="btn sm" onclick="rpSkip()">Seguir →</button>`}},"¡Te toca! Habla ahora");
 }
