@@ -113,6 +113,7 @@ body.typing .fab,body.typing .idx{display:none!important}
 .cbx.bad{background:#fbe5e2;color:#9b2a22}.cbx.bad u{text-decoration-thickness:2px;font-weight:600}
 .cbx.ok{background:#e3f4ea;color:#0f5c3b}.cbx.ok b{text-decoration:underline;text-decoration-thickness:2px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;justify-content:center}.chip{padding:5px 10px;border-radius:9px;font-weight:600;font-size:.95rem}.chip.ok{background:#e3f4ea;color:#0f5c3b}.chip.bad{background:#fbe5e2;color:#9b2a22}.wres{margin-top:10px;text-align:center}.wres small{font-size:.72rem;letter-spacing:.06em;color:var(--mut);font-weight:600}.bb .chips{justify-content:flex-start}.bb .chip{font-size:.85rem;padding:3px 8px}
+.espb{background:#f3f8ff;border-color:#cfe0f5}.espx{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:center;margin-top:10px;padding-top:10px;border-top:1px dashed #cfe0f5}.espx small{font-size:.7rem;color:var(--mut);letter-spacing:.05em;text-transform:uppercase}.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}.pcel{background:#f6f3ee;border-radius:10px;padding:8px 6px;text-align:center}.pcel.top{background:#e3f4ea}.pz{display:inline-flex;flex-direction:column;align-items:center;line-height:1.15}.pz small{font-size:.68rem;color:var(--mut)}.pp{color:#185FA5;font-weight:600}.pa{color:#a0590b;font-weight:600}.res{font-weight:700;font-size:1.05rem;margin-top:3px}.tr{font-size:.72rem;color:var(--mut)}.chp{display:inline-block;border-radius:8px;padding:2px 9px;font-size:.9rem}.pp-b{background:#e6f1fb;color:#0c447c}.pa-b{background:#faeeda;color:#633806}.ok-b{background:#e3f4ea;color:#0f5c3b}.mpo{display:flex;flex-wrap:wrap;gap:8px}.mpo .btn{white-space:normal;text-align:left}.rc{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:8px 0}.rc .rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:6px;margin-top:6px}.rc .rg div{background:#f6f3ee;border-radius:8px;padding:5px 8px}.rc .rg small{display:block;font-size:.68rem;color:var(--mut)}.dgt{display:block;font-size:.72rem;color:var(--mut);margin-top:3px;line-height:1.3}
 .micb{position:relative;overflow:hidden}.micb .fl{position:absolute;left:0;top:0;bottom:0;width:0;background:#e24b4a;transition:width .3s}.micb .tx{position:relative}
 .cbx .spk{padding:2px 5px;font-size:.85rem}
 .rd{font-size:1.35rem;font-weight:600;color:var(--ink);margin:4px 0}
@@ -952,6 +953,99 @@ function letHTML(L){return `<div class="card"><h2>📰 Lettura · ${L.t}</h2><p 
 
 const LV=[["Básico · A1","var(--b)",0,10],["Intermedio · A2","var(--i)",10,20],["Intermedio alto · A2+","var(--a)",20,30],["Avanzado · B1","#6b3fa0",30,60]];
 const ND=D.length;
+const ESP=[
+["En español «ser» y «estar» son dos verbos. En italiano <b>essere</b> sirve para los dos, igual que el to be del inglés.","Soy peruano y estoy feliz.","Sono peruviano e sono felice."],
+["En español tenemos 4 artículos: el, la, los, las. El italiano tiene 7, porque cambia según cómo <b>empieza</b> la palabra: il, lo, l', la, i, gli, le.","el libro · el estudiante · el amigo","il libro · lo studente · l'amico"],
+["Igual que en español: un / una. Para el plural, el italiano no agrega -s: <b>cambia la última vocal</b> (o → i, a → e).","un libro, dos libros","un libro, due libri"],
+["En español decimos «mi casa». En italiano el posesivo lleva <b>artículo</b>: «la mia casa», como si dijéramos «la mía casa».","mi casa · mis amigos","la mia casa · i miei amici"],
+["Igual que en español: el adjetivo cambia con el sustantivo. Casa roja → casa rossa; carros rojos → macchine rosse.","una casa bonita · casas bonitas","una casa bella · case belle"],
+["«Me gusta» funciona igual que en español: lo que gusta es el sujeto. <b>Mi piace</b> = me gusta; <b>mi piacciono</b> = me gustan.","Me gusta la pizza. Me gustan los dulces.","Mi piace la pizza. Mi piacciono i dolci."],
+["En español ya juntamos a + el = <b>al</b> y de + el = <b>del</b>. El italiano lo hace con todas las preposiciones y artículos.","Voy al mercado · el libro del profesor","Vado al mercato · il libro del professore"],
+["En español decimos «son las tres». En italiano también: <b>sono le tre</b>. Y «hace frío» se dice con fare: <b>fa freddo</b>.","Son las tres. Hace calor.","Sono le tre. Fa caldo."],
+["«Hay» tiene dos formas en italiano: <b>c'è</b> (una cosa) y <b>ci sono</b> (varias). En español usamos «hay» para todo.","Hay un banco. Hay dos bancos.","C'è una banca. Ci sono due banche."],
+["Para negar, igual que en español: <b>non</b> antes del verbo. Y la doble negación también existe: «no veo nada» = non vedo niente.","No como carne. No veo nada.","Non mangio carne. Non vedo niente."],
+["Los reflexivos son como en español: me levanto = <b>mi alzo</b>, te vistes = <b>ti vesti</b>.","Me despierto a las seis.","Mi sveglio alle sei."],
+["Español: este / ese / aquel. Italiano solo tiene dos: <b>questo</b> (cerca) y <b>quello</b> (lejos).","este libro · aquel carro","questo libro · quella macchina"],
+["Poder, querer y deber funcionan igual que en español: van seguidos de un infinitivo.","Quiero comer. Puedo venir.","Voglio mangiare. Posso venire."],
+["Igual que en español, el pronombre va antes del verbo: «lo veo» = <b>lo vedo</b>, «la llamo» = <b>la chiamo</b>.","¿El café? Lo tomo sin azúcar.","Il caffè? Lo prendo senza zucchero."],
+["El passato prossimo es nuestro «he comido»: <b>ho mangiato</b>. En italiano se usa también para «comí».","Ayer comí pizza.","Ieri ho mangiato la pizza."],
+["Algunos verbos usan <b>essere</b> en vez de avere: los de movimiento (ir, venir, salir). En español siempre usamos «haber».","Fui a Roma. María llegó tarde.","Sono andato a Roma. Maria è arrivata tardi."],
+["Para comparar: más… que = <b>più… di</b>; menos… que = <b>meno… di</b>. Casi igual que en español.","Lima es más grande que Chimbote.","Lima è più grande di Chimbote."],
+["El imperativo es como nuestras órdenes: ¡come!, ¡ven! = <b>mangia!, vieni!</b> Y «me duele» = <b>mi fa male</b>.","¡Ven aquí! Me duele la cabeza.","Vieni qui! Mi fa male la testa."],
+["El imperfetto es nuestro <b>-aba / -ía</b>: hablaba = parlavo, tenía = avevo. ¡Se usa igual que en español!","De niño jugaba en la playa.","Da bambino giocavo sulla spiaggia."],
+["«Hace dos años que vivo aquí» se dice con <b>da</b> + presente: <b>vivo qui da due anni</b>.","Hace un año que estudio italiano.","Studio italiano da un anno."],
+["El futuro es como en español: hablaré = <b>parlerò</b>, comeré = <b>mangerò</b>. La fuerza va al final.","Mañana viajaré a Lima.","Domani viaggerò a Lima."],
+["Como en español, el futuro sirve para suponer: «¿Dónde estará?» = <b>Dove sarà?</b>. Y «dentro de» = <b>fra / tra</b>.","Estará cansado. Llego dentro de una hora.","Sarà stanco. Arrivo fra un'ora."],
+["El condicional es nuestro <b>-ría</b>: quisiera = vorrei, podría = potrei, me gustaría = mi piacerebbe.","Quisiera un café. ¿Podría ayudarme?","Vorrei un caffè. Potrebbe aiutarmi?"],
+["El congiuntivo es nuestro subjuntivo: «espero que <b>vengas</b>» = spero che tu <b>venga</b>. Diferencia: «creo que» en italiano también pide subjuntivo.","Espero que estés bien. Creo que es verdad.","Spero che tu stia bene. Penso che sia vero."],
+["Igual que en español, las emociones piden subjuntivo: «me alegra que <b>estés</b> aquí».","Me alegra que estés aquí.","Sono contento che tu sia qui."],
+["Como en español: «se habla italiano», «se venden casas». El verbo concuerda con lo que se vende.","Aquí se habla italiano. Se venden casas.","Qui si parla italiano. Si vendono case."],
+["En español decimos «te lo doy», «se lo digo». El italiano los une en una palabra: <b>te lo do</b>, <b>glielo dico</b>.","Te lo digo mañana. Se lo doy a Ana.","Te lo dico domani. Lo do ad Anna → Glielo do."],
+["Como en español «me la juego», el italiano tiene verbos con pronombres fijos: <b>andarsene</b> (irse), <b>farcela</b> (lograrlo).","Me voy. ¡Lo logré!","Me ne vado. Ce l'ho fatta!"],
+["«Si tuviera dinero, viajaría»: en italiano es igual, <b>se avessi soldi, viaggerei</b>. Nunca condicional después de «si».","Si tuviera tiempo, estudiaría más.","Se avessi tempo, studierei di più."],
+["Los conectores son como nuestros «pero, entonces, sin embargo»: <b>però, quindi, comunque</b>. Hacen que hables con fluidez.","Estoy cansado, pero voy.","Sono stanco, però vengo."],
+["Igual que en español: «mientras <b>cocinaba</b> (imperfetto), <b>llegó</b> Luca (passato)».","Mientras dormía, sonó el teléfono.","Mentre dormivo, è suonato il telefono."],
+["El trapassato es nuestro «había + participio»: había comido = <b>avevo mangiato</b>.","Cuando llegué, el tren ya había partido.","Quando sono arrivato, il treno era già partito."],
+["En español «la vi» no cambia; en italiano el participio <b>concuerda</b> con el pronombre: l'ho vist<b>a</b>.","¿María? La vi ayer.","Maria? L'ho vista ieri."],
+["«Me levanté» en italiano usa essere: <b>mi sono alzato</b> (como si dijéramos «me soy levantado»).","Me levanté temprano.","Mi sono alzato presto."],
+["Para narrar, igual que en español: «hacía calor (imperfetto), fuimos a la playa (passato)».","Hacía sol y fuimos a la playa.","C'era il sole e siamo andati al mare."],
+["El futuro anteriore es nuestro «habré + participio»: habré terminado = <b>avrò finito</b>.","Para el viernes habré terminado.","Entro venerdì avrò finito."],
+["El condizionale passato es nuestro «habría + participio»: habría querido = <b>avrei voluto</b>.","Habría querido venir.","Avrei voluto venire."],
+["«Deberías» = <b>dovresti</b>, igual que en español. Y los pronombres se pegan al verbo como en «dime» = <b>dimmi</b>.","Deberías descansar. ¡Dime la verdad!","Dovresti riposare. Dimmi la verità!"],
+["El «usted» italiano es <b>Lei</b>, y sus órdenes son como las nuestras: «venga, tome, disculpe» = venga, prenda, scusi.","Disculpe, tome asiento.","Scusi, si accomodi."],
+["Para reclamar con cortesía, igual que en español: «¿Podría…?», «Quisiera…» = <b>Potrebbe…?, Vorrei…</b>","¿Podría cambiarme la habitación?","Potrebbe cambiarmi la camera?"],
+["El congiuntivo es nuestro subjuntivo: «que hable, que escriba» = <b>che parli, che scriva</b>. ¡Las terminaciones se cruzan como en español!","Quiero que hables.","Voglio che tu parli."],
+["Como en español, los irregulares salen del «yo»: hago → que haga = <b>faccio → faccia</b>.","Es importante que vayas.","È importante che tu vada."],
+["«Hay que» = <b>bisogna</b>; «es necesario que» = <b>è necessario che</b> + subjuntivo, igual que en español.","Hay que estudiar. Es necesario que vengas.","Bisogna studiare. È necessario che tu venga."],
+["«Espero que <b>hayas</b> llegado bien» = spero che tu <b>sia</b> arrivato bene. Es nuestro «haya + participio».","Me alegra que hayas venido.","Sono contento che tu sia venuto."],
+["Para opinar como en español: «para mí» + indicativo; «creo que» + subjuntivo (en italiano).","Para mí es justo. Creo que es justo.","Secondo me è giusto. Penso che sia giusto."],
+["El congiuntivo imperfetto es nuestro «-ra / -se»: tuviera = <b>avessi</b>, fuera = <b>fossi</b>, hablara = <b>parlassi</b>.","Quería que vinieras. ¡Ojalá tuviera tiempo!","Volevo che tu venissi. Magari avessi tempo!"],
+["«El amigo <b>con quien</b> trabajo» = l'amico <b>con cui</b> lavoro. Después de preposición siempre va <b>cui</b>.","La ciudad en la que vivo.","La città in cui vivo."],
+["<b>Ci</b> es como nuestro «allí» y <b>ne</b> como «de eso». «Voy allí» = ci vado; «tengo dos (de ellos)» = ne ho due.","¿Vas a Lima? Sí, voy (allí).","Vai a Lima? Sì, ci vado."],
+["Igual que en español: «en Italia se come tarde», «se venden casas».","En Perú se almuerza mucho.","In Perù si pranza tanto."],
+["En el médico, como en español: «me duele», «tengo fiebre» = <b>mi fa male, ho la febbre</b>.","Tengo fiebre desde ayer.","Ho la febbre da ieri."],
+["La pasiva es igual que en español: «fue construido por…» = <b>è stato costruito da…</b>","La iglesia fue construida en 1500.","La chiesa è stata costruita nel 1500."],
+["Igual que en español, al contar lo que alguien dijo el tiempo cambia: «dijo que <b>vendría</b>» = ha detto che <b>sarebbe venuto</b>.","Me dijo que estaba cansado.","Mi ha detto che era stanco."],
+["El gerundio es nuestro «-ando / -iendo»: caminando = <b>camminando</b>. «Estar a punto de» = <b>stare per</b>.","Estoy a punto de salir.","Sto per uscire."],
+["«Mejor» tiene dos formas: <b>migliore</b> (un libro mejor) y <b>meglio</b> (canta mejor). En español es una sola.","Es el mejor. Hoy estoy mejor.","È il migliore. Oggi sto meglio."],
+["Las noticias usan la pasiva y el condicional de rumor, como en español: «el presidente <b>habría</b> firmado».","Según fuentes, habría renunciado.","Secondo fonti, si sarebbe dimesso."],
+["En un correo formal, igual que en español: «Estimado…», «Atentamente» = <b>Gentile…, Distinti saluti</b>.","Estimada señora: le escribo para…","Gentile signora, Le scrivo per…"],
+["«Hace diez años que trabajo aquí» = <b>lavoro qui da dieci anni</b>: en italiano va en presente.","Hace cinco años que trabajo aquí.","Lavoro qui da cinque anni."],
+["Para comparar culturas, igual que en español: «es distinto de…», «más… que…» = <b>diverso da, più… di</b>.","El ceviche es distinto de la pizza.","Il ceviche è diverso dalla pizza."],
+["«A pesar de que», «con tal de que» piden subjuntivo, igual que en español: <b>nonostante sia, purché tu venga</b>.","Aunque sea difícil, sigo.","Nonostante sia difficile, continuo."],
+["El curso completo en una frase: «Si no hubiera estudiado, no habría llegado aquí» = <b>Se non avessi studiato, non sarei arrivato qui</b>.","Si hubiera sabido, habría venido.","Se avessi saputo, sarei venuto."]];
+function espBox(i){const e=ESP[i];if(!e)return "";return `<div class="card espb"><p class="lbl" style="margin-top:0">🇵🇪 Primero en español</p><div style="line-height:1.6">${e[0]}</div>
+  <div class="espx"><div><small>Español</small><div>${e[1]}</div></div><div><small>Italiano</small><div class="it">${e[2]}</div></div><span>${spk(e[2])}</span></div></div>`}
+const PZ=(p,ps,a,as,r,rs,top)=>`<div class="pcel${top?" top":""}"><span class="pz"><span class="pp">${p}</span><small>${ps}</small></span> + <span class="pz"><span class="pa">${a}</span><small>${as}</small></span><div class="res">${r}</div><div class="tr">${rs}</div></div>`;
+const PREP=[["DI","de","de","de",[["il","el","del","del","il libro del professore","el libro del profesor"],["la","la","della","de la","la casa della nonna","la casa de la abuela"]],[["lo","el","dello","del"],["l'","el/la","dell'","del / de la"],["i","los","dei","de los"],["gli","los","degli","de los"],["le","las","delle","de las"]]],
+["A","a","a","a",[["il","el","al","al","Vado al mare","Voy al mar"],["la","la","alla","a la","Vado alla stazione","Voy a la estación"]],[["lo","el","allo","al"],["l'","el/la","all'","al / a la"],["i","los","ai","a los"],["gli","los","agli","a los"],["le","las","alle","a las"]]],
+["DA","desde / donde","da","de / donde",[["il","el","dal","donde el","Vado dal dottore","Voy donde el doctor"],["la","la","dalla","donde la","Vado dalla nonna","Voy donde la abuela"]],[["lo","el","dallo","desde el"],["l'","el/la","dall'","desde el / la"],["i","los","dai","desde los"],["gli","los","dagli","desde los"],["le","las","dalle","desde las"]]],
+["IN","en","ne","en",[["il","el","nel","en el","Il latte è nel frigo","La leche está en el refri"],["la","la","nella","en la","Le chiavi sono nella borsa","Las llaves están en la cartera"]],[["lo","el","nello","en el"],["l'","el/la","nell'","en el / la"],["i","los","nei","en los"],["gli","los","negli","en los"],["le","las","nelle","en las"]]],
+["SU","sobre / encima","su","sobre",[["il","el","sul","sobre el","Il libro è sul tavolo","El libro está sobre la mesa"],["la","la","sulla","sobre la","Il gatto è sulla sedia","El gato está sobre la silla"]],[["lo","el","sullo","sobre el"],["l'","el/la","sull'","sobre el / la"],["i","los","sui","sobre los"],["gli","los","sugli","sobre los"],["le","las","sulle","sobre las"]]]];
+function artCard(){return `<div class="card"><p class="lbl" style="margin-top:0">💡 ¿Por qué hay 2 «el» y 2 «los»?</p><div>En italiano el artículo cambia según cómo <b>empieza</b> la palabra que sigue:</div>
+  <div class="g2" style="margin-top:8px">${[["il / i","casi siempre","il libro · i libri"],["lo / gli","antes de z, s + consonante, gn, ps","lo zaino · gli studenti"],["l'","antes de vocal","l'amico · l'acqua"],["la / le","femenino","la casa · le case"]].map(([a,b,c])=>`<div class="pcel" style="text-align:left"><b>${a}</b><div class="tr">${b}</div><div class="it" style="font-size:.95rem">${c}</div>${spk(c.replace("·",","))}</div>`).join("")}</div></div>`}
+function prepHTML(){return `<div class="card"><p class="lbl" style="margin-top:0">🧮 La fórmula</p>
+  <div class="row" style="gap:6px"><span class="chp pp-b">preposición</span>+<span class="chp pa-b">artículo</span>=<span class="chp ok-b">una palabra</span></div>
+  <p style="margin:10px 0 4px"><b>Regla 1:</b> di cambia a <b>de</b>, in cambia a <b>ne</b>. Las demás no cambian.</p>
+  <p style="margin:0"><b>Regla 2:</b> si el artículo empieza con <b>l</b>, la l se <b>duplica</b>: a + la = a<b>ll</b>a.</p>
+  <p class="mut" style="margin:8px 0 0;font-size:.85rem">Con estas 2 reglas armas las 35 formas sin memorizarlas.</p></div>
+  <p class="lbl">🗂️ Las 5 preposiciones, una por una</p>
+  ${PREP.map(([n,es,b,bs,top,rest])=>`<div class="card"><div class="row" style="justify-content:space-between"><h2 style="margin:0">${n} = ${es}</h2>${spk([...top,...rest].map(t=>t[2]).join(", "))}</div>
+   ${n==="DA"?`<div class="clave v" style="margin:8px 0"><small>🇵🇪 Truco peruano</small><div>Con personas, DA es nuestro «donde»: voy <b>donde</b> el doctor = <i>vado <b>dal</b> dottore</i>.</div></div>`:""}
+   <p class="lbl" style="margin:8px 0 4px">⭐ Las más usadas</p><div class="g2">${top.map(t=>PZ(b,bs,t[0],t[1],t[2],t[3],1)).join("")}</div>
+   <p class="lbl" style="margin:8px 0 4px">Las demás se construyen igual</p><div class="g3">${rest.map(t=>PZ(b,bs,t[0],t[1],t[2],t[3])).join("")}</div>
+   <div style="border-top:1px solid var(--line);margin-top:10px;padding-top:6px">${top.map(t=>`<div class="w" style="margin:6px 0"><div><div class="it">${t[4].replace(t[2],"<b>"+t[2]+"</b>")}</div><div class="es">${t[5]}</div></div><span>${spk(t[4])}</span></div>`).join("")}</div></div>`).join("")}
+  ${artCard()}`}
+let MP=null;
+function mpItems(){if(cur===6)return [["in","la","nella",["inla","nella","nela"],"in → ne, y la l se duplica. Sono nella cucina = Estoy en la cocina."],["di","il","del",["del","dil","dello"],"di → de + l. Il libro del professore = el libro del profesor."],["su","le","sulle",["sule","sulle","sulla"],"su + le, la l se duplica. Sulle sedie = sobre las sillas."]].map(([a,b,r,o,ex])=>({q:`Arma la palabra: <span class="chp pp-b">${a}</span> + <span class="chp pa-b">${b}</span> = ?`,r,o,ex}));
+  const ej=G[cur].ej.slice(0,3);return ej.map(([it,es])=>({q:`¿Cómo se dice en italiano? <b>«${es}»</b>`,r:it,o:ej.map(x=>x[0]).sort(()=>Math.random()-.5),ex:it+" = "+es}))}
+function mpStart(){MP={k:0,ok:0,it:mpItems()};mpShow()}
+function mpShow(){const b=sec("mp");if(!b)return;const x=MP.it[MP.k];
+  b.innerHTML=`<p class="mut" style="margin:0 0 6px">Pregunta ${MP.k+1} de ${MP.it.length}</p><div style="margin-bottom:10px;line-height:1.7">${x.q}</div><div class="mpo">${x.o.map((o,j)=>`<button class="btn" onclick="mpAns(this,${j})">${o}</button>`).join("")}</div><div id="mpf" style="margin-top:8px"></div>`}
+function mpAns(el,j){const x=MP.it[MP.k],ok=x.o[j]===x.r;if(sec("mpf").innerHTML)return;if(ok)MP.ok++;else say(x.r);
+  el.style.background=ok?"#e3f4ea":"#fbe5e2";el.style.color=ok?"#0f5c3b":"#9b2a22";
+  sec("mpf").innerHTML=`<div style="color:${ok?"#0f5c3b":"#9b2a22"};line-height:1.6">${ok?"✓ ¡Bravo!":"✗ Era <b>"+x.r+"</b>"+(/[.!?]$/.test(x.r)?"":".")} <span class="mut">${x.ex}</span></div>`+(MP.k<MP.it.length-1?`<button class="btn p" style="margin-top:8px" onclick="MP.k++;mpShow()">Siguiente →</button>`:`<p style="margin:8px 0 0"><b>Resultado: ${MP.ok} de ${MP.it.length}</b> ${MP.ok===MP.it.length?"🎉":""} <button class="btn sm" onclick="mpStart()">Repetir</button></p>`)}
+
 const lvlOf=i=>LV.find(l=>i>=l[2]&&i<l[3]);
 
 // ---------- estado ----------
@@ -985,7 +1079,7 @@ function home(){
   <div class="bar" style="margin-top:10px"><i style="width:${n/ND*100}%"></i></div>
   <div class="row" style="margin-top:12px"><button class="btn p" onclick="openDay(${nextDay()})">▶ Continuar: Día ${nextDay()+1}</button><button class="btn" onclick="verbs()">📚 Todos los verbos</button><button class="btn" onclick="repaso()">🧠 Repaso</button><button class="btn" onclick="tips()">💡 Tips y trucos</button></div></div>`;
   LV.forEach(([nm,c,a,b])=>{h+=`<div class="lvl"><span class="dot" style="background:${c}"></span>${nm} · Días ${a+1}-${b}</div><div class="grid">`;
-    for(let i=a;i<b;i++)h+=`<div class="day${i+1>MAXD?" locked":""}" style="--c:${c}" onclick="openDay(${i})">${done[i]?'<span class="ok">✓</span>':i+1>MAXD?'<span class="ok">🔒</span>':""}<b>Día ${i+1}</b><small>${D[i].t}</small><small>🔤 ${D[i].v[0]} · ${D[i].v[2].split(" ")[0]}</small></div>`;
+    for(let i=a;i<b;i++)h+=`<div class="day${i+1>MAXD?" locked":""}" style="--c:${c}" onclick="openDay(${i})">${done[i]?'<span class="ok">✓</span>':i+1>MAXD?'<span class="ok">🔒</span>':""}<b>Día ${i+1}</b><small>${D[i].t}</small><span class="dgt">📘 ${G[i].t}</span><small>🔤 ${D[i].v[0]} · ${D[i].v[2].split(" ")[0]}</small></div>`;
     h+=`</div>`});
   h+=`<details class="card" style="margin-top:22px" ${Object.keys(done).length?"":"open"}><summary style="cursor:pointer;font-weight:600">🧭 Cómo estudiar cada día (60 a 90 minutos) y qué esperar</summary>
   <ol style="line-height:1.7">
@@ -1047,16 +1141,18 @@ function aprender(){
 function playAll(){const ws=D[cur].w;let k=0;try{speechSynthesis.cancel()}catch(e){}
   const nx=()=>{if(k>=ws.length)return;const u=new SpeechSynthesisUtterance(ws[k][0]);u.lang="it-IT";if(voice)u.voice=voice;u.rate=rate;u.onend=()=>setTimeout(nx,700);k++;try{speechSynthesis.speak(u)}catch(e){}};nx()}
 
-function tbl(t){return `<div class="card" style="padding:0;overflow-x:auto"><table><caption class="cap">${t.c}</caption><tr><th></th>${t.h.map(x=>`<th class="th">${x}</th>`).join("")}</tr>${t.r.map(r=>{const s=t.k.map(j=>r[j]).join(". ").replace(/[→—]/g,",").replace(/\//g,",");return `<tr><td style="width:40px">${spk(s)}</td>${r.map((c,j)=>`<td style="width:auto;${t.k.includes(j)?"color:var(--ink);font-weight:500":"color:var(--mut)"}">${c}</td>`).join("")}</tr>`}).join("")}</table></div>`}
+function tbl(t){if(t.h.length>=4)return tblCards(t);return `<div class="card" style="padding:0;overflow-x:auto"><table><caption class="cap">${t.c}</caption><tr><th></th>${t.h.map(x=>`<th class="th">${x}</th>`).join("")}</tr>${t.r.map(r=>{const s=t.k.map(j=>r[j]).join(". ").replace(/[→—]/g,",").replace(/\//g,",");return `<tr><td style="width:40px">${spk(s)}</td>${r.map((c,j)=>`<td style="width:auto;${t.k.includes(j)?"color:var(--ink);font-weight:500":"color:var(--mut)"}">${c}</td>`).join("")}</tr>`}).join("")}</table></div>`}
+function tblCards(t){return `<div class="card"><p class="lbl" style="margin-top:0">${t.c}</p>${t.r.map(r=>{const s=t.k.map(j=>r[j]).join(". ").replace(/[→—]/g,",").replace(/\//g,",");return `<div class="rc"><div class="row" style="justify-content:space-between"><b>${t.h[0]?t.h[0]+": ":""}${r[0]}</b>${spk(s)}</div><div class="rg">${r.slice(1).map((c,j)=>`<div><small>${t.h[j+1]||""}</small><span style="${t.k.includes(j+1)?"font-weight:600":""}">${c}</span></div>`).join("")}</div></div>`}).join("")}</div>`}
 function claves(ns,oj){const ex=t=>{const m=t.match(/<i>(.*?)<\/i>/);return m?m[1].replace(/<[^>]+>/g,""):""};
   const card=(cls,title,txt)=>{const e=ex(txt);return `<div class="clave ${cls}"><small>${title}</small><div>${txt}</div>${e?`<div class="cx">${spk(e)} <span>${e}</span></div>`:""}</div>`};
   return `<p class="lbl">🔑 Claves del día</p>${ns.map((n,i)=>{const m=n.match(/^<b>([^<]+):<\/b>\s*/);return card(i?"b":"v","🔑 Clave"+(m?": "+m[1]:""),m?n.slice(m[0].length):n)}).join("")}${card("a","⚠️ Ojo: error típico",oj)}`}
 function gramatica(){
   const g=G[cur],r=GR[cur],x=(cur===5||cur===10)?GX[cur]:null;
-  sec("s-gram").innerHTML=`<h2 style="margin:6px 0 8px">📘 ${g.t}</h2><div class="prose">${r.i}</div>
-  <div class="tblgrid">${r.t.map(tbl).join("")}${x?tbl({c:x.cap,h:x.head,r:x.rows,k:[1,2]}):""}</div>
+  sec("s-gram").innerHTML=`<h2 style="margin:6px 0 8px">📘 ${g.t}</h2>${espBox(cur)}<div class="prose">${r.i}</div>
+  ${cur===6?prepHTML():`<div class="tblgrid">${r.t.map(tbl).join("")}${x?tbl({c:x.cap,h:x.head,r:x.rows,k:[1,2]}):""}</div>`}${cur===1?artCard():""}
   ${claves(r.n,OJ[cur])}
-  <div class="card"><h2>Ejemplos</h2>${g.ej.map(([it,es])=>`<div class="w" style="margin:6px 0"><div><div class="it">${it}</div><div class="es">${es}</div></div><span>${spk(it)} ${spkS(it)}</span></div>`).join("")}</div>`;
+  <div class="card"><h2>Ejemplos</h2>${g.ej.map(([it,es])=>`<div class="w" style="margin:6px 0"><div><div class="it">${it}</div><div class="es">${es}</div></div><span>${spk(it)} ${spkS(it)}</span></div>`).join("")}</div>
+  <div class="card"><h2>✏️ Mini práctica</h2><div id="mp"></div></div>`;mpStart();
 }
 function sonido(){
   const s=S2[cur];let prev=null;
@@ -1084,24 +1180,39 @@ function verbo(){
   sec("s-verbo").innerHTML=`<div class="card"><h2>${v[0]} <span class="mut" style="font-size:1rem">(${v[1]})</span> ${spk(v[0])}</h2><p class="mut" style="margin-top:0">Tiempo: <b>${v[2]}</b></p>${conjTable(v)}
   <button class="btn" style="margin-top:10px" onclick="sayConj()">▶ Escuchar conjugación completa</button></div>
   <div class="card"><h2>Practica</h2><div id="vq"></div></div>`;
-  vq();
+  vq(1);
 }
 function sayConj(){const v=D[cur].v;say(v[3].map((f,i)=>(/^(che|se|mi|ti|si|ci|vi) /.test(f)?"":P[i].split("/")[0]+" ")+f.replace(/\/[ae]$/,"")).join(", "))}
 function exVerb(v,i){const j=(i+3)%6,f=v[3][j],pr=f.match(/^(che \w+|se \w+)\s/);return `<p class="hint">Ejemplo: para <b>${pr?pr[1]:P[j]}</b> escribes <span class="ej">${pr?f.slice(pr[0].length):f}</span></p>`}
 function otherW(it){const o=D[cur].w.filter(w=>w[0]!==it);return o[Math.floor(Math.random()*o.length)]}
-function vq(){
-  const v=D[cur].v,i=Math.floor(Math.random()*6),ans=v[3][i];
+let VQ=null;
+function vq(reset){const v=D[cur].v;
+  if(reset||!VQ||VQ.d!==cur){const idx=[0,1,2,3,4,5].filter(k=>v[3][k]&&v[3][k]!=="—").sort(()=>Math.random()-.5);VQ={d:cur,o:idx,k:0,ok:0,bad:[]}}
+  const box=document.getElementById("vq");if(!box)return;
+  if(VQ.k>=VQ.o.length){const n=VQ.o.length,pct=VQ.ok/n;
+    box.innerHTML=`<div style="text-align:center;padding:6px 0"><div style="font-size:2.4rem">${pct===1?"🎉":pct>=.5?"👏":"💪"}</div><h2 style="margin:4px 0">¡Terminaste!</h2><p style="font-size:1.1rem;margin:4px 0"><b>${VQ.ok} de ${n}</b> correctas</p>
+    ${VQ.bad.length?`<p class="mut" style="margin:8px 0 4px">Repasa estas:</p>${VQ.bad.map(([p,f])=>`<div class="w" style="margin:4px 0"><div><span class="mut">${p}</span> <b>${f}</b></div><span>${spk(f.replace(/\/[ae]$/,""))}</span></div>`).join("")}`:`<p class="mut">¡Perfecto! Ya conjugas <b>${v[0]}</b> sin errores.</p>`}
+    <button class="btn p" style="margin-top:10px" onclick="vq(1)">↻ Practicar otra vez</button></div>`;return}
+  const i=VQ.o[VQ.k],ans=v[3][i];
   const pref=ans.match(/^(che \w+|se \w+)\s/);const shown=pref?pref[1]:P[i];const target=pref?ans.slice(pref[0].length):ans;
-  document.getElementById("vq").innerHTML=`<p style="margin-bottom:4px">Conjuga <b>${v[0]}</b> (${v[2]}) para: <b style="font-size:1.2rem">${shown}</b></p>${exVerb(v,i)}
+  box.innerHTML=`<div class="row" style="justify-content:space-between"><span class="mut">Persona ${VQ.k+1} de ${VQ.o.length}</span><span class="mut">✓ ${VQ.ok}</span></div>
+  <div class="bar" style="margin:6px 0 10px"><i style="width:${VQ.k/VQ.o.length*100}%"></i></div>
+  <p style="margin-bottom:4px">Conjuga <b>${v[0]}</b> (${v[2]}) para: <b style="font-size:1.2rem">${shown}</b></p>${exVerb(v,i)}
   <input type="text" id="vin" placeholder="Escribe la forma…" autocomplete="off" onkeydown="if(event.key==='Enter')chkV()">${accBar("vin")}
-  <div class="row" style="margin-top:10px"><button class="btn p" onclick="chkV()">Comprobar</button><button class="btn" onclick="vq()">Otra</button></div><div class="fb" id="vfb"></div>`;
-  window.__vt=target;
+  <div class="row" style="margin-top:10px" id="vbt"><button class="btn p" onclick="chkV()">Comprobar</button></div><div class="fb" id="vfb"></div>`;
+  window.__vt=target;window.__vp=shown;
 }
-function chkV(){const g=clean(document.getElementById("vin").value),t=window.__vt,fb=document.getElementById("vfb");
+function vNext(){VQ.k++;vq()}
+function chkV(){const inp=document.getElementById("vin"),g=clean(inp.value),t=window.__vt,fb=document.getElementById("vfb"),bt=document.getElementById("vbt");
+  if(!g){fb.className="fb bad";fb.textContent="Escribe una respuesta primero";return}
+  if(bt.dataset.done)return;
   const ok=[t,...t.includes("/")?[t.replace(/\/[ae]$/,""),t.replace(/([oi])\/([ae])$/,"$2")]:[]].some(x=>clean(x)===g);
-  if(ok){fb.className="fb ok";fb.textContent="✓ Corretto! ";say(t.replace(/\/[ae]$/,""));setTimeout(vq,1300)}
-  else if([t,t.replace(/\/[ae]$/,"")].some(x=>norm(x)===norm(g))){fb.className="fb ok";fb.textContent="≈ Casi: cuida el acento → "+t}
-  else{fb.className="fb bad";fb.textContent="✗ Era: "+t}}
+  const near=!ok&&[t,t.replace(/\/[ae]$/,"")].some(x=>norm(x)===norm(g));
+  bt.dataset.done=1;inp.disabled=true;
+  if(ok||near){VQ.ok++;fb.className="fb ok";fb.textContent=ok?"✓ Corretto!":"✓ Bien, pero cuida el acento → "+t;say(t.replace(/\/[ae]$/,""))}
+  else{VQ.bad.push([window.__vp,t]);fb.className="fb bad";fb.textContent="✗ Era: "+t;say(t.replace(/\/[ae]$/,""))}
+  bt.innerHTML=`<button class="btn p" onclick="vNext()">${VQ.k+1<VQ.o.length?"Siguiente →":"Ver resultado →"}</button>`;
+  if(ok)setTimeout(()=>{if(VQ&&document.getElementById("vin")===inp)vNext()},1400)}
 const accBar=id=>`<div class="acc">${["à","è","é","ì","ò","ù"].map(c=>`<button class="btn sm" onclick="const e=document.getElementById('${id}');e.value+='${c}';e.focus()">${c}</button>`).join("")}</div>`;
 
 // ---------- escuchar ----------
